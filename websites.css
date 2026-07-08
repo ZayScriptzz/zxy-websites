@@ -60,7 +60,11 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   pointer-events: none;
   transition: opacity 1.1s ease;
 }
-.fluid-active #fluid-canvas { opacity: 1; pointer-events: auto; }
+/* --fluid-fade: scroll-linked (site.js) — 1 in the hero, eases to 0 over its last
+   20vh so the reducer's pause always freezes an invisible frame. */
+.fluid-active #fluid-canvas { opacity: var(--fluid-fade, 1); pointer-events: auto; }
+/* after the 1.1s reveal crossfade, drop the transition so the fade tracks scroll 1:1 */
+.fluid-revealed #fluid-canvas { transition: none; }
 
 /* ===== FALLBACK BLOOM (reduced-motion / mobile / no-WebGL) ================
    STATIC, low-intensity. Shown by default; faded out once the canvas is live. */
@@ -380,11 +384,27 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   min-height: 40vh; /* stub height only — replaced by real content per phase */
   scroll-margin-top: 100px;
   border-top: 1px solid rgba(255,255,255,.06);
+  content-visibility: auto;                 /* skip layout/paint below the fold */
+  contain-intrinsic-size: auto 480px;
 }
 .section-chapter {
   margin: 0;
   font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2.5px;
   color: rgba(255,255,255,.48);
+}
+
+/* ===== REVEAL PRIMITIVE (site.js) =========================================
+   Content is visible by default. The hidden state only exists when JS is
+   running (html.js) AND motion is allowed — no-JS and reduced-motion users
+   see everything immediately. Stagger siblings with --i. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.22, .9, .32, 1);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  .js [data-reveal].in-view { opacity: 1; transform: none; }
 }
 .site-footer {
   position: relative;
