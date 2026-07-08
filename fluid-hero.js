@@ -64,6 +64,46 @@ let breathTimer = null;
 // cursor state
 let lastPt = null, lastInjPt = null, lastMove = 0, purpleUntil = 0, colCount = 0, wasInBand = false;
 
+// ---- FLUID LIFECYCLE REDUCER -------------------------------------------------
+// ONE derived state, ONE pause() call site. 0.6.1's pause() is a TOGGLE, so two
+// independent call paths can invert each other (sim paused while visible). All
+// inputs (tab visibility + registered zone visibility) funnel through
+// applyRunState(), guarded by simPaused so pause() only fires on transitions.
+// Zones: the hero now; the #preview reprise zone registers here in a later phase.
+const zoneState = new Map();   // element → currently intersecting?
+let zoneIO = null;
+
+function anyZoneVisible() {
+  for (const v of zoneState.values()) if (v) return true;
+  return false;
+}
+
+function observeFluidZone(el) {
+  if (!el) return;
+  if (!zoneIO) {
+    zoneIO = new IntersectionObserver((entries) => {
+      entries.forEach((en) => zoneState.set(en.target, en.isIntersecting));
+      applyRunState();
+    }, { threshold: 0 });
+  }
+  zoneState.set(el, true);   // assume visible until the observer's first callback corrects it
+  zoneIO.observe(el);
+}
+
+function applyRunState() {
+  if (stopped || !started) return;
+  const shouldRun = !document.hidden && anyZoneVisible();
+  if (!shouldRun && !simPaused) {
+    try { webGLFluidEnhanced.pause(); } catch (e) {}   // the ONLY pause() call site
+    simPaused = true;
+    if (breathTimer) { clearTimeout(breathTimer); breathTimer = null; }   // no timers while paused
+  } else if (shouldRun && simPaused) {
+    try { webGLFluidEnhanced.pause(); } catch (e) {}   // toggle back on
+    simPaused = false;
+    if (!breathTimer) ambientLoop();   // resume breathing (re-seeds promptly)
+  }
+}
+
 function hasWebGL() {
   try {
     const c = document.createElement('canvas');
@@ -156,7 +196,7 @@ function ambientSplat(isRed) {
 
 function ambientLoop() {
   if (stopped) return;
-  if (!document.hidden) {
+  if (!document.hidden && !simPaused) {
     const n = 2 + (Math.random() < 0.5 ? 1 : 0);   // 2–3 splats / tick
     for (let i = 0; i < n; i++) ambientSplat(Math.random() < 0.5);
   }
@@ -167,7 +207,9 @@ function ambientLoop() {
 // threshold). Inject ONLY after >10px of travel since the last injection, so a resting or slow pointer
 // injects nothing and white can never pile up (the blinding fix).
 function onPointerMove(e) {
-  if (stopped) return;
+  // simPaused gate: the listener is on window, so without it a pointer moving over
+  // the sections below keeps splatting the paused off-screen canvas.
+  if (stopped || !started || simPaused) return;
   const now = performance.now();
   if (now - lastMove < 16) return;     // light throttle (~60fps)
   lastMove = now;
@@ -209,16 +251,8 @@ function onPointerMove(e) {
   splat(x, y, dx * 0.4, dy * 0.4, CUR_WHITE, 0.004);      // faint white pinpoint inside (below bloom threshold)
 }
 
-function onVisibility() {
-  if (stopped || !started) return;
-  if (document.hidden) {
-    if (!simPaused) { try { webGLFluidEnhanced.pause(); } catch (e) {} simPaused = true; }
-    if (breathTimer) { clearTimeout(breathTimer); breathTimer = null; }   // no timers while hidden
-  } else {
-    if (simPaused) { try { webGLFluidEnhanced.pause(); } catch (e) {} simPaused = false; }
-    if (!breathTimer) ambientLoop();   // resume breathing (re-seeds promptly)
-  }
-}
+// Tab visibility is just another reducer input — no direct pause() here.
+function onVisibility() { applyRunState(); }
 
 function startFluid(canvas) {
   if (started || stopped) return false;
@@ -230,12 +264,16 @@ function startFluid(canvas) {
   started = true;
 
   document.body.classList.add('fluid-active');   // crossfade: canvas in, CSS fallback out
+  // After the 1.1s reveal crossfade completes, drop the opacity transition so the
+  // scroll-linked --fluid-fade (canvas-opacity-before-pause) tracks scroll 1:1.
+  setTimeout(() => document.body.classList.add('fluid-revealed'), 1300);
 
   intro();
   breathTimer = setTimeout(ambientLoop, 8000);   // hold ~4.5s + dissipate, then ambient breathing (~8s total)
 
   window.addEventListener('pointermove', onPointerMove, { passive: true });
   document.addEventListener('visibilitychange', onVisibility);
+  observeFluidZone(document.querySelector('.websites-page'));   // hero = zone #1; sim runs only while a zone is in view
   return true;
 }
 
