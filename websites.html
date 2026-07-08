@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZXY. — Websites | Build Your Frame, Together</title>
+<meta name="description" content="ZXY Visuals — Bilingual websites for Montreal businesses. Built in a week. Yours.">
+<meta name="theme-color" content="#020204">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="websites.css">
+
+<!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
+<script type="importmap">
+{
+  "imports": {
+    "webgl-fluid-enhanced": "https://esm.sh/webgl-fluid-enhanced@0.6.1"
+  }
+}
+</script>
+</head>
+<body>
+<div class="websites-page">
+
+  <!-- ===== LIVE WEBGL FLUID CANVAS ===== -->
+  <canvas id="fluid-canvas"></canvas>
+
+  <!-- ===== STATIC FALLBACK BLOOM (reduced-motion / mobile / no-WebGL) ===== -->
+  <div class="hero-fallback" aria-hidden="true">
+    <div class="bloom red-main"></div>
+    <div class="bloom red-low"></div>
+    <div class="bloom blue-main"></div>
+    <div class="bloom blue-low"></div>
+    <div class="bloom purple-mid"></div>
+    <div class="hero-wash red"></div>
+    <div class="hero-wash blue"></div>
+  </div>
+
+  <!-- ===== VIGNETTE + TEXT SCRIM ===== -->
+  <div class="hero-vignette" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <!-- ===== FLOATING CONTRACTOR MOCKUP (proof asset) ===== -->
+  <div class="hero-mockup" aria-hidden="true">
+    <div class="mockup-chrome">
+      <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+      <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>borealreno.ca</div></div>
+      <div class="spacer"></div>
+    </div>
+    <div class="mockup-site">
+      <div class="bg"></div>
+      <div class="overlay"></div>
+      <div class="mockup-nav">
+        <div class="mockup-brand">BORÉAL<span class="dot">.</span></div>
+        <div class="mockup-navlinks">
+          <span data-i18n="mockNavA">SERVICES</span><span data-i18n="mockNavB">PROJECTS</span>
+          <span class="quote" data-i18n="mockBtn">GET A QUOTE</span>
+        </div>
+      </div>
+      <div class="mockup-hud"><span class="dot"></span><span data-i18n="mockTag">YOUR DRONE FOOTAGE</span></div>
+      <div class="mockup-copy">
+        <div class="mockup-eyebrow">— <span data-i18n="mockEyebrow">MONTRÉAL — RENOVATION · SINCE 2014</span></div>
+        <div class="mockup-h1"><span data-i18n="mockH1">BUILT</span> <span class="grad" data-i18n="mockH2">TO LAST.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CORNER BRACKETS ===== -->
+  <div class="corner tl" aria-hidden="true"></div>
+  <div class="corner tr" aria-hidden="true"></div>
+  <div class="corner bl" aria-hidden="true"></div>
+  <div class="corner br" aria-hidden="true"></div>
+
+  <!-- ===== RETICLE ===== -->
+  <div class="reticle" aria-hidden="true"><div class="core"></div><div class="ring"></div></div>
+
+  <!-- ===== NAV — fixed top bar: transparent (scrim) over hero, solid black on scroll ===== -->
+  <nav class="hero-nav" id="hero-nav">
+    <div class="brand">
+      <a href="/" class="hero-logo">ZXY<span class="accent-dot">.</span></a>
+      <div class="hero-section-tag">/WEBSITES</div>
+    </div>
+    <div class="links">
+      <a href="#" class="btn-home" data-i18n="navHome">HOME</a>
+      <div class="menu">
+        <span data-i18n="navWhy">WHY</span><span data-i18n="navExamples">EXAMPLES</span><span data-i18n="navPricing">PRICING</span>
+      </div>
+      <button class="btn-lang" id="lang-toggle" type="button"><span class="dot"></span><span data-i18n="langCode">FR</span></button>
+      <button class="btn-nav-cta" type="button" data-i18n="navCta">GET A FREE PREVIEW</button>
+    </div>
+  </nav>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="hero-content">
+
+    <!-- HEADLINE -->
+    <div class="hero-headline-block">
+      <div class="hero-eyebrow">— <span data-i18n="eyebrow">MONTRÉAL — WEBSITES · BILINGUAL · BILL 96</span></div>
+      <h1 class="hero-headline">
+        <span data-i18n="l1">BUILD YOUR</span>
+        <span class="hl-frameline"><span data-i18n="l2pre"></span><span class="framed-word" data-i18n="l2frame">FRAME</span><span data-i18n="l2post">,</span></span>
+        <span data-i18n="l3">TOGETHER.</span>
+      </h1>
+      <p class="hero-tagline" data-i18n="sub1">Bilingual. Built in a week. Yours.</p>
+      <div class="hero-cta-row">
+        <a href="#preview" class="btn-primary"><span data-i18n="cta1">GET A FREE PREVIEW</span> <span class="arrow">→</span></a>
+        <a href="#examples" class="btn-secondary" data-i18n="cta2">SEE EXAMPLE BUILDS</a>
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW -->
+    <div class="hero-bottom">
+      <div class="left">
+        <div class="scroll-label"><span class="blink" data-i18n="scroll">SCROLL</span><span class="line"></span></div>
+      </div>
+      <!-- AXES MARK (replaces FLUID · LIVE) — red-Z / blue-X / grey-Y, draw-in once on load then static -->
+      <div class="hero-cornermark">
+        <svg class="axis-glyph" id="axisGlyph" viewBox="0 0 150 120" width="118" height="94" xmlns="http://www.w3.org/2000/svg" aria-label="ZXY axes">
+          <circle class="ax-dot" cx="60" cy="78" r="2.4" fill="rgba(255,255,255,.7)"/>
+          <line class="ax-line ax-z" x1="60" y1="78" x2="60" y2="14" stroke="#ff4438" stroke-width="1.6" stroke-linecap="round"/>
+          <text class="ax-label ax-z-label" x="66" y="17" fill="#ff4438">Z</text>
+          <line class="ax-line ax-x" x1="60" y1="78" x2="138" y2="78" stroke="#2b7fd4" stroke-width="1.6" stroke-linecap="round"/>
+          <text class="ax-label ax-x-label" x="140" y="82" fill="#2b7fd4">X</text>
+          <line class="ax-line ax-y" x1="60" y1="78" x2="16" y2="104" stroke="rgba(255,255,255,.42)" stroke-width="1.6" stroke-linecap="round"/>
+          <text class="ax-label ax-y-label" x="6" y="114" fill="rgba(255,255,255,.42)">Y</text>
+        </svg>
+        <div class="axis-tags">
+          <span class="atag"><span class="adot red"></span><span data-i18n="tagBilingual">BILINGUAL</span></span>
+          <span class="atag"><span class="adot blue"></span><span data-i18n="tagHosting">HOSTING</span></span>
+          <span class="atag"><span class="adot purple"></span><span data-i18n="tagWeek">IN A WEEK</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EN/FR toggle (ported from the design's bilingual component) -->
+<script>
+(function () {
+  var I18N = {
+    en: {
+      langCode: 'FR', navHome: 'HOME', navWhy: 'WHY', navExamples: 'EXAMPLES', navPricing: 'PRICING', navCta: 'GET A FREE PREVIEW',
+      eyebrow: 'MONTRÉAL — WEBSITES · BILINGUAL · BILL 96',
+      l1: 'BUILD YOUR', l2pre: '', l2frame: 'FRAME', l2post: ',', l3: 'TOGETHER.',
+      sub1: 'Bilingual. Built in a week. Yours.',
+      cta1: 'GET A FREE PREVIEW', cta2: 'SEE EXAMPLE BUILDS',
+      scroll: 'SCROLL',
+      tagBilingual: 'BILINGUAL', tagHosting: 'HOSTING', tagWeek: 'IN A WEEK',
+      mockTag: 'YOUR DRONE FOOTAGE', mockEyebrow: 'MONTRÉAL — RENOVATION · SINCE 2014',
+      mockH1: 'BUILT', mockH2: 'TO LAST.', mockNavA: 'SERVICES', mockNavB: 'PROJECTS', mockBtn: 'GET A QUOTE'
+    },
+    fr: {
+      langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
+      eyebrow: 'MONTRÉAL — SITES WEB · BILINGUE · LOI 96',
+      l1: 'BÂTISSEZ', l2pre: 'VOTRE ', l2frame: 'CADRE', l2post: ',', l3: 'ENSEMBLE.',
+      sub1: 'Bilingue. Prêt en une semaine. À vous.',
+      cta1: 'OBTENEZ UN APERÇU GRATUIT', cta2: 'VOIR DES EXEMPLES',
+      scroll: 'DÉFILER',
+      tagBilingual: 'BILINGUE', tagHosting: 'HÉBERGEMENT', tagWeek: 'EN UNE SEMAINE',
+      mockTag: 'VOS IMAGES DRONE', mockEyebrow: 'MONTRÉAL — RÉNOVATION · DEPUIS 2014',
+      mockH1: 'BÂTI', mockH2: 'POUR DURER.', mockNavA: 'SERVICES', mockNavB: 'PROJETS', mockBtn: 'SOUMISSION'
+    }
+  };
+  var lang = 'en';
+  function apply() {
+    var dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.textContent = dict[k];
+    });
+    document.documentElement.lang = lang;
+  }
+  var btn = document.getElementById('lang-toggle');
+  if (btn) btn.addEventListener('click', function () { lang = (lang === 'en') ? 'fr' : 'en'; apply(); });
+})();
+</script>
+
+<!-- Nav scroll state + axes mark draw-in (hero UI only — does NOT touch the fluid sim) -->
+<script>
+(function () {
+  // Navbar: transparent (scrim) over the hero, solid black once scrolled past it.
+  var nav = document.getElementById('hero-nav');
+  if (nav) {
+    var onScroll = function () {
+      nav.classList.toggle('scrolled', window.scrollY > (window.innerHeight - 90));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+  // Axes mark: one-time draw-in on load, then static (no looping state).
+  var ax = document.getElementById('axisGlyph');
+  if (ax) { requestAnimationFrame(function () { ax.classList.add('ax-animate'); }); }
+})();
+</script>
+
+<!-- Fluid engine -->
+<script type="module" src="fluid-hero.js"></script>
+</body>
+</html>

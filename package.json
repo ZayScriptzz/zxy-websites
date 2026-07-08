@@ -1,0 +1,16 @@
+{
+  "name": "zxy-visuals",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ZXY Visuals — static marketing site. The /websites hero uses a WebGL fluid background.",
+  "type": "module",
+  "scripts": {
+    "serve": "python3 -m http.server 8080"
+  },
+  "dependencies": {
+    "webgl-fluid-enhanced": "0.6.1"
+  },
+  "comments": {
+    "webgl-fluid-enhanced": "PINNED to exact 0.6.1 — do NOT use a caret/range. The /websites hero (fluid-hero.js) is written against the 0.6.1 static API (config()/splat()/simulation()/pause()). Newer majors (0.7+/0.8+) switched to a class-based API and will silently break the hero. The browser loads this same pinned version via the esm.sh importmap in websites.html — keep both in sync."
+  }
+}
