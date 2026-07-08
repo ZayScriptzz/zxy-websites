@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css">
+<link rel="stylesheet" href="websites.css?v=4"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -80,11 +80,12 @@
   <!-- ===== NAV — fixed top bar: transparent (scrim) over hero, solid black on scroll ===== -->
   <nav class="hero-nav" id="hero-nav">
     <div class="brand">
-      <a href="/" class="hero-logo">ZXY<span class="accent-dot">.</span></a>
+      <!-- absolute URL: local python server has no site root (bare "/" = directory listing) -->
+      <a href="https://zxyframe.ca/" class="hero-logo">ZXY<span class="accent-dot">.</span></a>
       <div class="hero-section-tag">/WEBSITES</div>
     </div>
     <div class="links">
-      <a href="#" class="btn-home" data-i18n="navHome">HOME</a>
+      <a href="https://zxyframe.ca/" class="btn-home" data-i18n="navHome">HOME</a>
       <div class="menu">
         <a href="#why" data-i18n="navWhy">WHY</a><a href="#examples" data-i18n="navExamples">EXAMPLES</a><a href="#pricing" data-i18n="navPricing">PRICING</a>
       </div>
@@ -153,20 +154,25 @@
      clip children). Opaque backgrounds cover the fixed z0 fluid canvas.
      Stubs now; content lands per phase (P4-P8). -->
 <main id="page-sections">
-  <section id="why" class="page-section" aria-labelledby="why-chapter">
-    <p class="section-chapter" id="why-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
+  <section id="why" class="page-section" aria-labelledby="why-title">
+    <p class="section-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
+    <h2 class="section-title" id="why-title" data-reveal data-i18n="whyTitle">NO SITE, NO SOUMISSION.</h2>
   </section>
-  <section id="examples" class="page-section" aria-labelledby="examples-chapter">
-    <p class="section-chapter" id="examples-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
+  <section id="examples" class="page-section" aria-labelledby="examples-title">
+    <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
+    <h2 class="section-title" id="examples-title" data-reveal data-i18n="examplesTitle">THE FRAME GALLERY.</h2>
   </section>
-  <section id="process" class="page-section" aria-labelledby="process-chapter">
-    <p class="section-chapter" id="process-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
+  <section id="process" class="page-section" aria-labelledby="process-title">
+    <p class="section-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
+    <h2 class="section-title" id="process-title" data-reveal data-i18n="processTitle">ONE WEEK. HERE'S HOW.</h2>
   </section>
-  <section id="pricing" class="page-section" aria-labelledby="pricing-chapter">
-    <p class="section-chapter" id="pricing-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
+  <section id="pricing" class="page-section" aria-labelledby="pricing-title">
+    <p class="section-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
+    <h2 class="section-title" id="pricing-title" data-reveal data-i18n="pricingTitle">ONE NUMBER IS FINAL: $0.</h2>
   </section>
-  <section id="preview" class="page-section" aria-labelledby="preview-chapter">
-    <p class="section-chapter" id="preview-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
+  <section id="preview" class="page-section" aria-labelledby="preview-title">
+    <p class="section-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
+    <h2 class="section-title" id="preview-title" data-reveal data-i18n="previewTitle">YOUR SITE, BUILT FIRST. FREE.</h2>
   </section>
 </main>
 <footer class="site-footer">
@@ -189,7 +195,10 @@
       mockH1: 'BUILT', mockH2: 'TO LAST.', mockNavA: 'SERVICES', mockNavB: 'PROJECTS', mockBtn: 'GET A QUOTE',
       navMenu: 'MENU',
       chWhy: '01 — WHY', chExamples: '02 — EXAMPLES', chProcess: '03 — PROCESS',
-      chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL'
+      chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL',
+      whyTitle: 'NO SITE, NO SOUMISSION.', examplesTitle: 'THE FRAME GALLERY.',
+      processTitle: "ONE WEEK. HERE'S HOW.", pricingTitle: 'ONE NUMBER IS FINAL: $0.',
+      previewTitle: 'YOUR SITE, BUILT FIRST. FREE.'
     },
     fr: {
       langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
@@ -203,7 +212,10 @@
       mockH1: 'BÂTI', mockH2: 'POUR DURER.', mockNavA: 'SERVICES', mockNavB: 'PROJETS', mockBtn: 'SOUMISSION',
       navMenu: 'MENU',
       chWhy: '01 — POURQUOI', chExamples: '02 — EXEMPLES', chProcess: '03 — PROCESSUS',
-      chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL'
+      chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL',
+      whyTitle: 'PAS DE SITE, PAS DE SOUMISSION.', examplesTitle: 'LA GALERIE DES CADRES.',
+      processTitle: 'UNE SEMAINE. VOICI COMMENT.', pricingTitle: 'UN SEUL CHIFFRE EST FINAL : 0 $.',
+      previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT."
     }
   };
   var lang = 'en';
@@ -247,9 +259,9 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js"></script>
+<script defer src="site.js?v=4"></script>
 
 <!-- Fluid engine -->
-<script type="module" src="fluid-hero.js"></script>
+<script type="module" src="fluid-hero.js?v=4"></script>
 </body>
 </html>

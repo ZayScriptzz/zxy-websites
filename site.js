@@ -72,8 +72,9 @@
       if (Math.abs(tiltTX - tiltCX) + Math.abs(tiltTY - tiltCY) < 0.002) return;
       tiltCX += (tiltTX - tiltCX) * 0.08;
       tiltCY += (tiltTY - tiltCY) * 0.08;
+      // orbit the RESTING angle (must match the CSS base transform: rotateY(-8) rotateX(2.5))
       fw.style.transform =
-        'perspective(640px) rotateX(' + tiltCX.toFixed(3) + 'deg) rotateY(' + tiltCY.toFixed(3) + 'deg)';
+        'perspective(900px) rotateX(' + (2.5 + tiltCX).toFixed(3) + 'deg) rotateY(' + (-8 + tiltCY).toFixed(3) + 'deg)';
     });
   }
 
