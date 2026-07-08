@@ -27,6 +27,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); }
 body { font-family: 'Archivo', sans-serif; color: #fff; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 .websites-page {
   position: relative;
@@ -225,7 +226,12 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .hero-section-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.48); }
 .hero-nav .links { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); }
 .hero-nav .menu { display: flex; gap: clamp(14px, 1.6vw, 24px); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.62); }
-.hero-nav .menu span { cursor: pointer; }
+.hero-nav .menu a { color: inherit; text-decoration: none; cursor: pointer; transition: color .2s ease; }
+.hero-nav .menu a:hover { color: #fff; }
+.hero-nav .menu a:focus-visible, .btn-nav-cta:focus-visible, .btn-home:focus-visible,
+.btn-lang:focus-visible, .nav-mobile summary:focus-visible, .nav-mobile-panel a:focus-visible {
+  outline: 1px solid rgba(var(--purple-rgb),.9); outline-offset: 3px;
+}
 .btn-lang {
   display: inline-flex; align-items: center; gap: 7px; background: transparent;
   border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.82);
@@ -233,9 +239,37 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 }
 .btn-lang .dot { width: 6px; height: 6px; border-radius: 50%; background: #2b7fd4; }
 .btn-nav-cta {
+  display: inline-flex; align-items: center;
   background: transparent; border: 1px solid rgba(255,255,255,.32); color: #fff;
   font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; padding: 9px 16px; cursor: pointer; border-radius: 2px; white-space: nowrap;
+  text-decoration: none;
 }
+
+/* ===== MOBILE DISCLOSURE NAV (≤820px) ====================================
+   Zero-JS <details>/<summary>; JS only closes it after a tap. Desktop: hidden. */
+.nav-mobile { display: none; position: relative; }
+.nav-mobile summary {
+  list-style: none; cursor: pointer;
+  display: inline-flex; align-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: #fff;
+  border: 1px solid rgba(255,255,255,.32); border-radius: 2px; padding: 9px 14px;
+  white-space: nowrap;
+}
+.nav-mobile summary::-webkit-details-marker { display: none; }
+.nav-mobile[open] summary { background: rgba(255,255,255,.08); }
+.nav-mobile-panel {
+  position: absolute; right: 0; top: calc(100% + 10px);
+  display: flex; flex-direction: column; gap: 2px;
+  min-width: 230px; padding: 10px;
+  background: rgba(var(--bg-rgb),.97);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 3px;
+}
+.nav-mobile-panel a {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 2px;
+  color: rgba(255,255,255,.82); text-decoration: none; padding: 12px; border-radius: 2px;
+}
+.nav-mobile-panel a:hover, .nav-mobile-panel a:focus-visible { background: rgba(255,255,255,.07); color: #fff; }
+.nav-mobile-panel a.cta { color: #fff; background: linear-gradient(95deg, rgba(var(--red-rgb),.85), rgba(var(--blue-rgb),.85)); margin-top: 6px; }
 
 /* headline */
 .hero-headline-block { max-width: 680px; }
@@ -335,6 +369,31 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .adot.blue   { background: var(--blue); box-shadow: 0 0 6px rgba(var(--blue-rgb),.6); }
 .adot.purple { background: var(--purple); box-shadow: 0 0 6px rgba(var(--purple-rgb),.6); }
 
+/* ===== PAGE SECTIONS (stubs — content lands P4–P8) =======================
+   Body-level siblings after .websites-page. Opaque bg covers the fixed z0
+   canvas; the top hairline is the blueprint seam between chapters. */
+.page-section {
+  position: relative;
+  z-index: var(--z-section);
+  background: var(--bg);
+  padding: clamp(72px, 10vh, 130px) var(--gutter);
+  min-height: 40vh; /* stub height only — replaced by real content per phase */
+  scroll-margin-top: 100px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.section-chapter {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2.5px;
+  color: rgba(255,255,255,.48);
+}
+.site-footer {
+  position: relative;
+  z-index: var(--z-section);
+  background: var(--bg);
+  padding: clamp(40px, 6vh, 72px) var(--gutter);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
 /* ===== RESPONSIVE / MOBILE =============================================
    Fluid is disabled below 820px (fluid-hero.js → static fallback). Reflow the
    absolute hero into a readable stacked column; drop the floating mockup. */
@@ -349,10 +408,13 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   .hero-content { position: relative; min-height: 100svh; justify-content: flex-start; gap: 40px; padding: 96px 24px 28px; }
   .hero-bottom { position: static; left: auto; right: auto; bottom: auto; }
   .hero-nav .menu { display: none; }
+  /* desktop CTA yields to the disclosure menu (which carries the CTA link);
+     the hero's primary CTA button remains on screen */
+  .hero-nav .btn-nav-cta { display: none; }
+  .nav-mobile { display: block; }
   .hero-scrim { background: linear-gradient(180deg, rgba(2,2,4,.55), rgba(2,2,4,.85)); }
 }
 @media (max-width: 420px) {
-  .hero-nav .btn-nav-cta { display: none; }
   .axis-tags { display: none; }
 }
 

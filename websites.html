@@ -86,10 +86,20 @@
     <div class="links">
       <a href="#" class="btn-home" data-i18n="navHome">HOME</a>
       <div class="menu">
-        <span data-i18n="navWhy">WHY</span><span data-i18n="navExamples">EXAMPLES</span><span data-i18n="navPricing">PRICING</span>
+        <a href="#why" data-i18n="navWhy">WHY</a><a href="#examples" data-i18n="navExamples">EXAMPLES</a><a href="#pricing" data-i18n="navPricing">PRICING</a>
       </div>
       <button class="btn-lang" id="lang-toggle" type="button"><span class="dot"></span><span data-i18n="langCode">FR</span></button>
-      <button class="btn-nav-cta" type="button" data-i18n="navCta">GET A FREE PREVIEW</button>
+      <a href="#preview" class="btn-nav-cta" data-i18n="navCta">GET A FREE PREVIEW</a>
+      <!-- mobile disclosure nav (≤820px) — zero-JS <details>; JS only closes it on tap -->
+      <details class="nav-mobile" id="nav-mobile">
+        <summary><span data-i18n="navMenu">MENU</span></summary>
+        <div class="nav-mobile-panel">
+          <a href="#why" data-i18n="navWhy">WHY</a>
+          <a href="#examples" data-i18n="navExamples">EXAMPLES</a>
+          <a href="#pricing" data-i18n="navPricing">PRICING</a>
+          <a href="#preview" class="cta" data-i18n="navCta">GET A FREE PREVIEW</a>
+        </div>
+      </details>
     </div>
   </nav>
 
@@ -138,6 +148,31 @@
   </div>
 </div>
 
+<!-- ===== PAGE SECTIONS =====================================================
+     Body-level siblings AFTER .websites-page (it has overflow:hidden and would
+     clip children). Opaque backgrounds cover the fixed z0 fluid canvas.
+     Stubs now; content lands per phase (P4-P8). -->
+<main id="page-sections">
+  <section id="why" class="page-section" aria-labelledby="why-chapter">
+    <p class="section-chapter" id="why-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
+  </section>
+  <section id="examples" class="page-section" aria-labelledby="examples-chapter">
+    <p class="section-chapter" id="examples-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
+  </section>
+  <section id="process" class="page-section" aria-labelledby="process-chapter">
+    <p class="section-chapter" id="process-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
+  </section>
+  <section id="pricing" class="page-section" aria-labelledby="pricing-chapter">
+    <p class="section-chapter" id="pricing-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
+  </section>
+  <section id="preview" class="page-section" aria-labelledby="preview-chapter">
+    <p class="section-chapter" id="preview-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
+  </section>
+</main>
+<footer class="site-footer">
+  <p class="section-chapter"><span data-i18n="chFooter">ZXY — MONTRÉAL</span></p>
+</footer>
+
 <!-- EN/FR toggle (ported from the design's bilingual component) -->
 <script>
 (function () {
@@ -151,7 +186,10 @@
       scroll: 'SCROLL',
       tagBilingual: 'BILINGUAL', tagHosting: 'HOSTING', tagWeek: 'IN A WEEK',
       mockTag: 'YOUR DRONE FOOTAGE', mockEyebrow: 'MONTRÉAL — RENOVATION · SINCE 2014',
-      mockH1: 'BUILT', mockH2: 'TO LAST.', mockNavA: 'SERVICES', mockNavB: 'PROJECTS', mockBtn: 'GET A QUOTE'
+      mockH1: 'BUILT', mockH2: 'TO LAST.', mockNavA: 'SERVICES', mockNavB: 'PROJECTS', mockBtn: 'GET A QUOTE',
+      navMenu: 'MENU',
+      chWhy: '01 — WHY', chExamples: '02 — EXAMPLES', chProcess: '03 — PROCESS',
+      chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL'
     },
     fr: {
       langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
@@ -162,7 +200,10 @@
       scroll: 'DÉFILER',
       tagBilingual: 'BILINGUE', tagHosting: 'HÉBERGEMENT', tagWeek: 'EN UNE SEMAINE',
       mockTag: 'VOS IMAGES DRONE', mockEyebrow: 'MONTRÉAL — RÉNOVATION · DEPUIS 2014',
-      mockH1: 'BÂTI', mockH2: 'POUR DURER.', mockNavA: 'SERVICES', mockNavB: 'PROJETS', mockBtn: 'SOUMISSION'
+      mockH1: 'BÂTI', mockH2: 'POUR DURER.', mockNavA: 'SERVICES', mockNavB: 'PROJETS', mockBtn: 'SOUMISSION',
+      navMenu: 'MENU',
+      chWhy: '01 — POURQUOI', chExamples: '02 — EXEMPLES', chProcess: '03 — PROCESSUS',
+      chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL'
     }
   };
   var lang = 'en';
@@ -195,6 +236,13 @@
   // Axes mark: one-time draw-in on load, then static (no looping state).
   var ax = document.getElementById('axisGlyph');
   if (ax) { requestAnimationFrame(function () { ax.classList.add('ax-animate'); }); }
+  // Mobile disclosure nav: works with zero JS; this only closes it after a tap.
+  var mnav = document.getElementById('nav-mobile');
+  if (mnav) {
+    mnav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { mnav.removeAttribute('open'); });
+    });
+  }
 })();
 </script>
 
