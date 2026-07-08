@@ -6,16 +6,35 @@
    is STATIC + low-intensity per the acceptance criteria (reduced-motion/mobile).
    ============================================================================ */
 
+/* ===== DESIGN TOKENS ======================================================
+   Single source of truth for the page palette + layout rhythm. The *-rgb
+   triplets exist so alpha variants stay derivable: rgba(var(--purple-rgb),.6).
+   Engine-local colors (fluid JS #B833FF, fallback bloom rgba(120,90,220,…))
+   deliberately stay literal — they are sim-side, not UI-side. */
+:root {
+  --bg: #020204;          --bg-rgb: 2,2,4;
+  --red: #ff4438;         --red-rgb: 255,68,56;
+  --blue: #2b7fd4;        --blue-rgb: 43,127,212;
+  --purple: #9166e8;      --purple-rgb: 145,102,232;
+  --gutter: clamp(26px, 3.6vw, 52px);
+  --z-section: 1;
+  --z-decor: 3;
+  --z-readout: 5;
+  --z-pill: 6;
+  --z-nav: 7;
+}
+
 *, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; background: #020204; }
+html, body { margin: 0; background: var(--bg); }
+body { font-family: 'Archivo', sans-serif; color: #fff; }
 
 .websites-page {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh; /* pinned: the hero is exactly one viewport; sections are siblings below */
   overflow: hidden;
   margin: 0;
-  background: #020204;
+  background: var(--bg);
   font-family: 'Archivo', sans-serif;
   color: #fff;
 }
@@ -164,7 +183,7 @@ html, body { margin: 0; background: #020204; }
 .hero-content {
   position: absolute; inset: 0; z-index: 5;
   display: flex; flex-direction: column; justify-content: center;
-  padding: clamp(26px, 3.6vw, 52px);
+  padding: var(--gutter);
   pointer-events: none;
 }
 .hero-content > * { pointer-events: auto; }
@@ -172,9 +191,9 @@ html, body { margin: 0; background: #020204; }
 /* nav — fixed top bar. Transparent with a top scrim over the hero (legibility over
    bright fluid bloom); flips to solid black once scrolled past the hero (.scrolled). */
 .hero-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 7;
+  position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav);
   display: flex; align-items: center; justify-content: space-between; gap: 20px;
-  padding: clamp(16px, 2vw, 26px) clamp(26px, 3.6vw, 52px);
+  padding: clamp(16px, 2vw, 26px) var(--gutter);
   background: linear-gradient(180deg, rgba(2,2,4,.66) 0%, rgba(2,2,4,.3) 55%, rgba(2,2,4,0) 100%);
   border-bottom: 1px solid transparent;
   transition: background .5s ease, padding .4s ease, border-color .5s ease, backdrop-filter .4s ease;
@@ -190,14 +209,14 @@ html, body { margin: 0; background: #020204; }
    / websites=purple). Placeholder href="#"; reads in both transparent and solid states. */
 .btn-home {
   display: inline-flex; align-items: center; gap: 7px;
-  border: 1px solid rgba(145,102,232,.6); border-radius: 2px;
-  background: rgba(145,102,232,.12); color: #d3c2f7;
+  border: 1px solid rgba(var(--purple-rgb),.6); border-radius: 2px;
+  background: rgba(var(--purple-rgb),.12); color: #d3c2f7;
   font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px;
   padding: 8px 13px; text-decoration: none; white-space: nowrap;
   transition: background .25s ease, border-color .25s ease, color .25s ease;
 }
 .btn-home::before { content: '←'; opacity: .85; }
-.btn-home:hover { background: rgba(145,102,232,.24); border-color: rgba(145,102,232,.95); color: #fff; }
+.btn-home:hover { background: rgba(var(--purple-rgb),.24); border-color: rgba(var(--purple-rgb),.95); color: #fff; }
 .hero-nav .brand { display: flex; align-items: center; gap: 14px; }
 .hero-logo {
   font-family: 'Anton', sans-serif; font-size: 24px; letter-spacing: 1px; color: #fff; line-height: 1;
@@ -227,7 +246,7 @@ html, body { margin: 0; background: #020204; }
 }
 .hero-headline span { display: block; }
 .hero-headline .grad {
-  background: linear-gradient(95deg, #ff4438 0%, #ff5a3d 26%, #9166e8 56%, #2b7fd4 92%);
+  background: linear-gradient(95deg, var(--red) 0%, #ff5a3d 26%, var(--purple) 56%, var(--blue) 92%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -247,11 +266,11 @@ html, body { margin: 0; background: #020204; }
   color: #f4f5f7;
   border: 2px solid rgba(255,255,255,.72);
   border-radius: 6px;
-  background: linear-gradient(180deg, rgba(145,102,232,.12), rgba(255,255,255,.02));
+  background: linear-gradient(180deg, rgba(var(--purple-rgb),.12), rgba(255,255,255,.02));
   box-shadow:
-    0 0 0 1px rgba(145,102,232,.45),
-    0 10px 36px -12px rgba(145,102,232,.55),
-    inset 0 0 26px -8px rgba(145,102,232,.5);
+    0 0 0 1px rgba(var(--purple-rgb),.45),
+    0 10px 36px -12px rgba(var(--purple-rgb),.55),
+    inset 0 0 26px -8px rgba(var(--purple-rgb),.5);
   -webkit-backdrop-filter: blur(2px) saturate(1.05);
   backdrop-filter: blur(2px) saturate(1.05);
 }
@@ -261,7 +280,7 @@ html, body { margin: 0; background: #020204; }
 .hero-cta-row { display: flex; align-items: center; gap: 16px; margin-top: clamp(24px, 2.8vw, 38px); flex-wrap: wrap; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 12px;
-  background: linear-gradient(95deg, #ff4438, #2b7fd4); border: none; color: #fff;
+  background: linear-gradient(95deg, var(--red), var(--blue)); border: none; color: #fff;
   font-family: 'JetBrains Mono', monospace; font-size: clamp(13px, 1.25vw, 16px); font-weight: 500; letter-spacing: 2.5px;
   padding: clamp(16px, 1.5vw, 21px) clamp(26px, 2.4vw, 38px); cursor: pointer; border-radius: 3px; white-space: nowrap;
   animation: zxy-cta 3.6s ease-in-out infinite; text-decoration: none;
@@ -276,7 +295,7 @@ html, body { margin: 0; background: #020204; }
 /* bottom row — pinned to the hero floor (nav left the flex flow, so the headline
    block now centers and this is positioned independently). */
 .hero-bottom {
-  position: absolute; left: clamp(26px, 3.6vw, 52px); right: clamp(26px, 3.6vw, 52px); bottom: clamp(26px, 3.6vw, 52px);
+  position: absolute; left: var(--gutter); right: var(--gutter); bottom: var(--gutter);
   display: flex; align-items: flex-end; justify-content: space-between; gap: 20px;
 }
 .hero-bottom .left { display: flex; align-items: center; gap: clamp(16px, 2vw, 28px); flex-wrap: wrap; }
@@ -312,15 +331,17 @@ html, body { margin: 0; background: #020204; }
   font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,.6);
 }
 .atag .adot { width: 6px; height: 6px; border-radius: 50%; }
-.adot.red    { background: #ff4438; box-shadow: 0 0 6px rgba(255,68,56,.6); }
-.adot.blue   { background: #2b7fd4; box-shadow: 0 0 6px rgba(43,127,212,.6); }
-.adot.purple { background: #9166e8; box-shadow: 0 0 6px rgba(145,102,232,.6); }
+.adot.red    { background: var(--red); box-shadow: 0 0 6px rgba(var(--red-rgb),.6); }
+.adot.blue   { background: var(--blue); box-shadow: 0 0 6px rgba(var(--blue-rgb),.6); }
+.adot.purple { background: var(--purple); box-shadow: 0 0 6px rgba(var(--purple-rgb),.6); }
 
 /* ===== RESPONSIVE / MOBILE =============================================
    Fluid is disabled below 820px (fluid-hero.js → static fallback). Reflow the
    absolute hero into a readable stacked column; drop the floating mockup. */
 @media (max-width: 820px) {
-  .websites-page { min-height: 100svh; }
+  /* mobile hero flows in-document (hero-content is position:relative below) —
+     height must be content-driven or overflow:hidden clips it */
+  .websites-page { height: auto; min-height: 100svh; }
   .hero-mockup, .reticle { display: none; }
   .hero-headline { white-space: normal; font-size: clamp(44px, 13vw, 72px); }
   .hero-headline .hl-frameline { white-space: normal; }
