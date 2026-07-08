@@ -549,6 +549,17 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   .nav-mobile { display: block; }
   .hero-scrim { background: linear-gradient(180deg, rgba(2,2,4,.55), rgba(2,2,4,.85)); }
 }
+@media (max-width: 600px) {
+  /* nav compression — the logo IS the home link, so the HOME button yields;
+     row is logo + FR + MENU with ample headroom at 390px */
+  .hero-section-tag { display: none; }
+  .btn-home { display: none; }
+  .hero-nav { gap: 10px; padding-left: 16px; padding-right: 16px; }
+  .hero-nav .links { gap: 8px; }
+  .btn-lang { padding: 7px 9px; }
+  .nav-mobile summary { padding: 7px 10px; }
+  .hero-logo { font-size: 20px; padding: 6px 9px; }
+}
 @media (max-width: 420px) {
   .axis-tags { display: none; }
 }
