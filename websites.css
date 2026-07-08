@@ -288,30 +288,121 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
-/* ===== FRAMED WORD — reusable component =================================
-   The color signature now lives on FRAME (TOGETHER is plain white). FRAME reads as
-   a literal framed/outlined word: white border + purple glow + light refraction
-   (a hint of backdrop blur), NOT heavy 3D glass. Outline is white/purple so it does
-   not camouflage into the red/blue fluid behind it. Built to be reusable; applied
-   to this page only for now. */
+/* ===== THE GLASS FRAME — brand signature device ==========================
+   Zay's hero directive: FRAME as a 3D glass object, title outline in the
+   version colors. This page: red→purple→blue gradient stroke, purple/white
+   secondary. PORTABLE: the recipe reads --frame-accent / --frame-accent-2 —
+   the realtor page sets both to its red (#d63030), creators to its blue
+   (#2b8ae0), and the gradient collapses to a solid. Font-agnostic.
+   Layers, back to front:
+     backdrop-filter pane (refracts the LIVE FLUID behind the glass)
+     → ::before gradient ring (mask-composite; solid purple ring fallback)
+     → border = white inner hairline · box-shadow bevels (lit tl / shaded br)
+     → ::after L-bracket corner ticks (the shared ZXY bracket grammar)
+     → .fw-specular one-shot sheen sweep
+     → .framed-word-text glass glyphs (gradient stroke, frosted fill).
+   Degrades: no canvas → pane blurs the static bloom; no mask-composite →
+   solid purple ring; no background-clip:text → solid purple stroke. */
 .hero-headline .hl-frameline { display: block; white-space: nowrap; padding: .04em 0; }
 .hero-headline .hl-frameline > span { display: inline; }
 .hero-headline .hl-frameline > .framed-word { display: inline-block; }
 .framed-word {
+  --frame-accent: var(--red);
+  --frame-accent-2: var(--blue);
   position: relative;
+  display: inline-block;
   padding: 0 .16em .02em;
   margin: 0 .04em;
-  color: #f4f5f7;
-  border: 2px solid rgba(255,255,255,.72);
-  border-radius: 6px;
-  background: linear-gradient(180deg, rgba(var(--purple-rgb),.12), rgba(255,255,255,.02));
+  border: 1.5px solid rgba(255,255,255,.8);   /* inner white hairline */
+  border-radius: 7px;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(var(--purple-rgb),.09));
   box-shadow:
-    0 0 0 1px rgba(var(--purple-rgb),.45),
-    0 10px 36px -12px rgba(var(--purple-rgb),.55),
-    inset 0 0 26px -8px rgba(var(--purple-rgb),.5);
-  -webkit-backdrop-filter: blur(2px) saturate(1.05);
-  backdrop-filter: blur(2px) saturate(1.05);
+    0 0 0 3px rgba(var(--purple-rgb),.55),          /* fallback accent ring (replaced by ::before when masks work) */
+    inset 1.5px 1.5px 0 rgba(255,255,255,.25),      /* bevel: light from top-left */
+    inset -1.5px -1.5px 0 rgba(2,2,4,.55),          /* bevel: shade to bottom-right */
+    inset 0 0 30px -6px rgba(var(--purple-rgb),.45),/* interior purple haze */
+    0 14px 44px -12px rgba(var(--purple-rgb),.55);  /* ambient glow */
+  -webkit-backdrop-filter: blur(9px) saturate(1.4) brightness(1.12);
+  backdrop-filter: blur(9px) saturate(1.4) brightness(1.12);
+  transform: perspective(640px);
+  will-change: transform;
 }
+/* gradient ring — version-colored outer stroke, painted as a true ring */
+@supports ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+  .framed-word {
+    box-shadow:
+      inset 1.5px 1.5px 0 rgba(255,255,255,.25),
+      inset -1.5px -1.5px 0 rgba(2,2,4,.55),
+      inset 0 0 30px -6px rgba(var(--purple-rgb),.45),
+      0 14px 44px -12px rgba(var(--purple-rgb),.55);
+  }
+  .framed-word::before {
+    content: '';
+    position: absolute; inset: -6px;
+    border-radius: 11px;
+    padding: 3px;
+    background: linear-gradient(95deg, var(--frame-accent), var(--purple) 52%, var(--frame-accent-2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: .92;
+    pointer-events: none;
+  }
+}
+/* corner ticks — the ZXY L-bracket grammar, mitred onto the frame */
+.framed-word::after {
+  content: '';
+  position: absolute; inset: -14px;
+  pointer-events: none;
+  --tick: rgba(255,255,255,.6);
+  background:
+    linear-gradient(var(--tick), var(--tick)) 0 0 / 15px 1.5px,
+    linear-gradient(var(--tick), var(--tick)) 0 0 / 1.5px 15px,
+    linear-gradient(var(--tick), var(--tick)) 100% 0 / 15px 1.5px,
+    linear-gradient(var(--tick), var(--tick)) 100% 0 / 1.5px 15px,
+    linear-gradient(var(--tick), var(--tick)) 0 100% / 15px 1.5px,
+    linear-gradient(var(--tick), var(--tick)) 0 100% / 1.5px 15px,
+    linear-gradient(var(--tick), var(--tick)) 100% 100% / 15px 1.5px,
+    linear-gradient(var(--tick), var(--tick)) 100% 100% / 1.5px 15px;
+  background-repeat: no-repeat;
+}
+/* glass glyphs — gradient stroke, frosted translucent fill */
+.framed-word-text {
+  position: relative;
+  z-index: 1;
+  -webkit-text-stroke: .028em transparent;
+  background: linear-gradient(95deg, var(--frame-accent), var(--purple) 52%, var(--frame-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: rgba(244,245,247,.34);   /* frosted fill — the gradient edge glows through the glass */
+}
+@supports not (-webkit-background-clip: text) {
+  .framed-word-text {
+    background: none;
+    -webkit-text-stroke: .028em var(--purple);
+    color: rgba(244,245,247,.4);
+  }
+}
+/* one-shot specular sweep across the pane after the reveal */
+.fw-specular {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.fw-specular::before {
+  content: '';
+  position: absolute; top: -22%; bottom: -22%; left: 0; width: 34%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.30) 46%, rgba(255,255,255,.06) 58%, transparent);
+  transform: translateX(-140%) skewX(-18deg);
+}
+@keyframes fw-specular { to { transform: translateX(340%) skewX(-18deg); } }
+@media (prefers-reduced-motion: no-preference) {
+  .fw-specular::before { animation: fw-specular 1.5s cubic-bezier(.5, .1, .3, 1) 1.7s 1 both; }
+}
+/* sentinel tier-down: the pane blur is this page's heaviest decorative layer */
+.perf-tier-down .framed-word { -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 .hero-tagline { font-family: 'Archivo', sans-serif; font-weight: 300; font-size: clamp(16px, 1.5vw, 21px); letter-spacing: .4px; color: rgba(255,255,255,.74); margin: clamp(18px, 2vw, 28px) 0 0; max-width: 440px; }
 

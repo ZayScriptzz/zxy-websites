@@ -57,6 +57,26 @@
     revealTargets.forEach(function (el) { el.classList.add('in-view'); });
   }
 
+  // ---- GLASS FRAME MICRO-PARALLAX ----------------------------------------------
+  // ±2° perspective tilt toward the pointer — glass catching the light. Desktop
+  // fine-pointer only, motion-gated; transform-only (compositor-cheap).
+  var fw = document.querySelector('.framed-word');
+  if (fw && !MOTION_OFF &&
+      window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 821px)').matches) {
+    var tiltTX = 0, tiltTY = 0, tiltCX = 0, tiltCY = 0;
+    window.addEventListener('pointermove', function (e) {
+      tiltTY = ((e.clientX / window.innerWidth) - 0.5) * 4;   // rotateY ±2°
+      tiltTX = (0.5 - (e.clientY / vh)) * 3;                  // rotateX ±1.5°
+    }, { passive: true });
+    subs.push(function () {
+      if (Math.abs(tiltTX - tiltCX) + Math.abs(tiltTY - tiltCY) < 0.002) return;
+      tiltCX += (tiltTX - tiltCX) * 0.08;
+      tiltCY += (tiltTY - tiltCY) * 0.08;
+      fw.style.transform =
+        'perspective(640px) rotateX(' + tiltCX.toFixed(3) + 'deg) rotateY(' + tiltCY.toFixed(3) + 'deg)';
+    });
+  }
+
   // ---- THE LOOP ------------------------------------------------------------
   var last = performance.now();
   function frame(now) {
