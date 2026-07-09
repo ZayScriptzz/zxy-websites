@@ -837,24 +837,43 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 
 /* ===== #PROCESS — blueprint timeline ===================================== */
 .proc-sub { max-width: 520px; margin: 16px 0 0; font-weight: 300; font-size: clamp(14px, 1.1vw, 17px); color: var(--s-body); }
-.proc-wrap { position: relative; margin-top: clamp(36px, 5vh, 64px); }
+.proc-wrap { position: relative; margin-top: clamp(36px, 5vh, 64px);
+  /* one gap source: station i's dot center = i·(100% + gap)/6 + 5.5px (dot is 11px) —
+     the carriage keyframes park on these exact points at any viewport width */
+  --proc-gap: clamp(10px, 1.4vw, 22px);
+  --proc-stop: calc((100% + var(--proc-gap)) / 6);
+}
 .proc-rail { position: absolute; left: 0; right: 0; top: 46px; width: 100%; height: 4px; }
-/* PROGRESSION SLIDER: the gradient fill extends along the faint track in sync
-   with the scanner carriage riding its leading edge — one linear clock (3s)
-   drives fill, carriage, and station power-on (0.6s per station). */
+/* ONE CLOCK: everything below keys to .proc-wrap.in-view (the rail itself entering
+   the viewport — NOT the section, whose .in-view fires much earlier) and rides a
+   single 4s linear timeline starting .6s in. Stations light every .8s = every 20%
+   of the timeline; the scanner travels 16% and dwells 4% on each dot, arriving
+   exactly as it lights — a plotter taking a reading. The fill's leading edge
+   plateaus on the same schedule (dashoffset ≈ station positions at 6-col layout;
+   the carriage glow covers the ±1% viewport drift). Both stop at D7 — the faint
+   track past the last station stays unfilled. */
 .proc-line { stroke-dasharray: 100; stroke-dashoffset: 100; }
-.in-view .proc-line { animation: proc-draw 3s linear .5s forwards; }
-@keyframes proc-draw { to { stroke-dashoffset: 0; } }
-.proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(10px, 1.4vw, 22px); }
+.proc-wrap.in-view .proc-line { animation: proc-draw 4s linear .6s forwards; }
+@keyframes proc-draw {
+  0%, 4%   { stroke-dashoffset: 99.5; }
+  20%, 24% { stroke-dashoffset: 82.6; }
+  40%, 44% { stroke-dashoffset: 65.6; }
+  60%, 64% { stroke-dashoffset: 48.7; }
+  80%, 84% { stroke-dashoffset: 31.7; }
+  100%     { stroke-dashoffset: 14.8; }
+}
+.proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--proc-gap); }
 .proc-step { display: grid; justify-items: start; align-content: start; gap: 8px; }
 .proc-day { display: block; height: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.55); }
 .proc-dot { position: relative; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid rgba(255,255,255,.8); margin: 8px 0 10px; }
 .proc-dot::after { content: ''; position: absolute; inset: -7px; border-radius: 50%; border: 1px solid rgba(var(--blue-rgb),.7); opacity: 0; }
-.in-view .proc-step .proc-dot::after { animation: zxy-ret 2s ease-out 1; animation-delay: calc(var(--i) * .24s + 1s); }
+.proc-wrap.in-view .proc-step .proc-dot::after { animation: zxy-ret 2s ease-out 1; animation-delay: calc(.6s + var(--i) * .8s); }
 .proc-step h3 { margin: 0; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(12px, 1.05vw, 15px); letter-spacing: 1px; color: #f4f5f7; }
 .proc-step p { margin: 0; font-weight: 300; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.55); max-width: 20ch; }
-/* THE SLIDER (Zay's directive): a scanner carriage rides the rail after it
-   draws, and each station powers on as the carriage passes it. */
+/* THE SLIDER (Zay's directive): a scanner carriage rides the fill's leading edge
+   and STOPS at each station — dot lights on arrival, carriage dwells .16s on the
+   lit dot, then moves on. Position and opacity are separate animations so the
+   carriage can park on D7 for a beat before powering down. */
 .proc-carriage {
   position: absolute; top: 48px; left: 0%;
   width: 18px; height: 18px; margin: -9px 0 0 -9px;
@@ -868,29 +887,40 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .proc-carriage::before { left: 50%; top: -7px; bottom: -7px; width: 1px; margin-left: -.5px; }
 .proc-carriage::after { top: 50%; left: -7px; right: -7px; height: 1px; margin-top: -.5px; }
 @media (prefers-reduced-motion: no-preference) {
-  .in-view .proc-carriage { animation: proc-slide 3s linear .5s 1 forwards; }
-  /* stations start dim, power on exactly as the fill's leading edge arrives */
-  .js .style-blueprint.in-view .proc-step { opacity: .3; animation: proc-on .45s ease forwards; animation-delay: calc(.5s + var(--i) * .6s); }
-  .js .style-blueprint.in-view .proc-dot { animation: proc-dot-fill .4s ease forwards; animation-delay: calc(.5s + var(--i) * .6s); }
+  .proc-wrap.in-view .proc-carriage { animation: proc-slide 4s linear .6s forwards, proc-fade 4.4s linear .6s forwards; }
+  /* stations start dim, power on exactly as the scanner arrives — same clock */
+  .js .proc-wrap.in-view .proc-step { opacity: .3; animation: proc-on .45s ease forwards; animation-delay: calc(.6s + var(--i) * .8s); }
+  .js .proc-wrap.in-view .proc-dot { animation: proc-dot-fill .4s ease forwards; animation-delay: calc(.6s + var(--i) * .8s); }
 }
 @keyframes proc-slide {
-  0%   { left: 0%;   opacity: 0; }
-  5%   { opacity: 1; }
-  93%  { opacity: 1; }
-  100% { left: 100%; opacity: 0; }
+  0%, 4%   { left: 5.5px; }
+  20%, 24% { left: calc(var(--proc-stop) * 1 + 5.5px); }
+  40%, 44% { left: calc(var(--proc-stop) * 2 + 5.5px); }
+  60%, 64% { left: calc(var(--proc-stop) * 3 + 5.5px); }
+  80%, 84% { left: calc(var(--proc-stop) * 4 + 5.5px); }
+  100%     { left: calc(var(--proc-stop) * 5 + 5.5px); }
+}
+@keyframes proc-fade {
+  0%   { opacity: 0; }
+  3%   { opacity: 1; }
+  91%  { opacity: 1; } /* 91% of 4.4s ≈ 4s — the slide's end: park on lit D7, then power down */
+  100% { opacity: 0; }
 }
 @keyframes proc-on { to { opacity: 1; } }
 @keyframes proc-dot-fill { to { background: rgb(var(--purple-rgb)); border-color: #fff; } }
 @media (max-width: 820px) {
-  /* vertical rail: gradient hairline down the left, stations stack */
+  /* vertical rail: gradient hairline down the left, stations stack.
+     No carriage here — the 0.8s desktop stagger would feel broken, so tighten it. */
   .proc-rail { display: none; }
   .proc-steps { grid-template-columns: 1fr; gap: 22px; border-left: 2px solid transparent;
     border-image: linear-gradient(180deg, var(--red), var(--purple), var(--blue)) 1; padding-left: 22px; }
   .proc-dot { display: none; }
   .proc-step p { max-width: none; }
+  .js .proc-wrap.in-view .proc-step { animation-delay: calc(.15s + var(--i) * .2s); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .proc-line { stroke-dashoffset: 0; animation: none !important; }
+  /* static-complete = the animation's end state: fill stops at D7 */
+  .proc-line { stroke-dashoffset: 14.8; animation: none !important; }
   .proc-dot::after { animation: none !important; }
 }
 
