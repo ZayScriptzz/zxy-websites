@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=6"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=7"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -161,6 +161,34 @@
     <p class="section-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot red"></span><span data-i18n="styleWhy">STYLE — BOLD</span></span>
     <h2 class="section-title" id="why-title" data-reveal data-i18n="whyTitle">NO SITE, NO SOUMISSION.</h2>
+    <div class="why-grid">
+      <article class="why-card" data-reveal style="--i: 0">
+        <span class="atag"><span class="adot red"></span><span data-i18n="whyCard1Tag">BILINGUAL</span></span>
+        <h3 data-i18n="whyCard1Title">Both languages. Hand-written.</h3>
+        <p data-i18n="whyCard1Body">Every page ships in French and English — authored, not auto-translated. In the spirit of Loi 96 — and of actually being found.</p>
+        <button type="button" class="toggle-proof" id="toggle-proof" data-i18n="whyToggleProof">Press FR. That's the product. →</button>
+      </article>
+      <article class="why-card" data-reveal style="--i: 1">
+        <span class="atag"><span class="adot purple"></span><span data-i18n="whyCard2Tag">YOURS</span></span>
+        <h3 data-i18n="whyCard2Title">You own every piece.</h3>
+        <p data-i18n="whyCard2Body">Domain, files, hosting handled — one build, no retainer holding your site hostage.</p>
+      </article>
+      <article class="why-card" data-reveal style="--i: 2">
+        <span class="atag"><span class="adot blue"></span><span data-i18n="whyCard3Tag">IN A WEEK</span></span>
+        <h3 data-i18n="whyCard3Title">Live in seven days.</h3>
+        <p data-i18n="whyCard3Body">From the first call to handoff. See exactly how below.</p>
+        <a class="why-link" href="#process" data-i18n="whyCard3Link">THE PROCESS →</a>
+      </article>
+    </div>
+    <p class="why-moat" data-reveal data-i18n="whyMoat">No photos? We fly drones for a living. Your footage is the add-on, not your homework.</p>
+    <div class="why-stats" data-reveal>
+      <div class="stat"><span class="stat-n">2</span><span class="stat-l" data-i18n="stat1l">LANGUAGES</span></div>
+      <div class="stat"><span class="stat-n">7</span><span class="stat-l" data-i18n="stat2l">DAYS</span></div>
+      <div class="stat"><span class="stat-n">100%</span><span class="stat-l" data-i18n="stat3l">YOURS</span></div>
+    </div>
+    <!-- the brand's emergence rule, restated in pure CSS for the no-canvas audience:
+         red + blue overlap under screen blending → purple appears, never painted -->
+    <div class="purple-seam" aria-hidden="true"><span class="seam-red"></span><span class="seam-blue"></span></div>
   </section>
   <section id="examples" class="page-section style-gallery" aria-labelledby="examples-title">
     <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
@@ -271,7 +299,17 @@
       smsHref: 'sms:5142604573?&body=PREVIEW%20—%20',
       pillText: 'TEXT US — FREE PREVIEW',
       footPitch: 'Bilingual websites for Montréal businesses. Built in a week. Yours.',
-      footMade: 'Conçu et hébergé à Montréal.'
+      footMade: 'Conçu et hébergé à Montréal.',
+      whyCard1Tag: 'BILINGUAL', whyCard1Title: 'Both languages. Hand-written.',
+      whyCard1Body: 'Every page ships in French and English — authored, not auto-translated. In the spirit of Loi 96 — and of actually being found.',
+      whyToggleProof: "Press FR. That's the product. →",
+      whyCard2Tag: 'YOURS', whyCard2Title: 'You own every piece.',
+      whyCard2Body: 'Domain, files, hosting handled — one build, no retainer holding your site hostage.',
+      whyCard3Tag: 'IN A WEEK', whyCard3Title: 'Live in seven days.',
+      whyCard3Body: 'From the first call to handoff. See exactly how below.',
+      whyCard3Link: 'THE PROCESS →',
+      whyMoat: 'No photos? We fly drones for a living. Your footage is the add-on, not your homework.',
+      stat1l: 'LANGUAGES', stat2l: 'DAYS', stat3l: 'YOURS'
     },
     fr: {
       langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
@@ -302,7 +340,17 @@
       smsHref: 'sms:5142604573?&body=APER%C3%87U%20—%20',
       pillText: 'TEXTEZ-NOUS — APERÇU GRATUIT',
       footPitch: 'Sites web bilingues pour les entreprises de Montréal. Prêts en une semaine. À vous.',
-      footMade: 'Conçu et hébergé à Montréal.'
+      footMade: 'Conçu et hébergé à Montréal.',
+      whyCard1Tag: 'BILINGUE', whyCard1Title: 'Les deux langues. Écrites à la main.',
+      whyCard1Body: "Chaque page est livrée en français et en anglais — rédigée, pas traduite par une machine. Dans l'esprit de la Loi 96 — et pour être trouvé, tout simplement.",
+      whyToggleProof: "Appuyez sur EN. C'est ça, le produit. →",
+      whyCard2Tag: 'À VOUS', whyCard2Title: 'Chaque morceau vous appartient.',
+      whyCard2Body: "Domaine, fichiers, hébergement pris en charge — une seule facture, aucun forfait mensuel qui retient votre site en otage.",
+      whyCard3Tag: 'EN UNE SEMAINE', whyCard3Title: 'En ligne en sept jours.',
+      whyCard3Body: 'Du premier appel à la remise des clés. Voyez comment juste en dessous.',
+      whyCard3Link: 'LE PROCESSUS →',
+      whyMoat: "Pas de photos? Le drone, c'est notre métier. Vos images sont une option, pas un devoir.",
+      stat1l: 'LANGUES', stat2l: 'JOURS', stat3l: 'À VOUS'
     }
   };
   var lang = 'en';
@@ -328,6 +376,12 @@
   }
   var btn = document.getElementById('lang-toggle');
   if (btn) btn.addEventListener('click', function () { setLang(lang === 'en' ? 'fr' : 'en', true); });
+  // toggle-as-proof (#why card): flips the whole page — the demo IS the product.
+  var tp = document.getElementById('toggle-proof');
+  if (tp && btn) tp.addEventListener('click', function () {
+    btn.click();
+    tp.classList.remove('pulse'); void tp.offsetWidth; tp.classList.add('pulse');
+  });
 
   // dev-only drift check (runs on the pristine EN DOM, before any language apply):
   // hardcoded EN markup must byte-match the en dict or the EN→FR→EN roundtrip corrupts.
@@ -387,7 +441,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=6"></script>
+<script defer src="site.js?v=7"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>

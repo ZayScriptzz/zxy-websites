@@ -78,6 +78,30 @@
     });
   }
 
+  // ---- STAT COUNT-UP (#why) ------------------------------------------------------
+  // Animates only the digits; the localized label lives in a separate i18n'd span,
+  // so a mid-count language flip can never corrupt the number.
+  var statEls = document.querySelectorAll('.stat-n');
+  if (statEls.length && 'IntersectionObserver' in window && !MOTION_OFF) {
+    var statIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        statIO.unobserve(e.target);
+        var raw = e.target.textContent;
+        var suffix = raw.replace(/[0-9]/g, '');
+        var target = parseInt(raw, 10) || 0;
+        var t0 = performance.now(), dur = 900;
+        (function tick(now) {
+          var p = Math.min(1, (now - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 4);
+          e.target.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick); else e.target.textContent = raw;
+        })(t0);
+      });
+    }, { threshold: 0.6 });
+    statEls.forEach(function (el) { statIO.observe(el); });
+  }
+
   // ---- STICKY SMS PILL (mobile) ------------------------------------------------
   // Visible only between hero-exit and #preview-entry — one dominant conversion
   // element per viewport. CSS keeps it display:none on desktop.
