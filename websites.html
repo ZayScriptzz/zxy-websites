@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=10"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=11"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -51,7 +51,7 @@
       <div class="spacer"></div>
     </div>
     <div class="mockup-site">
-      <div class="bg"></div>
+      <div class="bg boreal-scene"></div>
       <div class="overlay"></div>
       <div class="mockup-nav">
         <div class="mockup-brand">BORÉAL<span class="dot">.</span></div>
@@ -194,6 +194,78 @@
     <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleExamples">STYLE — GALLERY</span></span>
     <h2 class="section-title" id="examples-title" data-reveal data-i18n="examplesTitle">THE FRAME GALLERY.</h2>
+    <p class="gallery-sub" data-reveal data-i18n="examplesSub">No fake clients. Concept builds and our own sites — labeled exactly what they are.</p>
+    <div class="gallery-grid">
+      <!-- 1 · Boréal — the CSS-composed concept build (domain doesn't resolve: honesty is the pitch) -->
+      <article class="build-card" data-reveal style="--i: 0">
+        <div class="mockup-chrome">
+          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>borealreno.ca</div></div>
+          <div class="spacer"></div>
+        </div>
+        <div class="build-shot boreal-scene">
+          <div class="bshot-copy">
+            <span class="bshot-brand">BORÉAL<span>.</span></span>
+            <span class="bshot-h1"><span data-i18n="mockH1">BUILT</span> <em data-i18n="mockH2">TO LAST.</em></span>
+          </div>
+        </div>
+        <div class="build-placard">
+          <span class="atag"><span class="adot red"></span><span data-i18n="tileBorealTag">CONTRACTOR</span></span>
+          <h3 data-i18n="tileBorealName">Boréal — Renovation</h3>
+          <span class="build-badge" data-i18n="badgeConcept">CONCEPT — DEMO</span>
+        </div>
+      </article>
+      <!-- 2 · the real ZXY real-estate frame -->
+      <article class="build-card" data-reveal style="--i: 1">
+        <div class="mockup-chrome">
+          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>zxyframe.ca</div></div>
+          <div class="spacer"></div>
+        </div>
+        <div class="build-shot">
+          <img src="assets/zxy-realtor-hero.jpg" loading="lazy" width="1200" height="644"
+               alt="ZXY real-estate site hero" data-i18n-attrs="alt=altRealtor">
+        </div>
+        <div class="build-placard">
+          <span class="atag"><span class="adot red"></span><span data-i18n="tileRealtorTag">REAL ESTATE</span></span>
+          <h3 data-i18n="tileRealtorName">ZXY — Property Media</h3>
+          <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+        </div>
+      </article>
+      <!-- 3 · the real ZXY creators frame -->
+      <article class="build-card" data-reveal style="--i: 2">
+        <div class="mockup-chrome">
+          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>zxyframe.ca/creators</div></div>
+          <div class="spacer"></div>
+        </div>
+        <div class="build-shot">
+          <img src="assets/zxy-creator-hero.jpg" loading="lazy" width="1200" height="644"
+               alt="ZXY creator sessions site hero" data-i18n-attrs="alt=altCreator">
+        </div>
+        <div class="build-placard">
+          <span class="atag"><span class="adot blue"></span><span data-i18n="tileCreatorTag">CREATORS</span></span>
+          <h3 data-i18n="tileCreatorName">ZXY — Creator Sessions</h3>
+          <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+        </div>
+      </article>
+      <!-- 4 · the Empty Frame — the honesty gap converted into the CTA -->
+      <a class="build-card empty-frame" href="#preview" data-reveal style="--i: 3">
+        <div class="mockup-chrome">
+          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span><span data-i18n="emptyUrl">yourbusiness.ca</span></div></div>
+          <div class="spacer"></div>
+        </div>
+        <div class="build-shot empty">
+          <span class="empty-plus" aria-hidden="true">+</span>
+          <span class="empty-line" data-i18n="tileEmptyLine">YOUR BUSINESS — NEXT</span>
+        </div>
+        <div class="build-placard">
+          <span class="atag"><span class="adot purple"></span><span data-i18n="tileEmptyTag">NEXT</span></span>
+          <h3 data-i18n="tileEmptyCta">GET YOUR PREVIEW →</h3>
+        </div>
+      </a>
+    </div>
   </section>
   <section id="process" class="page-section style-blueprint" aria-labelledby="process-title">
     <p class="section-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
@@ -288,6 +360,13 @@
       previewTitle: 'YOUR SITE, BUILT FIRST. FREE.',
       styleWhy: 'STYLE — WARM', styleExamples: 'STYLE — GALLERY', styleProcess: 'STYLE — BLUEPRINT',
       stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINEMATIC',
+      examplesSub: 'No fake clients. Concept builds and our own sites — labeled exactly what they are.',
+      tileBorealTag: 'CONTRACTOR', tileBorealName: 'Boréal — Renovation', badgeConcept: 'CONCEPT — DEMO',
+      tileRealtorTag: 'REAL ESTATE', tileRealtorName: 'ZXY — Property Media', badgeOwn: 'OUR OWN FRAME',
+      tileCreatorTag: 'CREATORS', tileCreatorName: 'ZXY — Creator Sessions',
+      tileEmptyTag: 'NEXT', tileEmptyLine: 'YOUR BUSINESS — NEXT', tileEmptyCta: 'GET YOUR PREVIEW →',
+      emptyUrl: 'yourbusiness.ca',
+      altRealtor: 'ZXY real-estate site hero', altCreator: 'ZXY creator sessions site hero',
       previewSub: 'We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.',
       formBusiness: 'BUSINESS NAME', formBusinessPh: 'e.g. Boréal Rénovation',
       formName: 'YOUR NAME', formPhone: 'PHONE', formTrade: 'YOUR TRADE',
@@ -329,6 +408,13 @@
       previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT.",
       styleWhy: 'STYLE — CHALEUREUX', styleExamples: 'STYLE — GALERIE', styleProcess: 'STYLE — PLAN',
       stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINÉMA',
+      examplesSub: 'Pas de faux clients. Des concepts et nos propres sites — étiquetés pour ce qu\'ils sont.',
+      tileBorealTag: 'ENTREPRENEUR', tileBorealName: 'Boréal — Rénovation', badgeConcept: 'CONCEPT — DÉMO',
+      tileRealtorTag: 'IMMOBILIER', tileRealtorName: 'ZXY — Médias immobiliers', badgeOwn: 'NOTRE PROPRE CADRE',
+      tileCreatorTag: 'CRÉATEURS', tileCreatorName: 'ZXY — Sessions créateurs',
+      tileEmptyTag: 'PROCHAIN', tileEmptyLine: 'VOTRE ENTREPRISE — LA PROCHAINE', tileEmptyCta: 'OBTENEZ VOTRE APERÇU →',
+      emptyUrl: 'votreentreprise.ca',
+      altRealtor: 'Héros du site immobilier ZXY', altCreator: 'Héros du site sessions créateurs ZXY',
       previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle. Pas de rencontre, pas de dépôt, aucune obligation.",
       formBusiness: "NOM DE L'ENTREPRISE", formBusinessPh: 'ex. : Boréal Rénovation',
       formName: 'VOTRE NOM', formPhone: 'TÉLÉPHONE', formTrade: 'VOTRE MÉTIER',
@@ -441,7 +527,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=10"></script>
+<script defer src="site.js?v=11"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>
