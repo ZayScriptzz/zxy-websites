@@ -805,7 +805,8 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .forge-brand { font-family: 'Anton', sans-serif; font-size: 13px; letter-spacing: .5px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
 .forge-cta { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 1px; color: #fff; background: rgb(var(--f-accent-rgb)); border-radius: 1px; padding: 4px 8px; white-space: nowrap; transition: background .4s ease; }
 .forge-copy { display: grid; gap: 6px; }
-.forge-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 2px; color: rgba(255,255,255,.62); }
+.forge-copy > * { min-width: 0; } /* grid items refuse to shrink below content without this */
+.forge-eyebrow { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 2px; color: rgba(255,255,255,.62); }
 .forge-h1 { font-family: 'Anton', sans-serif; font-size: clamp(20px, 1.9vw, 28px); line-height: .95; color: #fff; overflow-wrap: anywhere; }
 .forge-hud {
   display: inline-flex; align-items: center; gap: 7px; margin: 10px 0 4px;

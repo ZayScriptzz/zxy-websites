@@ -179,6 +179,8 @@
         detailTimer = setTimeout(function () {
           var v = fDetail.value.trim();
           if (!v || !fEye) return;
+          // the eyebrow is a one-line badge — clamp so a long entry can't clutter it
+          if (v.length > 32) v = v.slice(0, 31).replace(/\s+$/, '') + '…';
           fEye.removeAttribute('data-i18n');
           fEye.textContent = 'MONTRÉAL — ' + v.toUpperCase();
         }, 140);
