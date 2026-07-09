@@ -102,6 +102,71 @@
     statEls.forEach(function (el) { statIO.observe(el); });
   }
 
+  // ---- X-RAY LENS (Boréal tile) --------------------------------------------------
+  // The alt layer always carries the OTHER language; a MutationObserver on
+  // <html lang> keeps it in sync with the toggle.
+  var lensHost = document.getElementById('lens-host');
+  if (lensHost) {
+    var altH1 = lensHost.querySelector('.alt-h1');
+    var lensChip = document.getElementById('lens-chip');
+    var syncAlt = function () {
+      var alt = (document.documentElement.lang === 'fr') ? 'en' : 'fr';
+      if (altH1 && altH1.dataset[alt]) altH1.textContent = altH1.dataset[alt];
+      if (lensChip) lensChip.textContent = alt.toUpperCase() + ' — LIVE';
+    };
+    syncAlt();
+    new MutationObserver(syncAlt).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !MOTION_OFF) {
+      lensHost.addEventListener('pointermove', function (e) {
+        var r = lensHost.getBoundingClientRect();
+        lensHost.style.setProperty('--lx', (e.clientX - r.left) + 'px');
+        lensHost.style.setProperty('--ly', (e.clientY - r.top) + 'px');
+        lensHost.classList.add('lensing');
+      });
+      lensHost.addEventListener('pointerleave', function () { lensHost.classList.remove('lensing'); });
+    } else {
+      // coarse pointer / reduced motion: tap flips the whole tile
+      lensHost.addEventListener('click', function () { lensHost.classList.toggle('flipped'); });
+    }
+  }
+
+  // ---- THE PREVIEW FORGE -----------------------------------------------------------
+  // Debounced textContent mirrors only (XSS-safe); first keystroke strips the
+  // data-i18n defaults so the language toggle can't stomp typed values.
+  var forge = document.getElementById('forge');
+  var fBiz = document.getElementById('f-business');
+  var fTrade = document.getElementById('f-trade');
+  if (forge && fBiz) {
+    var fH1 = document.getElementById('forge-h1');
+    var fBrand = document.getElementById('forge-brand');
+    var fUrl = document.getElementById('forge-url');
+    var slugify = function (v) {
+      return v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+    };
+    var forgeTimer;
+    fBiz.addEventListener('input', function () {
+      clearTimeout(forgeTimer);
+      forgeTimer = setTimeout(function () {
+        var v = fBiz.value.trim();
+        if (!v) return;   // keep the localized defaults until there's a name
+        [fH1, fBrand, fUrl].forEach(function (el) { if (el) el.removeAttribute('data-i18n'); });
+        if (fH1) fH1.textContent = v + '.';
+        if (fBrand) fBrand.textContent = v.toUpperCase();
+        if (fUrl) fUrl.textContent = (slugify(v) || 'votresite') + '.ca';
+      }, 120);
+    });
+    if (fTrade) {
+      fTrade.addEventListener('change', function () {
+        forge.setAttribute('data-trade', fTrade.value || '');
+        var fEye = document.getElementById('forge-eyebrow');
+        if (fEye && fTrade.value) {
+          fEye.removeAttribute('data-i18n');
+          fEye.textContent = 'MONTRÉAL — ' + fTrade.options[fTrade.selectedIndex].text.toUpperCase();
+        }
+      });
+    }
+  }
+
   // ---- INSTRUMENT TELEMETRY ------------------------------------------------------
   // (a) progress hairline: scaleX driven from the spine (doc height cached on resize)
   var progressBar = document.getElementById('nav-progress');

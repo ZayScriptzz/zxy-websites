@@ -749,6 +749,70 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   .gallery-grid { grid-template-columns: 1fr; }
 }
 
+/* ===== X-RAY LENS (Boréal tile) ==========================================
+   Two stacked copies of the scene; the top one carries the OTHER language and
+   is clipped to a reticle circle that follows the pointer. Touch: tap flips
+   the whole tile. The bilingual promise, physically demonstrable. */
+.lens-host { cursor: crosshair; }
+.lens-layer {
+  position: absolute; inset: 0;
+  clip-path: circle(0px at 50% 50%);
+}
+.lens-host.lensing .lens-layer {
+  clip-path: circle(74px at var(--lx, 50%) var(--ly, 50%));
+}
+.lens-host.flipped .lens-layer { clip-path: none; }
+.lens-ring {
+  position: absolute; left: var(--lx, 50%); top: var(--ly, 50%);
+  width: 148px; height: 148px; margin: -74px 0 0 -74px;
+  border: 1px solid rgba(255,255,255,.85); border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(2,2,4,.45), 0 0 26px rgba(var(--purple-rgb),.55);
+  opacity: 0; transition: opacity .2s ease;
+  pointer-events: none;
+}
+.lens-host.lensing .lens-ring { opacity: 1; }
+.lens-layer .bshot-h1 { color: #fff; }
+.lens-chip {
+  position: absolute; top: 10px; left: 14px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.5px;
+  color: #fff; background: rgba(var(--purple-rgb),.85); border-radius: 2px; padding: 3px 7px;
+}
+
+/* ===== THE PREVIEW FORGE ==================================================
+   Live mini-site beside the form: the business name mirrors into the headline
+   and URL, the trade select re-themes the accent. Pure DOM/CSS. */
+.forge {
+  --f-accent-rgb: var(--purple-rgb);
+  border-radius: 8px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 24px 60px -24px rgba(0,0,0,.8), 0 0 40px -18px rgba(var(--f-accent-rgb),.5);
+  transition: box-shadow .4s ease;
+}
+.forge[data-trade="contractor"] { --f-accent-rgb: 217,90,23; }
+.forge[data-trade="realtor"]    { --f-accent-rgb: var(--red-rgb); }
+.forge[data-trade="creator"]    { --f-accent-rgb: var(--blue-rgb); }
+.forge-site {
+  position: relative; aspect-ratio: 16 / 10;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 14px;
+  background:
+    radial-gradient(80% 90% at 82% 0%, rgba(var(--f-accent-rgb),.34), transparent 62%),
+    radial-gradient(70% 70% at 10% 100%, rgba(var(--f-accent-rgb),.16), transparent 60%),
+    linear-gradient(180deg, #171a22, #0a0b0e);
+  transition: background .4s ease;
+}
+.forge-nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.forge-brand { font-family: 'Anton', sans-serif; font-size: 13px; letter-spacing: .5px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%; }
+.forge-cta { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 1px; color: #fff; background: rgb(var(--f-accent-rgb)); border-radius: 1px; padding: 4px 8px; white-space: nowrap; transition: background .4s ease; }
+.forge-copy { display: grid; gap: 6px; }
+.forge-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 2px; color: rgba(255,255,255,.62); }
+.forge-h1 { font-family: 'Anton', sans-serif; font-size: clamp(20px, 1.9vw, 28px); line-height: .95; color: #fff; overflow-wrap: anywhere; }
+.forge-hud {
+  display: inline-flex; align-items: center; gap: 7px; margin: 10px 0 4px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,.6);
+}
+
 /* ===== BORÉAL DUSK SCENE ==================================================
    CSS-composed "drone shot at dusk" for the concept build — deep sky, warm
    horizon, rooflines, lit windows. Shared by the hero mockup and the tile. */

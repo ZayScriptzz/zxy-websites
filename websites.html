@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=14"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=15"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -200,11 +200,21 @@
           <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>borealreno.ca</div></div>
           <div class="spacer"></div>
         </div>
-        <div class="build-shot boreal-scene">
+        <div class="build-shot boreal-scene lens-host" id="lens-host">
           <div class="bshot-copy">
             <span class="bshot-brand">BORÉAL<span>.</span></span>
             <span class="bshot-h1"><span data-i18n="mockH1">BUILT</span> <em data-i18n="mockH2">TO LAST.</em></span>
           </div>
+          <!-- X-RAY LENS: the OTHER language lives on this layer, revealed
+               through a reticle that follows the pointer (tap-to-flip on touch) -->
+          <div class="lens-layer boreal-scene" aria-hidden="true">
+            <div class="bshot-copy">
+              <span class="bshot-brand">BORÉAL<span>.</span></span>
+              <span class="bshot-h1 alt-h1" data-en="BUILT TO LAST." data-fr="BÂTI POUR DURER.">BÂTI POUR DURER.</span>
+            </div>
+            <span class="lens-chip" id="lens-chip">FR — LIVE</span>
+          </div>
+          <div class="lens-ring" aria-hidden="true"></div>
         </div>
         <div class="build-placard">
           <span class="atag"><span class="adot red"></span><span data-i18n="tileBorealTag">CONTRACTOR</span></span>
@@ -396,6 +406,26 @@
         <p class="form-note" data-i18n="resp48">We reply within 48 hours. / On répond en 48 heures.</p> -->
       </form>
       <aside class="preview-aside" data-reveal>
+        <!-- THE PREVIEW FORGE — the form builds the visitor's own site while they
+             type. aria-hidden mirror; the form stays the accessible object. -->
+        <div class="forge" id="forge" data-trade="" aria-hidden="true">
+          <div class="mockup-chrome">
+            <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+            <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span><span id="forge-url" data-i18n="forgeUrlDefault">yoursite.ca</span></div></div>
+            <div class="spacer"></div>
+          </div>
+          <div class="forge-site">
+            <div class="forge-nav">
+              <span class="forge-brand" id="forge-brand" data-i18n="forgeBrand">YOUR BUSINESS</span>
+              <span class="forge-cta" data-i18n="mockBtn">GET A QUOTE</span>
+            </div>
+            <div class="forge-copy">
+              <span class="forge-eyebrow" id="forge-eyebrow" data-i18n="forgeEyebrow">MONTRÉAL — YOUR TRADE</span>
+              <span class="forge-h1" id="forge-h1" data-i18n="forgeDefault">YOUR BUSINESS, FRAMED.</span>
+            </div>
+          </div>
+        </div>
+        <p class="forge-hud"><span class="adot purple"></span><span data-i18n="forgeHud">THIS IS THE PREVIEW WE BUILD</span></p>
         <p class="aside-label" data-i18n="orText">— OR —</p>
         <a class="contact-chip" href="sms:5142604573?&body=PREVIEW%20—%20" data-i18n-attrs="href=smsHref"><span class="adot red"></span><span data-i18n="smsChip">TEXT US</span><span class="chip-num">514 260-4573</span></a>
         <a class="contact-chip" href="tel:5142604573"><span class="adot blue"></span><span data-i18n="callChip">CALL</span><span class="chip-num">514 260-4573</span></a>
@@ -467,6 +497,8 @@
       tierBoth: 'Both languages', tierBoth2: 'Both languages', tierBoth3: 'Both languages',
       tierWeek: 'Live in a week', tierWeek2: 'Live in a week', tierWeek3: 'Live in a week',
       tzPrice: '$0', tzTitle: 'THE PREVIEW', tzBody: "Price your build after you've seen it.",
+      forgeHud: 'THIS IS THE PREVIEW WE BUILD', forgeDefault: 'YOUR BUSINESS, FRAMED.',
+      forgeUrlDefault: 'yoursite.ca', forgeBrand: 'YOUR BUSINESS', forgeEyebrow: 'MONTRÉAL — YOUR TRADE',
       inclLabel: 'EVERY BUILD INCLUDES',
       inclList: 'Bilingual (Loi 96) · Mobile-first · Hosting handled · SEO basics · One build — you own it.',
       previewSub: 'We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.',
@@ -533,6 +565,8 @@
       tierBoth: 'Les deux langues', tierBoth2: 'Les deux langues', tierBoth3: 'Les deux langues',
       tierWeek: 'En ligne en une semaine', tierWeek2: 'En ligne en une semaine', tierWeek3: 'En ligne en une semaine',
       tzPrice: '0 $', tzTitle: "L'APERÇU", tzBody: "Fixez le prix après l'avoir vu.",
+      forgeHud: "VOICI L'APERÇU QU'ON CONSTRUIT", forgeDefault: 'VOTRE ENTREPRISE, ENCADRÉE.',
+      forgeUrlDefault: 'votresite.ca', forgeBrand: 'VOTRE ENTREPRISE', forgeEyebrow: 'MONTRÉAL — VOTRE MÉTIER',
       inclLabel: 'CHAQUE SITE INCLUT',
       inclList: "Bilingue (Loi 96) · Mobile d'abord · Hébergement inclus · SEO de base · Un seul montage — c'est à vous.",
       previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle. Pas de rencontre, pas de dépôt, aucune obligation.",
@@ -647,7 +681,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=14"></script>
+<script defer src="site.js?v=15"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>
