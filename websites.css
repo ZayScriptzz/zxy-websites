@@ -466,8 +466,10 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   min-height: 40vh; /* stub height only — replaced by real content per phase */
   scroll-margin-top: 100px;
   border-top: 1px solid var(--s-line);
-  content-visibility: auto;                 /* skip layout/paint below the fold */
-  contain-intrinsic-size: auto 480px;
+  /* content-visibility:auto removed: its intrinsic-size guess broke anchor
+     jumps (#preview links land mid-section while heights resolve). Five
+     sections don't need paint-skipping — the GPU cost is the canvas, and
+     the reducer already pauses that. */
 }
 .section-chapter {
   margin: 0;
