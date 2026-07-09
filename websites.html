@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=11"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=12"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -271,11 +271,90 @@
     <p class="section-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleProcess">STYLE — BLUEPRINT</span></span>
     <h2 class="section-title" id="process-title" data-reveal data-i18n="processTitle">ONE WEEK. HERE'S HOW.</h2>
+    <p class="proc-sub" data-reveal data-i18n="processSub">The week, station by station — the same one we run for every build.</p>
+    <div class="proc-wrap" data-reveal>
+      <svg class="proc-rail" viewBox="0 0 1000 4" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="procGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ff4438"/>
+            <stop offset=".5" stop-color="#9166e8"/>
+            <stop offset="1" stop-color="#2b7fd4"/>
+          </linearGradient>
+        </defs>
+        <line class="proc-line" x1="0" y1="2" x2="1000" y2="2" stroke="url(#procGrad)" stroke-width="3" pathLength="100"/>
+      </svg>
+      <ol class="proc-steps">
+        <li class="proc-step" style="--i: 0">
+          <span class="proc-day" data-i18n="procD1">D1</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT1">THE CALL</h3><p data-i18n="procB1">Everything we need, in one conversation.</p>
+        </li>
+        <li class="proc-step" style="--i: 1">
+          <span class="proc-day" data-i18n="procD2">D2</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT2">THE DRAFT</h3><p data-i18n="procB2">Structure and copy — in both languages.</p>
+        </li>
+        <li class="proc-step" style="--i: 2">
+          <span class="proc-day" data-i18n="procD3">D3–4</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT3">THE BUILD</h3><p data-i18n="procB3">Your real site takes shape.</p>
+        </li>
+        <li class="proc-step" style="--i: 3">
+          <span class="proc-day" data-i18n="procD4">D5</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT4">YOUR PASS</h3><p data-i18n="procB4">One review. Mark everything.</p>
+        </li>
+        <li class="proc-step" style="--i: 4">
+          <span class="proc-day" data-i18n="procD5">D6</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT5">THE FIX</h3><p data-i18n="procB5">Every note closed.</p>
+        </li>
+        <li class="proc-step" style="--i: 5">
+          <span class="proc-day" data-i18n="procD6">D7</span><span class="proc-dot" aria-hidden="true"></span>
+          <h3 data-i18n="procT6">HANDOFF</h3><p data-i18n="procB6">Live. Owned. Yours.</p>
+        </li>
+      </ol>
+    </div>
   </section>
   <section id="pricing" class="page-section style-minimal" aria-labelledby="pricing-title">
     <p class="section-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePricing">STYLE — MINIMAL</span></span>
     <h2 class="section-title" id="pricing-title" data-reveal data-i18n="pricingTitle">ONE NUMBER IS FINAL: $0.</h2>
+    <p class="pricing-sub" data-reveal><span class="pricing-pending"><span class="adot purple"></span><span data-i18n="pricingPending">PRICING — FINALIZING</span></span> <span data-i18n="pricingSub">Tiers are being calibrated. What's already final: what every build includes — and the free preview.</span></p>
+    <div class="tier-grid">
+      <article class="tier-card" data-reveal style="--i: 0">
+        <h3 data-i18n="tier1Name">STARTER</h3>
+        <div class="tier-price"><span class="cal cal-l" aria-hidden="true"></span><span class="tier-num">—</span><span class="cal cal-r" aria-hidden="true"></span></div>
+        <ul>
+          <li data-i18n="tier1a">One page, done right</li>
+          <li data-i18n="tierBoth">Both languages</li>
+          <li data-i18n="tierWeek">Live in a week</li>
+        </ul>
+      </article>
+      <article class="tier-card popular" data-reveal style="--i: 1">
+        <span class="tier-pop" data-i18n="tierPop">MOST POPULAR</span>
+        <h3 data-i18n="tier2Name">STANDARD</h3>
+        <div class="tier-price"><span class="cal cal-l" aria-hidden="true"></span><span class="tier-num">—</span><span class="cal cal-r" aria-hidden="true"></span></div>
+        <ul>
+          <li data-i18n="tier2a">The full site</li>
+          <li data-i18n="tierBoth2">Both languages</li>
+          <li data-i18n="tierWeek2">Live in a week</li>
+        </ul>
+      </article>
+      <article class="tier-card" data-reveal style="--i: 2">
+        <h3 data-i18n="tier3Name">PREMIUM</h3>
+        <div class="tier-price"><span class="cal cal-l" aria-hidden="true"></span><span class="tier-num">—</span><span class="cal cal-r" aria-hidden="true"></span></div>
+        <ul>
+          <li data-i18n="tier3a">Site + drone/photo day</li>
+          <li data-i18n="tierBoth3">Both languages</li>
+          <li data-i18n="tierWeek3">Live in a week</li>
+        </ul>
+      </article>
+    </div>
+    <a class="tier-zero" href="#preview" data-reveal>
+      <span class="tz-price" data-i18n="tzPrice">$0</span>
+      <span class="tz-copy">
+        <strong data-i18n="tzTitle">THE PREVIEW</strong>
+        <span data-i18n="tzBody">Price your build after you've seen it.</span>
+      </span>
+      <span class="tz-arrow" aria-hidden="true">→</span>
+    </a>
+    <p class="tier-includes" data-reveal><strong data-i18n="inclLabel">EVERY BUILD INCLUDES</strong><span data-i18n="inclList">Bilingual (Loi 96) · Mobile-first · Hosting handled · SEO basics · One build — you own it.</span></p>
   </section>
   <section id="preview" class="page-section style-cinematic" aria-labelledby="preview-title">
     <p class="section-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
@@ -338,6 +417,10 @@
 <!-- Sticky mobile SMS pill — appears after the hero exits, hides at #preview (site.js) -->
 <a class="sms-pill" id="sms-pill" href="sms:5142604573?&body=PREVIEW%20—%20" data-i18n-attrs="href=smsHref"><span class="adot"></span><span data-i18n="pillText">TEXT US — FREE PREVIEW</span></a>
 
+<!-- Telemetry: progress hairline + section readout (site.js drives both) -->
+<div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
+<div class="section-readout" id="section-readout" aria-hidden="true"></div>
+
 <!-- EN/FR toggle (ported from the design's bilingual component) -->
 <script>
 (function () {
@@ -367,6 +450,24 @@
       tileEmptyTag: 'NEXT', tileEmptyLine: 'YOUR BUSINESS — NEXT', tileEmptyCta: 'GET YOUR PREVIEW →',
       emptyUrl: 'yourbusiness.ca',
       altRealtor: 'ZXY real-estate site hero', altCreator: 'ZXY creator sessions site hero',
+      processSub: 'The week, station by station — the same one we run for every build.',
+      procD1: 'D1', procD2: 'D2', procD3: 'D3–4', procD4: 'D5', procD5: 'D6', procD6: 'D7',
+      procT1: 'THE CALL', procB1: 'Everything we need, in one conversation.',
+      procT2: 'THE DRAFT', procB2: 'Structure and copy — in both languages.',
+      procT3: 'THE BUILD', procB3: 'Your real site takes shape.',
+      procT4: 'YOUR PASS', procB4: 'One review. Mark everything.',
+      procT5: 'THE FIX', procB5: 'Every note closed.',
+      procT6: 'HANDOFF', procB6: 'Live. Owned. Yours.',
+      pricingPending: 'PRICING — FINALIZING',
+      pricingSub: "Tiers are being calibrated. What's already final: what every build includes — and the free preview.",
+      tier1Name: 'STARTER', tier1a: 'One page, done right',
+      tier2Name: 'STANDARD', tier2a: 'The full site', tierPop: 'MOST POPULAR',
+      tier3Name: 'PREMIUM', tier3a: 'Site + drone/photo day',
+      tierBoth: 'Both languages', tierBoth2: 'Both languages', tierBoth3: 'Both languages',
+      tierWeek: 'Live in a week', tierWeek2: 'Live in a week', tierWeek3: 'Live in a week',
+      tzPrice: '$0', tzTitle: 'THE PREVIEW', tzBody: "Price your build after you've seen it.",
+      inclLabel: 'EVERY BUILD INCLUDES',
+      inclList: 'Bilingual (Loi 96) · Mobile-first · Hosting handled · SEO basics · One build — you own it.',
       previewSub: 'We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.',
       formBusiness: 'BUSINESS NAME', formBusinessPh: 'e.g. Boréal Rénovation',
       formName: 'YOUR NAME', formPhone: 'PHONE', formTrade: 'YOUR TRADE',
@@ -415,6 +516,24 @@
       tileEmptyTag: 'PROCHAIN', tileEmptyLine: 'VOTRE ENTREPRISE — LA PROCHAINE', tileEmptyCta: 'OBTENEZ VOTRE APERÇU →',
       emptyUrl: 'votreentreprise.ca',
       altRealtor: 'Héros du site immobilier ZXY', altCreator: 'Héros du site sessions créateurs ZXY',
+      processSub: 'La semaine, étape par étape — la même pour chaque projet.',
+      procD1: 'J1', procD2: 'J2', procD3: 'J3–4', procD4: 'J5', procD5: 'J6', procD6: 'J7',
+      procT1: "L'APPEL", procB1: "Tout ce qu'il faut, en une conversation.",
+      procT2: 'LE TRACÉ', procB2: 'Structure et textes — dans les deux langues.',
+      procT3: 'LE MONTAGE', procB3: 'Votre vrai site prend forme.',
+      procT4: 'VOTRE REGARD', procB4: 'Une révision. Notez tout.',
+      procT5: 'LES RETOUCHES', procB5: 'Chaque note réglée.',
+      procT6: 'CLÉ EN MAIN', procB6: 'En ligne. À vous.',
+      pricingPending: 'TARIFS — EN FINALISATION',
+      pricingSub: "Les forfaits se calibrent. Ce qui est déjà final : ce que chaque site inclut — et l'aperçu gratuit.",
+      tier1Name: 'DÉPART', tier1a: 'Une page, bien faite',
+      tier2Name: 'STANDARD', tier2a: 'Le site complet', tierPop: 'LE PLUS POPULAIRE',
+      tier3Name: 'PREMIUM', tier3a: 'Site + journée drone/photo',
+      tierBoth: 'Les deux langues', tierBoth2: 'Les deux langues', tierBoth3: 'Les deux langues',
+      tierWeek: 'En ligne en une semaine', tierWeek2: 'En ligne en une semaine', tierWeek3: 'En ligne en une semaine',
+      tzPrice: '0 $', tzTitle: "L'APERÇU", tzBody: "Fixez le prix après l'avoir vu.",
+      inclLabel: 'CHAQUE SITE INCLUT',
+      inclList: "Bilingue (Loi 96) · Mobile d'abord · Hébergement inclus · SEO de base · Un seul montage — c'est à vous.",
       previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle. Pas de rencontre, pas de dépôt, aucune obligation.",
       formBusiness: "NOM DE L'ENTREPRISE", formBusinessPh: 'ex. : Boréal Rénovation',
       formName: 'VOTRE NOM', formPhone: 'TÉLÉPHONE', formTrade: 'VOTRE MÉTIER',
@@ -527,7 +646,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=11"></script>
+<script defer src="site.js?v=12"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>

@@ -782,6 +782,125 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
     radial-gradient(95% 75% at 68% 8%, #3d4a70 0%, #262e4c 42%, #131624 100%);
 }
 
+/* ===== #PROCESS — blueprint timeline ===================================== */
+.proc-sub { max-width: 520px; margin: 16px 0 0; font-weight: 300; font-size: clamp(14px, 1.1vw, 17px); color: var(--s-body); }
+.proc-wrap { position: relative; margin-top: clamp(36px, 5vh, 64px); }
+.proc-rail { position: absolute; left: 0; right: 0; top: 46px; width: 100%; height: 4px; }
+.proc-line { stroke-dasharray: 100; stroke-dashoffset: 100; }
+.in-view .proc-line { animation: proc-draw 1.6s cubic-bezier(.3, .6, .3, 1) .2s forwards; }
+@keyframes proc-draw { to { stroke-dashoffset: 0; } }
+.proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(10px, 1.4vw, 22px); }
+.proc-step { display: grid; justify-items: start; gap: 8px; }
+.proc-day { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.55); }
+.proc-dot { position: relative; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid rgba(255,255,255,.8); margin: 8px 0 10px; }
+.proc-dot::after { content: ''; position: absolute; inset: -7px; border-radius: 50%; border: 1px solid rgba(var(--blue-rgb),.7); opacity: 0; }
+.in-view .proc-step .proc-dot::after { animation: zxy-ret 2s ease-out 1; animation-delay: calc(var(--i) * .24s + 1s); }
+.proc-step h3 { margin: 0; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(12px, 1.05vw, 15px); letter-spacing: 1px; color: #f4f5f7; }
+.proc-step p { margin: 0; font-weight: 300; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.55); max-width: 20ch; }
+@media (max-width: 820px) {
+  /* vertical rail: gradient hairline down the left, stations stack */
+  .proc-rail { display: none; }
+  .proc-steps { grid-template-columns: 1fr; gap: 22px; border-left: 2px solid transparent;
+    border-image: linear-gradient(180deg, var(--red), var(--purple), var(--blue)) 1; padding-left: 22px; }
+  .proc-dot { display: none; }
+  .proc-step p { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .proc-line { stroke-dashoffset: 0; animation: none !important; }
+  .proc-dot::after { animation: none !important; }
+}
+
+/* ===== #PRICING — minimal calipers ======================================= */
+.pricing-sub { max-width: 640px; margin: 18px 0 0; font-weight: 300; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.6; color: var(--s-body); }
+.pricing-pending {
+  display: inline-flex; align-items: center; gap: 7px; margin-right: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: var(--s-dim); border: 1px solid var(--s-line-strong); border-radius: 2px; padding: 4px 8px;
+  vertical-align: 2px;
+}
+.tier-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 26px); margin-top: clamp(30px, 4vh, 52px); }
+.tier-card {
+  position: relative;
+  background: var(--s-card-bg);
+  border: 1px solid var(--s-line); border-radius: 8px;
+  padding: clamp(20px, 2vw, 30px);
+  box-shadow: 0 10px 30px -18px rgba(23,24,28,.25);
+}
+.tier-card.popular { border-color: rgba(var(--purple-rgb),.6); box-shadow: 0 16px 40px -18px rgba(var(--purple-rgb),.35); }
+.tier-pop {
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.5px;
+  color: #fff; background: rgb(var(--purple-rgb)); border-radius: 2px; padding: 3px 8px; white-space: nowrap;
+}
+.tier-card h3 { margin: 0; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 2.5px; color: var(--s-dim); }
+/* the calipers: brackets slide in and "measure" the unfinished number */
+.tier-price { display: flex; align-items: center; gap: 14px; margin: 18px 0 14px; }
+.tier-num { font-family: 'Archivo', sans-serif; font-weight: 300; font-size: clamp(40px, 3.6vw, 56px); line-height: 1; color: var(--s-ink); }
+.cal { width: 14px; height: 34px; }
+.cal-l { border-left: 2px solid rgb(var(--purple-rgb)); border-top: 2px solid rgb(var(--purple-rgb)); border-bottom: 2px solid rgb(var(--purple-rgb)); }
+.cal-r { border-right: 2px solid rgb(var(--purple-rgb)); border-top: 2px solid rgb(var(--purple-rgb)); border-bottom: 2px solid rgb(var(--purple-rgb)); }
+@media (prefers-reduced-motion: no-preference) {
+  .js .tier-card .cal-l { transform: translateX(-14px); opacity: 0; transition: transform .5s cubic-bezier(.22,.9,.32,1) .35s, opacity .4s ease .35s; }
+  .js .tier-card .cal-r { transform: translateX(14px); opacity: 0; transition: transform .5s cubic-bezier(.22,.9,.32,1) .35s, opacity .4s ease .35s; }
+  .js .tier-card.in-view .cal { transform: none; opacity: 1; }
+}
+.tier-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.tier-card li { font-weight: 300; font-size: 14px; color: var(--s-body); padding-left: 16px; position: relative; }
+.tier-card li::before { content: '—'; position: absolute; left: 0; color: rgb(var(--purple-rgb)); }
+/* the one real number — the protagonist */
+.tier-zero {
+  display: flex; align-items: center; gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(20px, 2.6vh, 32px);
+  padding: clamp(18px, 2vw, 26px) clamp(20px, 2.2vw, 32px);
+  border: 2px solid rgb(var(--purple-rgb)); border-radius: 10px;
+  background: rgba(var(--purple-rgb),.05);
+  text-decoration: none; color: inherit;
+  transition: background .25s ease, transform .25s ease;
+}
+.tier-zero:hover { background: rgba(var(--purple-rgb),.1); transform: translateY(-2px); }
+.tz-price { font-family: var(--s-font-display); font-weight: 300; font-size: clamp(44px, 4.2vw, 64px); line-height: 1; color: var(--s-ink); }
+.tz-copy { display: grid; gap: 4px; flex: 1; }
+.tz-copy strong { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 12px; letter-spacing: 2.5px; color: var(--s-ink); }
+.tz-copy span { font-weight: 300; font-size: 14px; color: var(--s-body); }
+.tz-arrow { font-size: 26px; color: rgb(var(--purple-rgb)); transition: transform .25s ease; }
+.tier-zero:hover .tz-arrow { transform: translateX(6px); }
+.tier-includes { margin: clamp(20px, 2.6vh, 32px) 0 0; display: grid; gap: 6px; }
+.tier-includes strong { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 10px; letter-spacing: 2.5px; color: var(--s-dim); }
+.tier-includes span { font-weight: 300; font-size: 14px; color: var(--s-body); }
+@media (max-width: 820px) {
+  .tier-grid { grid-template-columns: 1fr; }
+  .tier-zero { flex-wrap: wrap; }
+}
+
+/* ===== INSTRUMENT TELEMETRY ==============================================
+   Page-wide narration: progress hairline under the nav, scroll-spy state on
+   the menu, and the mono section readout (the comp's FLUID · LIVE conceit). */
+.nav-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  z-index: calc(var(--z-nav) + 1);
+  background: linear-gradient(90deg, var(--red), var(--purple), var(--blue));
+  transform: scaleX(0); transform-origin: left center;
+  pointer-events: none;
+}
+.hero-nav .menu a { position: relative; padding-bottom: 4px; }
+.hero-nav .menu a[aria-current="true"] { color: #fff; }
+.hero-nav .menu a[aria-current="true"]::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+  background: rgb(var(--purple-rgb)); border-radius: 1px;
+}
+.section-readout {
+  position: fixed; right: var(--gutter); bottom: 16px;
+  z-index: var(--z-readout);
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,.55);
+  background: rgba(var(--bg-rgb),.72);
+  border: 1px solid rgba(255,255,255,.14); border-radius: 2px; padding: 5px 9px;
+  opacity: 0; transition: opacity .3s ease;
+  pointer-events: none;
+}
+.section-readout.on { opacity: 1; }
+@media (max-width: 820px) { .section-readout { display: none; } }
+
 /* ===== PREVIEW / CONVERSION ============================================== */
 .preview-sub {
   max-width: 520px; margin: 18px 0 0;
