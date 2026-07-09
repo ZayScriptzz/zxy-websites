@@ -10,8 +10,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=7"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="websites.css?v=8"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -157,10 +157,10 @@
      the page is the portfolio). The style-demo class paints the backdrop; the
      .style-chip names it like a spec label. -->
 <main id="page-sections">
-  <section id="why" class="page-section style-bold" aria-labelledby="why-title">
+  <section id="why" class="page-section style-warm" aria-labelledby="why-title">
     <p class="section-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot red"></span><span data-i18n="styleWhy">STYLE — BOLD</span></span>
-    <h2 class="section-title" id="why-title" data-reveal data-i18n="whyTitle">NO SITE, NO SOUMISSION.</h2>
+    <h2 class="section-title" id="why-title" data-reveal data-i18n="whyTitle">NO SITE, NO LEADS.</h2>
     <div class="why-grid">
       <article class="why-card" data-reveal style="--i: 0">
         <span class="atag"><span class="adot red"></span><span data-i18n="whyCard1Tag">BILINGUAL</span></span>
@@ -283,10 +283,10 @@
       navMenu: 'MENU',
       chWhy: '01 — WHY', chExamples: '02 — EXAMPLES', chProcess: '03 — PROCESS',
       chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL',
-      whyTitle: 'NO SITE, NO SOUMISSION.', examplesTitle: 'THE FRAME GALLERY.',
+      whyTitle: 'NO SITE, NO LEADS.', examplesTitle: 'THE FRAME GALLERY.',
       processTitle: "ONE WEEK. HERE'S HOW.", pricingTitle: 'ONE NUMBER IS FINAL: $0.',
       previewTitle: 'YOUR SITE, BUILT FIRST. FREE.',
-      styleWhy: 'STYLE — BOLD', styleExamples: 'STYLE — GALLERY', styleProcess: 'STYLE — BLUEPRINT',
+      styleWhy: 'STYLE — WARM', styleExamples: 'STYLE — GALLERY', styleProcess: 'STYLE — BLUEPRINT',
       stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINEMATIC',
       previewSub: 'We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.',
       formBusiness: 'BUSINESS NAME', formBusinessPh: 'e.g. Boréal Rénovation',
@@ -327,7 +327,7 @@
       whyTitle: 'PAS DE SITE, PAS DE SOUMISSION.', examplesTitle: 'LA GALERIE DES CADRES.',
       processTitle: 'UNE SEMAINE. VOICI COMMENT.', pricingTitle: 'UN SEUL CHIFFRE EST FINAL : 0 $.',
       previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT.",
-      styleWhy: 'STYLE — AUDACIEUX', styleExamples: 'STYLE — GALERIE', styleProcess: 'STYLE — PLAN',
+      styleWhy: 'STYLE — CHALEUREUX', styleExamples: 'STYLE — GALERIE', styleProcess: 'STYLE — PLAN',
       stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINÉMA',
       previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle. Pas de rencontre, pas de dépôt, aucune obligation.",
       formBusiness: "NOM DE L'ENTREPRISE", formBusinessPh: 'ex. : Boréal Rénovation',
@@ -441,7 +441,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=7"></script>
+<script defer src="site.js?v=8"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>
