@@ -398,7 +398,10 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
     .032em .040em 0 rgba(34,23,70,.88),
     .040em .050em 0 rgba(38,25,78,.86),
     .048em .060em 0 rgba(42,27,86,.84),
-    .07em .11em .09em rgba(2,2,4,.55);   /* soft ground shadow cast by the extrusion */
+    .056em .070em 0 rgba(46,29,94,.80),
+    .064em .080em 0 rgba(50,31,102,.74),
+    .072em .090em 0 rgba(54,33,110,.66),
+    .09em .13em .10em rgba(2,2,4,.55);   /* soft ground shadow cast by the extrusion */
 }
 @supports not (-webkit-background-clip: text) {
   .framed-word-text {
