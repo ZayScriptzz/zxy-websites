@@ -846,7 +846,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .in-view .proc-line { animation: proc-draw 3s linear .5s forwards; }
 @keyframes proc-draw { to { stroke-dashoffset: 0; } }
 .proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(10px, 1.4vw, 22px); }
-.proc-step { display: grid; justify-items: start; gap: 8px; }
+.proc-step { display: grid; justify-items: start; align-content: start; gap: 8px; }
 .proc-day { display: block; height: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px; color: rgba(255,255,255,.55); }
 .proc-dot { position: relative; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid rgba(255,255,255,.8); margin: 8px 0 10px; }
 .proc-dot::after { content: ''; position: absolute; inset: -7px; border-radius: 50%; border: 1px solid rgba(var(--blue-rgb),.7); opacity: 0; }
@@ -1003,6 +1003,8 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .preview-form .hp { position: absolute; left: -9999px; width: 0; height: 0; opacity: 0; }
 .field { display: grid; gap: 7px; }
 .field label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px; color: rgba(255,255,255,.6); }
+.field label .opt { font-style: normal; color: rgba(255,255,255,.35); letter-spacing: 1.5px; }
+.field label .opt[hidden] { display: none; }
 .field input, .field select {
   width: 100%;
   background: #0b0c10;

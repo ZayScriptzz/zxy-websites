@@ -155,14 +155,33 @@
         if (fUrl) fUrl.textContent = (slugify(v) || 'votresite') + '.ca';
       }, 120);
     });
+    var fEye = document.getElementById('forge-eyebrow');
+    var fDetail = document.getElementById('f-trade-detail');
+    var fDetailOpt = document.getElementById('f-trade-detail-opt');
     if (fTrade) {
       fTrade.addEventListener('change', function () {
         forge.setAttribute('data-trade', fTrade.value || '');
-        var fEye = document.getElementById('forge-eyebrow');
-        if (fEye && fTrade.value) {
+        // "Other" must say what they do; everyone else may (Zay's rule)
+        var isOther = fTrade.value === 'other';
+        if (fDetail) fDetail.required = isOther;
+        if (fDetailOpt) fDetailOpt.hidden = isOther;
+        if (fEye && fTrade.value && !(fDetail && fDetail.value.trim())) {
           fEye.removeAttribute('data-i18n');
           fEye.textContent = 'MONTRÉAL — ' + fTrade.options[fTrade.selectedIndex].text.toUpperCase();
         }
+      });
+    }
+    // the specify box mirrors into the Forge eyebrow — their words, their site
+    if (fDetail) {
+      var detailTimer;
+      fDetail.addEventListener('input', function () {
+        clearTimeout(detailTimer);
+        detailTimer = setTimeout(function () {
+          var v = fDetail.value.trim();
+          if (!v || !fEye) return;
+          fEye.removeAttribute('data-i18n');
+          fEye.textContent = 'MONTRÉAL — ' + v.toUpperCase();
+        }, 140);
       });
     }
   }
