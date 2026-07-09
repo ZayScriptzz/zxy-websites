@@ -612,13 +612,33 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 /* purple is off-palette in this room — every accent re-inks to cream */
 .style-minimal .adot { background: #fdf6ee; box-shadow: none; }
 
-/* — STYLE 05 · CINEMATIC (the ZXY signature — dark, glowing) ---------------- */
+/* — STYLE 05 · SPOTLIGHT ("PromptMaster": one lamp over a centered stage.
+   Gradients only — nothing here for perf-tier-down to manage, and the static
+   image IS the reduced-motion state. Layers top-down: beam fade, hot core,
+   16° visible cone, ambient purple wash, floor pool, solid floor. ----------- */
 .style-cinematic {
   background:
-    radial-gradient(46% 60% at 8% 82%, rgba(var(--red-rgb),.10), transparent 70%),
-    radial-gradient(50% 66% at 94% 18%, rgba(var(--blue-rgb),.11), transparent 72%),
-    radial-gradient(36% 44% at 55% 55%, rgba(var(--purple-rgb),.07), transparent 75%),
-    var(--bg);
+    linear-gradient(180deg, rgba(190,170,255,.05), transparent 34%),
+    radial-gradient(38% 26% at 50% -6%, rgba(230,220,255,.22), transparent 70%),
+    conic-gradient(at 50% -6%, transparent 172deg, rgba(190,170,255,.13) 180deg, transparent 188deg),
+    radial-gradient(72% 55% at 50% 6%, rgba(var(--purple-rgb),.10), transparent 74%),
+    radial-gradient(48% 22% at 50% 98%, rgba(var(--purple-rgb),.08), transparent 78%),
+    #050308;
+  text-align: center; /* the whole stage centers under the lamp… */
+}
+.style-cinematic .preview-grid { text-align: left; } /* …but the working area reads left-to-right */
+.style-cinematic .section-title { max-width: 20ch; transform-origin: 50% 78%; }
+.style-cinematic .preview-sub { margin-left: auto; margin-right: auto; }
+.preview-chips {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin-top: clamp(18px, 2.4vh, 28px);
+}
+.p-chip {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  color: rgba(235,228,255,.85);
+  background: rgba(190,170,255,.06);
+  border: 1px solid rgba(190,170,255,.35); border-radius: 999px;
+  padding: 7px 14px;
 }
 
 /* ===== REVEAL PRIMITIVE (site.js) =========================================
@@ -850,7 +870,8 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   --f-accent-rgb: var(--purple-rgb);
   border-radius: 8px; overflow: hidden;
   border: 1px solid rgba(255,255,255,.12);
-  box-shadow: 0 24px 60px -24px rgba(0,0,0,.8), 0 0 40px -18px rgba(var(--f-accent-rgb),.5);
+  box-shadow: 0 24px 60px -24px rgba(0,0,0,.8), 0 0 40px -18px rgba(var(--f-accent-rgb),.5),
+              0 -20px 50px -22px rgba(190,170,255,.28); /* the lamp catches its top edge */
   transition: box-shadow .4s ease;
 }
 .forge[data-trade="contractor"] { --f-accent-rgb: 217,90,23; }
@@ -1098,6 +1119,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   grid-template-columns: minmax(0, 560px) minmax(240px, 380px);
   gap: clamp(28px, 4vw, 72px);
   align-items: start;
+  justify-content: center; /* the stage sits under the lamp */
   margin-top: clamp(28px, 4vh, 48px);
 }
 .preview-form { display: grid; gap: 16px; }
@@ -1110,6 +1132,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   width: 100%;
   background: #0b0c10;
   border: 1px solid rgba(255,255,255,.14); border-radius: 3px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.07); /* lit from above */
   color: #fff; font-family: 'Archivo', sans-serif; font-size: 16px; /* ≥16px: no iOS zoom */
   padding: 13px 14px;
   transition: border-color .2s ease, box-shadow .2s ease;
