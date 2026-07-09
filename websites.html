@@ -190,9 +190,21 @@
   </section>
   <section id="examples" class="page-section style-gallery" aria-labelledby="examples-title">
     <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
-    <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleExamples">STYLE — GALLERY</span></span>
-    <h2 class="section-title" id="examples-title" data-reveal data-i18n="examplesTitle">THE FRAME GALLERY.</h2>
-    <p class="gallery-sub" data-reveal data-i18n="examplesSub">No fake clients. Concept builds and our own sites — labeled exactly what they are.</p>
+    <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleExamples">STYLE — EDITORIAL</span></span>
+    <!-- JLM-style brutalist frame: the wrapper and the rail paint INK through
+         2px gaps; every child paints cream — the grid lines are never drawn -->
+    <div class="jlm-frame">
+      <div class="jlm-panel">
+        <div class="jlm-panel-in">
+          <h2 class="section-title" id="examples-title" data-reveal>
+            <span class="jlm-line" data-i18n="exTitleL1">THE</span>
+            <span class="jlm-line" data-i18n="exTitleL2">FRAME</span>
+            <span class="jlm-line" data-i18n="exTitleL3">GALLERY.</span>
+          </h2>
+          <p class="gallery-sub" data-reveal data-i18n="examplesSub">No fake clients. Concept builds and our own sites — labeled exactly what they are.</p>
+          <div class="jlm-swatches" aria-hidden="true"><span class="sw red"></span><span class="sw blue"></span><span class="sw purple"></span></div>
+        </div>
+      </div>
     <div class="gallery-grid">
       <!-- 1 · Boréal — the CSS-composed concept build (domain doesn't resolve: honesty is the pitch) -->
       <article class="build-card" data-reveal style="--i: 0">
@@ -274,6 +286,7 @@
         </div>
       </a>
     </div>
+    </div><!-- /jlm-frame -->
   </section>
   <section id="process" class="page-section style-blueprint" aria-labelledby="process-title">
     <p class="section-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
@@ -475,10 +488,11 @@
       chWhy: '01 — WHY', chExamples: '02 — EXAMPLES', chProcess: '03 — PROCESS',
       chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL',
       whyBadge: 'MONTRÉAL — BUILT HERE',
-      whyTitleA: 'No site, no ', whyTitleHl: 'leads.', examplesTitle: 'THE FRAME GALLERY.',
+      whyTitleA: 'No site, no ', whyTitleHl: 'leads.',
+      exTitleL1: 'THE', exTitleL2: 'FRAME', exTitleL3: 'GALLERY.',
       processTitle: "ONE WEEK. HERE'S HOW.", pricingTitle: 'ONE NUMBER IS FINAL: $0.',
       previewTitle: 'YOUR SITE, BUILT FIRST. FREE.',
-      styleWhy: 'STYLE — WARM', styleExamples: 'STYLE — GALLERY', styleProcess: 'STYLE — BLUEPRINT',
+      styleWhy: 'STYLE — WARM', styleExamples: 'STYLE — EDITORIAL', styleProcess: 'STYLE — BLUEPRINT',
       stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINEMATIC',
       examplesSub: 'No fake clients. Concept builds and our own sites — labeled exactly what they are.',
       tileBorealTag: 'CONTRACTOR', tileBorealName: 'Boréal — Renovation', badgeConcept: 'CONCEPT — DEMO',
@@ -546,10 +560,11 @@
       chWhy: '01 — POURQUOI', chExamples: '02 — EXEMPLES', chProcess: '03 — PROCESSUS',
       chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL',
       whyBadge: 'MONTRÉAL — FAIT ICI',
-      whyTitleA: 'Pas de site, pas de ', whyTitleHl: 'soumission.', examplesTitle: 'LA GALERIE DES CADRES.',
+      whyTitleA: 'Pas de site, pas de ', whyTitleHl: 'soumission.',
+      exTitleL1: 'LA', exTitleL2: 'GALERIE', exTitleL3: 'DES CADRES.',
       processTitle: 'UNE SEMAINE. VOICI COMMENT.', pricingTitle: 'UN SEUL CHIFFRE EST FINAL : 0 $.',
       previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT.",
-      styleWhy: 'STYLE — CHALEUREUX', styleExamples: 'STYLE — GALERIE', styleProcess: 'STYLE — PLAN',
+      styleWhy: 'STYLE — CHALEUREUX', styleExamples: 'STYLE — ÉDITORIAL', styleProcess: 'STYLE — PLAN',
       stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINÉMA',
       examplesSub: 'Pas de faux clients. Des concepts et nos propres sites — étiquetés pour ce qu\'ils sont.',
       tileBorealTag: 'ENTREPRENEUR', tileBorealName: 'Boréal — Rénovation', badgeConcept: 'CONCEPT — DÉMO',
