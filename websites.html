@@ -181,11 +181,62 @@
     <p class="section-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePreview">STYLE — CINEMATIC</span></span>
     <h2 class="section-title" id="preview-title" data-reveal data-i18n="previewTitle">YOUR SITE, BUILT FIRST. FREE.</h2>
+    <p class="preview-sub" data-reveal data-i18n="previewSub">We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.</p>
+    <div class="preview-grid">
+      <!-- FormSubmit: same endpoint as the live main site. UNTESTED IN PROD from
+           this page — first real submission triggers FormSubmit's one-time
+           activation email (deploy-day checklist item). -->
+      <form class="preview-form" action="https://formsubmit.co/zxypiczz@gmail.com" method="POST" data-reveal>
+        <input type="hidden" name="_subject" value="ZXY — Free website preview request">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="field">
+          <label for="f-business" data-i18n="formBusiness">BUSINESS NAME</label>
+          <input id="f-business" name="business" type="text" required autocomplete="organization" placeholder="e.g. Boréal Rénovation" data-i18n-attrs="placeholder=formBusinessPh">
+        </div>
+        <div class="field">
+          <label for="f-name" data-i18n="formName">YOUR NAME</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-phone" data-i18n="formPhone">PHONE</label>
+          <input id="f-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel">
+        </div>
+        <div class="field">
+          <label for="f-trade" data-i18n="formTrade">YOUR TRADE</label>
+          <select id="f-trade" name="trade" required>
+            <option value="" data-i18n="tradePick">Choose…</option>
+            <option value="contractor" data-i18n="tradeContractor">Contractor / Renovation</option>
+            <option value="realtor" data-i18n="tradeRealtor">Realtor</option>
+            <option value="creator" data-i18n="tradeCreator">Creator</option>
+            <option value="other" data-i18n="tradeOther">Other</option>
+          </select>
+        </div>
+        <button class="btn-primary form-submit" type="submit"><span data-i18n="formSubmit">GET MY FREE PREVIEW</span> <span class="arrow">→</span></button>
+        <!-- Response-time promise — Zay's operational call; enable when ready:
+        <p class="form-note" data-i18n="resp48">We reply within 48 hours. / On répond en 48 heures.</p> -->
+      </form>
+      <aside class="preview-aside" data-reveal>
+        <p class="aside-label" data-i18n="orText">— OR —</p>
+        <a class="contact-chip" href="sms:5142604573?&body=PREVIEW%20—%20" data-i18n-attrs="href=smsHref"><span class="adot red"></span><span data-i18n="smsChip">TEXT US</span><span class="chip-num">514 260-4573</span></a>
+        <a class="contact-chip" href="tel:5142604573"><span class="adot blue"></span><span data-i18n="callChip">CALL</span><span class="chip-num">514 260-4573</span></a>
+        <p class="aside-note" data-i18n="asideNote">A real human in Montréal answers both.</p>
+      </aside>
+    </div>
   </section>
 </main>
 <footer class="site-footer">
   <p class="section-chapter"><span data-i18n="chFooter">ZXY — MONTRÉAL</span></p>
+  <div class="footer-grid">
+    <p class="footer-line" data-i18n="footPitch">Bilingual websites for Montréal businesses. Built in a week. Yours.</p>
+    <p class="footer-contact">
+      <a href="sms:5142604573">514 260-4573</a><span class="sep"> · </span><a href="mailto:zxypiczz@gmail.com">zxypiczz@gmail.com</a><span class="sep"> · </span><a href="https://zxyframe.ca/">zxyframe.ca</a>
+    </p>
+    <p class="footer-legal" data-i18n="footMade">Conçu et hébergé à Montréal.</p>
+  </div>
 </footer>
+
+<!-- Sticky mobile SMS pill — appears after the hero exits, hides at #preview (site.js) -->
+<a class="sms-pill" id="sms-pill" href="sms:5142604573?&body=PREVIEW%20—%20" data-i18n-attrs="href=smsHref"><span class="adot"></span><span data-i18n="pillText">TEXT US — FREE PREVIEW</span></a>
 
 <!-- EN/FR toggle (ported from the design's bilingual component) -->
 <script>
@@ -208,7 +259,19 @@
       processTitle: "ONE WEEK. HERE'S HOW.", pricingTitle: 'ONE NUMBER IS FINAL: $0.',
       previewTitle: 'YOUR SITE, BUILT FIRST. FREE.',
       styleWhy: 'STYLE — BOLD', styleExamples: 'STYLE — GALLERY', styleProcess: 'STYLE — BLUEPRINT',
-      stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINEMATIC'
+      stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINEMATIC',
+      previewSub: 'We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.',
+      formBusiness: 'BUSINESS NAME', formBusinessPh: 'e.g. Boréal Rénovation',
+      formName: 'YOUR NAME', formPhone: 'PHONE', formTrade: 'YOUR TRADE',
+      tradePick: 'Choose…', tradeContractor: 'Contractor / Renovation', tradeRealtor: 'Realtor',
+      tradeCreator: 'Creator', tradeOther: 'Other',
+      formSubmit: 'GET MY FREE PREVIEW',
+      orText: '— OR —', smsChip: 'TEXT US', callChip: 'CALL',
+      asideNote: 'A real human in Montréal answers both.',
+      smsHref: 'sms:5142604573?&body=PREVIEW%20—%20',
+      pillText: 'TEXT US — FREE PREVIEW',
+      footPitch: 'Bilingual websites for Montréal businesses. Built in a week. Yours.',
+      footMade: 'Conçu et hébergé à Montréal.'
     },
     fr: {
       langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
@@ -227,7 +290,19 @@
       processTitle: 'UNE SEMAINE. VOICI COMMENT.', pricingTitle: 'UN SEUL CHIFFRE EST FINAL : 0 $.',
       previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT.",
       styleWhy: 'STYLE — AUDACIEUX', styleExamples: 'STYLE — GALERIE', styleProcess: 'STYLE — PLAN',
-      stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINÉMA'
+      stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINÉMA',
+      previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle. Pas de rencontre, pas de dépôt, aucune obligation.",
+      formBusiness: "NOM DE L'ENTREPRISE", formBusinessPh: 'ex. : Boréal Rénovation',
+      formName: 'VOTRE NOM', formPhone: 'TÉLÉPHONE', formTrade: 'VOTRE MÉTIER',
+      tradePick: 'Choisir…', tradeContractor: 'Entrepreneur / Rénovation', tradeRealtor: 'Courtier immobilier',
+      tradeCreator: 'Créateur', tradeOther: 'Autre',
+      formSubmit: 'OBTENEZ MON APERÇU GRATUIT',
+      orText: '— OU —', smsChip: 'TEXTEZ-NOUS', callChip: 'APPELEZ',
+      asideNote: 'Un vrai humain à Montréal répond aux deux.',
+      smsHref: 'sms:5142604573?&body=APER%C3%87U%20—%20',
+      pillText: 'TEXTEZ-NOUS — APERÇU GRATUIT',
+      footPitch: 'Sites web bilingues pour les entreprises de Montréal. Prêts en une semaine. À vous.',
+      footMade: 'Conçu et hébergé à Montréal.'
     }
   };
   var lang = 'en';

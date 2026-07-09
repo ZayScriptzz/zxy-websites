@@ -78,6 +78,23 @@
     });
   }
 
+  // ---- STICKY SMS PILL (mobile) ------------------------------------------------
+  // Visible only between hero-exit and #preview-entry — one dominant conversion
+  // element per viewport. CSS keeps it display:none on desktop.
+  var pill = document.getElementById('sms-pill');
+  var pillHero = document.querySelector('.websites-page');
+  var pillPrev = document.getElementById('preview');
+  if (pill && pillHero && pillPrev && 'IntersectionObserver' in window) {
+    var heroIn = true, prevIn = false;
+    var updPill = function () { pill.classList.toggle('on', !heroIn && !prevIn); };
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { heroIn = e.isIntersecting; }); updPill();
+    }, { threshold: 0 }).observe(pillHero);
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { prevIn = e.isIntersecting; }); updPill();
+    }, { threshold: 0.2 }).observe(pillPrev);
+  }
+
   // ---- THE LOOP ------------------------------------------------------------
   var last = performance.now();
   function frame(now) {
