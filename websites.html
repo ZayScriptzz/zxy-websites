@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=5"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=6"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -312,10 +312,51 @@
       var k = el.getAttribute('data-i18n');
       if (dict[k] != null) el.textContent = dict[k];
     });
+    // attribute i18n: data-i18n-attrs="attr=key,attr2=key2" (placeholders, sms body, aria)
+    document.querySelectorAll('[data-i18n-attrs]').forEach(function (el) {
+      el.getAttribute('data-i18n-attrs').split(',').forEach(function (pair) {
+        var kv = pair.split('=');
+        if (dict[kv[1]] != null) el.setAttribute(kv[0], dict[kv[1]]);
+      });
+    });
     document.documentElement.lang = lang;
   }
+  function setLang(l, persist) {
+    lang = l;
+    if (persist) { try { localStorage.setItem('zxy-lang', l); } catch (e) {} }
+    apply();
+  }
   var btn = document.getElementById('lang-toggle');
-  if (btn) btn.addEventListener('click', function () { lang = (lang === 'en') ? 'fr' : 'en'; apply(); });
+  if (btn) btn.addEventListener('click', function () { setLang(lang === 'en' ? 'fr' : 'en', true); });
+
+  // dev-only drift check (runs on the pristine EN DOM, before any language apply):
+  // hardcoded EN markup must byte-match the en dict or the EN→FR→EN roundtrip corrupts.
+  if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (I18N.en[k] == null) { console.warn('[i18n] missing en key:', k); return; }
+      if (el.textContent !== I18N.en[k])
+        console.warn('[i18n drift]', k, JSON.stringify(el.textContent), '!=', JSON.stringify(I18N.en[k]));
+    });
+    Object.keys(I18N.en).forEach(function (k) {
+      if (I18N.fr[k] == null) console.warn('[i18n] key missing in fr:', k);
+    });
+  }
+
+  // LANGUAGE PICK — texted ?lang=fr links always win, then the visitor's saved
+  // choice, then the browser language (a French Montréal phone gets French first
+  // paint). This script is synchronous at body end, so applying here beats first
+  // paint: no EN flash. Saved-choice persistence only on explicit signals
+  // (toggle press / ?lang link), never on the sniff.
+  var urlLang = null;
+  try { urlLang = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  var stored = null;
+  try { stored = localStorage.getItem('zxy-lang'); } catch (e) {}
+  var pref =
+    (urlLang === 'fr' || urlLang === 'en') ? urlLang :
+    (stored === 'fr' || stored === 'en') ? stored :
+    ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+  if (pref !== 'en') setLang(pref, urlLang != null);
 })();
 </script>
 
@@ -346,7 +387,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=4"></script>
+<script defer src="site.js?v=6"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>
