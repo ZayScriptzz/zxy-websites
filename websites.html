@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=4"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=5"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -153,25 +153,33 @@
      Body-level siblings AFTER .websites-page (it has overflow:hidden and would
      clip children). Opaque backgrounds cover the fixed z0 fluid canvas.
      Stubs now; content lands per phase (P4-P8). -->
+<!-- Each section's backdrop demos a WEBSITE STYLE ZXY builds (Zay's direction:
+     the page is the portfolio). The style-demo class paints the backdrop; the
+     .style-chip names it like a spec label. -->
 <main id="page-sections">
-  <section id="why" class="page-section" aria-labelledby="why-title">
+  <section id="why" class="page-section style-bold" aria-labelledby="why-title">
     <p class="section-chapter"><span data-i18n="chWhy">01 — WHY</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot red"></span><span data-i18n="styleWhy">STYLE — BOLD</span></span>
     <h2 class="section-title" id="why-title" data-reveal data-i18n="whyTitle">NO SITE, NO SOUMISSION.</h2>
   </section>
-  <section id="examples" class="page-section" aria-labelledby="examples-title">
+  <section id="examples" class="page-section style-gallery" aria-labelledby="examples-title">
     <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleExamples">STYLE — GALLERY</span></span>
     <h2 class="section-title" id="examples-title" data-reveal data-i18n="examplesTitle">THE FRAME GALLERY.</h2>
   </section>
-  <section id="process" class="page-section" aria-labelledby="process-title">
+  <section id="process" class="page-section style-blueprint" aria-labelledby="process-title">
     <p class="section-chapter"><span data-i18n="chProcess">03 — PROCESS</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot blue"></span><span data-i18n="styleProcess">STYLE — BLUEPRINT</span></span>
     <h2 class="section-title" id="process-title" data-reveal data-i18n="processTitle">ONE WEEK. HERE'S HOW.</h2>
   </section>
-  <section id="pricing" class="page-section" aria-labelledby="pricing-title">
+  <section id="pricing" class="page-section style-minimal" aria-labelledby="pricing-title">
     <p class="section-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePricing">STYLE — MINIMAL</span></span>
     <h2 class="section-title" id="pricing-title" data-reveal data-i18n="pricingTitle">ONE NUMBER IS FINAL: $0.</h2>
   </section>
-  <section id="preview" class="page-section" aria-labelledby="preview-title">
+  <section id="preview" class="page-section style-cinematic" aria-labelledby="preview-title">
     <p class="section-chapter"><span data-i18n="chPreview">05 — YOUR PREVIEW</span></p>
+    <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePreview">STYLE — CINEMATIC</span></span>
     <h2 class="section-title" id="preview-title" data-reveal data-i18n="previewTitle">YOUR SITE, BUILT FIRST. FREE.</h2>
   </section>
 </main>
@@ -198,7 +206,9 @@
       chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL',
       whyTitle: 'NO SITE, NO SOUMISSION.', examplesTitle: 'THE FRAME GALLERY.',
       processTitle: "ONE WEEK. HERE'S HOW.", pricingTitle: 'ONE NUMBER IS FINAL: $0.',
-      previewTitle: 'YOUR SITE, BUILT FIRST. FREE.'
+      previewTitle: 'YOUR SITE, BUILT FIRST. FREE.',
+      styleWhy: 'STYLE — BOLD', styleExamples: 'STYLE — GALLERY', styleProcess: 'STYLE — BLUEPRINT',
+      stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINEMATIC'
     },
     fr: {
       langCode: 'EN', navHome: 'ACCUEIL', navWhy: 'POURQUOI', navExamples: 'EXEMPLES', navPricing: 'TARIFS', navCta: 'APERÇU GRATUIT',
@@ -215,7 +225,9 @@
       chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL',
       whyTitle: 'PAS DE SITE, PAS DE SOUMISSION.', examplesTitle: 'LA GALERIE DES CADRES.',
       processTitle: 'UNE SEMAINE. VOICI COMMENT.', pricingTitle: 'UN SEUL CHIFFRE EST FINAL : 0 $.',
-      previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT."
+      previewTitle: "VOTRE SITE, CONSTRUIT D'ABORD. GRATUIT.",
+      styleWhy: 'STYLE — AUDACIEUX', styleExamples: 'STYLE — GALERIE', styleProcess: 'STYLE — PLAN',
+      stylePricing: 'STYLE — MINIMAL', stylePreview: 'STYLE — CINÉMA'
     }
   };
   var lang = 'en';

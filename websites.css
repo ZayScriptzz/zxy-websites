@@ -376,28 +376,35 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
     linear-gradient(var(--tick), var(--tick)) 100% 100% / 1.5px 15px;
   background-repeat: no-repeat;
 }
-/* glass glyphs — gradient stroke, frosted translucent fill */
+/* 3D OUTLINED LETTERS (Zay's reference: classic extruded block lettering) —
+   the border sits ON the glyphs (gradient stroke), the faces are frosted
+   near-white, and a hard stacked-shadow extrusion gives each letter physical
+   depth. The GLASS lives on the pane behind them. em-based so it scales. */
 .framed-word-text {
   position: relative;
   z-index: 1;
   display: inline-block;
-  -webkit-text-stroke: .028em transparent;
+  -webkit-text-stroke: .034em transparent;   /* the colored border on the letters */
   background: linear-gradient(95deg, var(--frame-accent), var(--purple) 52%, var(--frame-accent-2));
   -webkit-background-clip: text;
   background-clip: text;
-  color: rgba(244,245,247,.34);   /* frosted fill — the gradient edge glows through the glass */
-  /* glyph extrusion: the letters get physical depth inside the pane */
+  color: rgba(244,245,247,.82);   /* frosted-white letter FACES — solid enough to sit on the extrusion */
   transform: translateZ(14px);
-  filter:
-    drop-shadow(1px 1px 0 rgba(2,2,4,.5))
-    drop-shadow(2px 3px 0 rgba(2,2,4,.35))
-    drop-shadow(4px 7px 8px rgba(2,2,4,.55));
+  /* hard extrusion walls, receding down-right (matches bevel light + drop shadow) */
+  text-shadow:
+    .008em .010em 0 rgba(22,17,46,.94),
+    .016em .020em 0 rgba(26,19,54,.92),
+    .024em .030em 0 rgba(30,21,62,.90),
+    .032em .040em 0 rgba(34,23,70,.88),
+    .040em .050em 0 rgba(38,25,78,.86),
+    .048em .060em 0 rgba(42,27,86,.84),
+    .07em .11em .09em rgba(2,2,4,.55);   /* soft ground shadow cast by the extrusion */
 }
 @supports not (-webkit-background-clip: text) {
   .framed-word-text {
     background: none;
-    -webkit-text-stroke: .028em var(--purple);
-    color: rgba(244,245,247,.4);
+    -webkit-text-stroke: .034em var(--purple);
+    color: rgba(244,245,247,.86);
   }
 }
 /* one-shot specular sweep across the pane after the reveal */
@@ -500,12 +507,60 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   color: rgba(255,255,255,.48);
 }
 .section-title {
+  display: inline-block;             /* transform hugs the text, not the row */
   margin: clamp(18px, 2.4vh, 30px) 0 0;
   font-family: 'Anton', sans-serif;
   font-size: clamp(34px, 4.6vw, 68px);
   line-height: .94;
   letter-spacing: .5px;
   color: #f4f5f7;
+  transform-origin: left 78%;
+}
+/* Zay's direction: titles grow under the cursor (desktop, motion allowed) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .js .section-title.in-view, html:not(.js) .section-title { transition: transform .45s cubic-bezier(.22, .9, .32, 1); }
+  .section-title:hover { transform: scale(1.08); }
+}
+
+/* ===== SECTION STYLE DEMOS ================================================
+   Zay's direction: each section's backdrop demos a website STYLE ZXY builds —
+   the page is the portfolio. All backdrops end in solid var(--bg) (the fixed
+   canvas sits below); pattern layers are whisper-alpha so copy stays king. */
+.style-chip {
+  position: absolute; top: clamp(28px, 4vh, 48px); right: var(--gutter);
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,.55);
+  border: 1px solid rgba(255,255,255,.14); border-radius: 2px; padding: 5px 9px;
+}
+.style-bold {
+  background:
+    radial-gradient(52% 60% at 88% 8%, rgba(var(--red-rgb),.09), transparent 70%),
+    repeating-linear-gradient(-24deg, rgba(255,255,255,.028) 0 2px, transparent 2px 88px),
+    var(--bg);
+}
+.style-gallery {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,.05) 1px, transparent 1.6px),
+    var(--bg);
+  background-size: 30px 30px, auto;
+}
+.style-blueprint {
+  background:
+    linear-gradient(rgba(var(--blue-rgb),.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--blue-rgb),.055) 1px, transparent 1px),
+    linear-gradient(rgba(var(--blue-rgb),.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--blue-rgb),.03) 1px, transparent 1px),
+    var(--bg);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px, auto;
+}
+.style-minimal { background: var(--bg); }   /* the restraint IS the demo */
+.style-cinematic {
+  background:
+    radial-gradient(46% 60% at 8% 82%, rgba(var(--red-rgb),.10), transparent 70%),
+    radial-gradient(50% 66% at 94% 18%, rgba(var(--blue-rgb),.11), transparent 72%),
+    radial-gradient(36% 44% at 55% 55%, rgba(var(--purple-rgb),.07), transparent 75%),
+    var(--bg);
 }
 
 /* ===== REVEAL PRIMITIVE (site.js) =========================================
