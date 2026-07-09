@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=12"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=13"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -187,8 +187,13 @@
       <div class="stat"><span class="stat-n">100%</span><span class="stat-l" data-i18n="stat3l">YOURS</span></div>
     </div>
     <!-- the brand's emergence rule, restated in pure CSS for the no-canvas audience:
-         red + blue overlap under screen blending → purple appears, never painted -->
-    <div class="purple-seam" aria-hidden="true"><span class="seam-red"></span><span class="seam-blue"></span></div>
+         red + blue overlap → purple appears, never painted. Captioned so it reads
+         as the bilingual thesis, not decoration. -->
+    <div class="purple-seam">
+      <span class="seam-red" aria-hidden="true"></span>
+      <span class="seam-blue" aria-hidden="true"></span>
+      <span class="seam-caption" data-i18n="seamCaption">TWO LANGUAGES. ONE FRAME.</span>
+    </div>
   </section>
   <section id="examples" class="page-section style-gallery" aria-labelledby="examples-title">
     <p class="section-chapter"><span data-i18n="chExamples">02 — EXAMPLES</span></p>
@@ -283,6 +288,7 @@
         </defs>
         <line class="proc-line" x1="0" y1="2" x2="1000" y2="2" stroke="url(#procGrad)" stroke-width="3" pathLength="100"/>
       </svg>
+      <div class="proc-carriage" aria-hidden="true"></div>
       <ol class="proc-steps">
         <li class="proc-step" style="--i: 0">
           <span class="proc-day" data-i18n="procD1">D1</span><span class="proc-dot" aria-hidden="true"></span>
@@ -466,6 +472,7 @@
       tierBoth: 'Both languages', tierBoth2: 'Both languages', tierBoth3: 'Both languages',
       tierWeek: 'Live in a week', tierWeek2: 'Live in a week', tierWeek3: 'Live in a week',
       tzPrice: '$0', tzTitle: 'THE PREVIEW', tzBody: "Price your build after you've seen it.",
+      seamCaption: 'TWO LANGUAGES. ONE FRAME.',
       inclLabel: 'EVERY BUILD INCLUDES',
       inclList: 'Bilingual (Loi 96) · Mobile-first · Hosting handled · SEO basics · One build — you own it.',
       previewSub: 'We build a working preview of your site. You look at it. Then we talk. No meeting, no deposit, no obligation.',
@@ -532,6 +539,7 @@
       tierBoth: 'Les deux langues', tierBoth2: 'Les deux langues', tierBoth3: 'Les deux langues',
       tierWeek: 'En ligne en une semaine', tierWeek2: 'En ligne en une semaine', tierWeek3: 'En ligne en une semaine',
       tzPrice: '0 $', tzTitle: "L'APERÇU", tzBody: "Fixez le prix après l'avoir vu.",
+      seamCaption: 'DEUX LANGUES. UN CADRE.',
       inclLabel: 'CHAQUE SITE INCLUT',
       inclList: "Bilingue (Loi 96) · Mobile d'abord · Hébergement inclus · SEO de base · Un seul montage — c'est à vous.",
       previewSub: "On monte un aperçu fonctionnel de votre site. Vous le regardez. Ensuite, on se parle. Pas de rencontre, pas de dépôt, aucune obligation.",
@@ -646,7 +654,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=12"></script>
+<script defer src="site.js?v=13"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=4"></script>

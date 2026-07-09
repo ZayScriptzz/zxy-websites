@@ -662,18 +662,28 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .stat-l { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2.5px; color: var(--s-dim); }
 /* purple emergence seam — red + blue overlap; purple is never painted.
    screen-blend births it on dark styles, multiply on light ones. */
-.purple-seam { position: relative; height: 130px; margin-top: clamp(40px, 6vh, 70px); overflow: hidden; }
-.purple-seam span {
-  position: absolute; top: 50%; height: 110px; width: 63%;
+.purple-seam { position: relative; height: 140px; margin-top: clamp(40px, 6vh, 70px); overflow: hidden; }
+.purple-seam .seam-red, .purple-seam .seam-blue {
+  position: absolute; top: 50%; height: 116px; width: 74%;
   transform: translateY(-50%);
   border-radius: 50%;
-  filter: blur(30px);
+  filter: blur(28px);
   mix-blend-mode: screen;
 }
-.seam-red  { left: -2%;  background: radial-gradient(closest-side, rgba(255,68,56,.55), transparent 74%); }
-.seam-blue { right: -2%; background: radial-gradient(closest-side, rgba(43,127,212,.6), transparent 74%); }
-.style-warm .purple-seam span, .style-gallery .purple-seam span, .style-minimal .purple-seam span {
+.seam-red  { left: -8%;  background: radial-gradient(closest-side, rgba(255,68,56,.62), transparent 74%); }
+.seam-blue { right: -8%; background: radial-gradient(closest-side, rgba(43,127,212,.68), transparent 74%); }
+.style-warm .purple-seam .seam-red, .style-warm .purple-seam .seam-blue,
+.style-gallery .purple-seam .seam-red, .style-gallery .purple-seam .seam-blue,
+.style-minimal .purple-seam .seam-red, .style-minimal .purple-seam .seam-blue {
   mix-blend-mode: multiply;   /* on light paper, overlap darkens into purple */
+}
+/* the caption that makes the emergence rule READ (Zay: "what is it for?") */
+.seam-caption {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  color: var(--s-ink);
+  white-space: nowrap;
+  text-align: center;
 }
 @media (max-width: 820px) {
   .why-grid { grid-template-columns: 1fr; }
@@ -797,6 +807,34 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .in-view .proc-step .proc-dot::after { animation: zxy-ret 2s ease-out 1; animation-delay: calc(var(--i) * .24s + 1s); }
 .proc-step h3 { margin: 0; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: clamp(12px, 1.05vw, 15px); letter-spacing: 1px; color: #f4f5f7; }
 .proc-step p { margin: 0; font-weight: 300; font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.55); max-width: 20ch; }
+/* THE SLIDER (Zay's directive): a scanner carriage rides the rail after it
+   draws, and each station powers on as the carriage passes it. */
+.proc-carriage {
+  position: absolute; top: 48px; left: 0%;
+  width: 18px; height: 18px; margin: -9px 0 0 -9px;
+  border: 1px solid rgba(255,255,255,.85);
+  border-radius: 50%;
+  box-shadow: 0 0 14px rgba(var(--purple-rgb),.85), inset 0 0 7px rgba(var(--purple-rgb),.6);
+  opacity: 0;
+  pointer-events: none;
+}
+.proc-carriage::before, .proc-carriage::after { content: ''; position: absolute; background: rgba(255,255,255,.75); }
+.proc-carriage::before { left: 50%; top: -7px; bottom: -7px; width: 1px; margin-left: -.5px; }
+.proc-carriage::after { top: 50%; left: -7px; right: -7px; height: 1px; margin-top: -.5px; }
+@media (prefers-reduced-motion: no-preference) {
+  .in-view .proc-carriage { animation: proc-slide 3.1s cubic-bezier(.5, .05, .45, 1) .5s 1 forwards; }
+  /* stations start dim, power on in carriage order */
+  .js .style-blueprint.in-view .proc-step { opacity: .3; animation: proc-on .45s ease forwards; animation-delay: calc(.55s + var(--i) * .58s); }
+  .js .style-blueprint.in-view .proc-dot { animation: proc-dot-fill .4s ease forwards; animation-delay: calc(.55s + var(--i) * .58s); }
+}
+@keyframes proc-slide {
+  0%   { left: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  93%  { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes proc-on { to { opacity: 1; } }
+@keyframes proc-dot-fill { to { background: rgb(var(--purple-rgb)); border-color: #fff; } }
 @media (max-width: 820px) {
   /* vertical rail: gradient hairline down the left, stations stack */
   .proc-rail { display: none; }
