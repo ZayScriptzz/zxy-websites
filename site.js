@@ -45,7 +45,7 @@
   // ---- REVEAL PRIMITIVE --------------------------------------------------------
   // [data-reveal] fades up on first viewport entry; stagger with --i on the element.
   // Reduced motion: the CSS hidden state never applies — nothing to force-complete.
-  var revealTargets = document.querySelectorAll('[data-reveal]');
+  var revealTargets = document.querySelectorAll('[data-reveal], .page-section, .site-footer');
   if ('IntersectionObserver' in window && !MOTION_OFF) {
     var revealIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

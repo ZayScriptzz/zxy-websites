@@ -351,9 +351,12 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
     .040em .050em 0 rgba(38,25,78,.86),
     .048em .060em 0 rgba(42,27,86,.84),
     .056em .070em 0 rgba(46,29,94,.80),
-    .064em .080em 0 rgba(50,31,102,.74),
-    .072em .090em 0 rgba(54,33,110,.66),
-    .09em .13em .10em rgba(2,2,4,.55);   /* soft ground shadow cast by the extrusion */
+    .064em .080em 0 rgba(50,31,102,.76),
+    .072em .090em 0 rgba(54,33,110,.72),
+    .080em .100em 0 rgba(58,35,118,.66),
+    .088em .110em 0 rgba(62,37,126,.58),
+    .096em .120em 0 rgba(66,39,134,.48),
+    .12em .17em .11em rgba(2,2,4,.55);   /* soft ground shadow cast by the extrusion */
 }
 @supports not (-webkit-background-clip: text) {
   .framed-word-text {
@@ -587,6 +590,10 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
     transition-delay: calc(var(--i, 0) * 90ms);
   }
   .js [data-reveal].in-view { opacity: 1; transform: none; }
+  /* whole-section fade on entry (Zay: ~0.4s per section) — layers under the
+     staggered child reveals */
+  .js .page-section, .js .site-footer { opacity: 0; transition: opacity .4s ease; }
+  .js .page-section.in-view, .js .site-footer.in-view { opacity: 1; }
 }
 .site-footer {
   position: relative;
