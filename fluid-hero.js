@@ -64,6 +64,18 @@ let breathTimer = null;
 // cursor state
 let lastPt = null, lastInjPt = null, lastMove = 0, purpleUntil = 0, colCount = 0, wasInBand = false;
 
+// ---- P10 · THE CONFLUENCE ------------------------------------------------------
+// The fluid returns once, behind the #preview form: red pours in from the left,
+// blue from the right, and the purple is BORN (never painted) exactly where they
+// meet — behind the place where the visitor signs. ONE boolean kills the whole
+// phase: zone, scrim class, farewell, loops. false = the hero-only page.
+const CONFLUENCE = true;
+let heroZoneEl = null;        // .websites-page — ambient breathing belongs to the hero only
+let confluenceEl = null;      // #preview
+let confluenceOn = false;     // scene is holding dye (dissipation lowered)
+let confluenceTimer = null;
+let lastFarewell = 0;
+
 // ---- FLUID LIFECYCLE REDUCER -------------------------------------------------
 // ONE derived state, ONE pause() call site. 0.6.1's pause() is a TOGGLE, so two
 // independent call paths can invert each other (sim paused while visible). All
@@ -97,10 +109,12 @@ function applyRunState() {
     try { webGLFluidEnhanced.pause(); } catch (e) {}   // the ONLY pause() call site
     simPaused = true;
     if (breathTimer) { clearTimeout(breathTimer); breathTimer = null; }   // no timers while paused
+    if (confluenceTimer) { clearTimeout(confluenceTimer); confluenceTimer = null; }
   } else if (shouldRun && simPaused) {
     try { webGLFluidEnhanced.pause(); } catch (e) {}   // toggle back on
     simPaused = false;
     if (!breathTimer) ambientLoop();   // resume breathing (re-seeds promptly)
+    if (confluenceEl && !confluenceTimer) confluenceLoop();
   }
 }
 
@@ -196,7 +210,9 @@ function ambientSplat(isRed) {
 
 function ambientLoop() {
   if (stopped) return;
-  if (!document.hidden && !simPaused) {
+  // breathing belongs to the HERO — while the sim runs for the confluence zone
+  // instead, random streaks would muddy its directed left/right statement
+  if (!document.hidden && !simPaused && zoneState.get(heroZoneEl) !== false) {
     const n = 2 + (Math.random() < 0.5 ? 1 : 0);   // 2–3 splats / tick
     for (let i = 0; i < n; i++) ambientSplat(Math.random() < 0.5);
   }
@@ -254,6 +270,74 @@ function onPointerMove(e) {
 // Tab visibility is just another reducer input — no direct pause() here.
 function onVisibility() { applyRunState(); }
 
+// ---- P10 · CONFLUENCE SCENE ------------------------------------------------------
+// One volley = a red plume from the LEFT edge and a blue plume from the RIGHT,
+// both aimed at the working area (.preview-grid). The canvas is fixed and
+// full-viewport, so client coords map 1:1 (same convention as the cursor).
+// The target rect is re-measured EVERY volley — resize can never stale it.
+function confluenceVolley(strong) {
+  const W = window.innerWidth, H = window.innerHeight;
+  const grid = confluenceEl.querySelector('.preview-grid');
+  const r = (grid || confluenceEl).getBoundingClientRect();
+  const cy = Math.min(H * 0.88, Math.max(H * 0.12, r.top + r.height * 0.45));
+  const jit = () => (Math.random() * 2 - 1) * H * 0.06;
+  const force = (strong ? 2900 : 2100) + Math.random() * 700;
+  const radius = strong ? 5 : 2.2;
+  // purple is never painted — it is born where these two meet, behind the form
+  splat(W * 0.03, cy + jit(),  force, (Math.random() * 2 - 1) * 260, RED[(Math.random() * RED.length) | 0], radius);
+  splat(W * 0.97, cy + jit(), -force, (Math.random() * 2 - 1) * 260, BLUE[(Math.random() * BLUE.length) | 0], radius);
+}
+
+// maintenance volleys — slow cadence so the held dye (low dissipation) never piles up
+function confluenceLoop() {
+  if (stopped) return;
+  if (!document.hidden && !simPaused && confluenceOn) confluenceVolley(false);
+  confluenceTimer = setTimeout(confluenceLoop, 3200 + Math.random() * 1200);
+}
+
+function setupConfluence() {
+  confluenceEl = document.getElementById('preview');
+  if (!confluenceEl) return;
+  document.body.classList.add('confluence-on');   // CSS: the opaque floor becomes a scrim window
+  observeFluidZone(confluenceEl);                 // the sim wakes for the reprise
+  // scene state keys at 22% visible: dye is HELD while the visitor is at the form,
+  // released the moment they leave (same hold/release the intro uses)
+  new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting && !confluenceOn) {
+        confluenceOn = true;
+        try { webGLFluidEnhanced.config({ DENSITY_DISSIPATION: HOLD_DISSIPATION }); } catch (e) {}
+        confluenceVolley(true);                                          // the arrival statement
+        setTimeout(() => { if (confluenceOn) confluenceVolley(true); }, 450);
+      } else if (!en.isIntersecting && confluenceOn) {
+        confluenceOn = false;
+        try { webGLFluidEnhanced.config({ DENSITY_DISSIPATION: AMBIENT_DISSIPATION }); } catch (e) {}
+      }
+    });
+  }, { threshold: 0.22 }).observe(confluenceEl);
+  confluenceLoop();
+}
+
+// FAREWELL — as the hero leaves (35% remaining, canvas still fading), the pair
+// crosses once more at its heart. Throttled so scroll jitter can't machine-gun it.
+function setupFarewell() {
+  if (!heroZoneEl) return;
+  let above = true;
+  new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      const now = performance.now();
+      const isAbove = en.intersectionRatio >= 0.35;
+      if (above && !isAbove && !document.hidden && !simPaused && now - lastFarewell > 4000) {
+        lastFarewell = now;
+        const W = window.innerWidth, H = window.innerHeight;
+        splat(W * 0.30, H * 0.34,  1400, 300, RED[0],  3.2);
+        splat(W * 0.70, H * 0.30, -1400, 340, BLUE[1], 3.2);
+      }
+      above = isAbove;
+    });
+  }, { threshold: [0.35] }).observe(heroZoneEl);
+}
+
 function startFluid(canvas) {
   if (started || stopped) return false;
   try {
@@ -273,7 +357,9 @@ function startFluid(canvas) {
 
   window.addEventListener('pointermove', onPointerMove, { passive: true });
   document.addEventListener('visibilitychange', onVisibility);
-  observeFluidZone(document.querySelector('.websites-page'));   // hero = zone #1; sim runs only while a zone is in view
+  heroZoneEl = document.querySelector('.websites-page');
+  observeFluidZone(heroZoneEl);   // hero = zone #1; sim runs only while a zone is in view
+  if (CONFLUENCE) { setupFarewell(); setupConfluence(); }   // P10 — one boolean, whole phase
   return true;
 }
 

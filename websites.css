@@ -627,6 +627,22 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   text-align: center; /* the whole stage centers under the lamp… */
 }
 .style-cinematic .preview-grid { text-align: left; } /* …but the working area reads left-to-right */
+/* P10 · THE CONFLUENCE — while the sim is live (body.confluence-on, set by
+   fluid-hero.js), the spotlight's solid floor becomes a dark SCRIM WINDOW, not a
+   hole-punch: the fixed canvas glows through the whole section, dimmed enough
+   that the copy stays king. Red arrives from the left, blue from the right, and
+   the purple is born exactly where the visitor signs. Kill-switch: CONFLUENCE =
+   false in fluid-hero.js → the class never lands → this block is inert and the
+   section keeps its opaque floor (the standing every-section-ends-opaque rule). */
+.confluence-on .style-cinematic {
+  background:
+    linear-gradient(180deg, rgba(190,170,255,.05), transparent 34%),
+    radial-gradient(38% 26% at 50% -6%, rgba(230,220,255,.22), transparent 70%),
+    conic-gradient(at 50% -6%, transparent 172deg, rgba(190,170,255,.13) 180deg, transparent 188deg),
+    radial-gradient(72% 55% at 50% 6%, rgba(var(--purple-rgb),.10), transparent 74%),
+    radial-gradient(48% 22% at 50% 98%, rgba(var(--purple-rgb),.08), transparent 78%),
+    linear-gradient(rgba(5,3,8,.84), rgba(5,3,8,.84));
+}
 .style-cinematic .section-title { max-width: 20ch; transform-origin: 50% 78%; }
 .style-cinematic .preview-sub { margin-left: auto; margin-right: auto; }
 .preview-chips {

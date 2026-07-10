@@ -33,10 +33,32 @@
   // Fade #fluid-canvas over the hero's last 20vh so the fluid reducer's pause
   // (which freezes the frame) always lands at opacity 0 — a frozen frame is
   // never visible. Uses raw targetY: the fade must track scroll 1:1, not lag.
+  // P10 · CONFLUENCE: the canvas returns the same way for the #preview window —
+  // fading in over the first 20vh of overlap and out over the last, so the
+  // reducer's pause at zero overlap always lands at opacity 0 there too.
   var lastFade = -1;
   if (document.getElementById('fluid-canvas')) {
+    var confTop = Infinity, confH = 0;   // Infinity until the confluence is confirmed → term stays 0
+    var measureConf = function () {
+      var el = document.body.classList.contains('confluence-on') && document.getElementById('preview');
+      if (!el) { confTop = Infinity; confH = 0; return; }
+      var r = el.getBoundingClientRect();
+      confTop = r.top + (window.scrollY || 0); confH = r.height;
+    };
+    window.addEventListener('resize', measureConf, { passive: true });
+    window.addEventListener('load', measureConf);
+    // fluid-hero flags the body when the sim confirms (usually <1s, worst-case
+    // slower) — poll until the flag lands, then stop; resize keeps it fresh
+    var confTries = 0;
+    var confPoll = setInterval(function () {
+      measureConf();
+      if (confTop !== Infinity || ++confTries > 14) clearInterval(confPoll);
+    }, 1000);
     subs.push(function (y) {
       var f = 1 - Math.min(1, Math.max(0, (y - vh * 0.8) / (vh * 0.2)));
+      var fi = Math.min(1, Math.max(0, (y + vh - confTop) / (vh * 0.2)));
+      var fo = Math.min(1, Math.max(0, (confTop + confH - y) / (vh * 0.2)));
+      f = Math.max(f, Math.min(fi, fo));
       f = Math.round(f * 100) / 100;
       if (f !== lastFade) { lastFade = f; docEl.style.setProperty('--fluid-fade', f); }
     });
