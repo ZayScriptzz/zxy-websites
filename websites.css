@@ -1029,12 +1029,6 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 
 /* ===== #PRICING — minimal calipers ======================================= */
 .pricing-sub { max-width: 640px; margin: 18px 0 0; font-weight: 300; font-size: clamp(14px, 1.15vw, 17px); line-height: 1.6; color: var(--s-body); }
-.pricing-pending {
-  display: inline-flex; align-items: center; gap: 7px; margin-right: 10px;
-  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
-  color: var(--s-dim); border: 1px solid var(--s-line-strong); border-radius: 2px; padding: 4px 8px;
-  vertical-align: 2px;
-}
 /* tiers demoted to fine-footer columns above a cream hairline — the em-dash
    placeholders whisper; the $0 protagonist above them does the talking */
 .tier-grid {
