@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=26"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=27"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 <!-- the hero mockup's photo is a CSS background — preload it at the right size so the hero paints complete -->
 <link rel="preload" as="image" href="assets/dusk-street.jpg" media="(min-width: 821px)">
 <link rel="preload" as="image" href="assets/dusk-street-sm.jpg" media="(max-width: 820px)">
@@ -262,59 +262,42 @@
           <span class="build-badge" data-i18n="badgeConcept">CONCEPT — DEMO</span>
         </div>
       </article>
-      <!-- 2 · the real ZXY real-estate frame -->
-      <article class="build-card" data-reveal style="--i: 1">
-        <div class="mockup-chrome">
-          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
-          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>zxyframe.ca</div></div>
-          <div class="spacer"></div>
-        </div>
-        <div class="build-shot">
+      <!-- 2 · the real ZXY real-estate frame — TEMPLATE: THE MATTE (framed print) -->
+      <article class="build-card tile-matte" data-reveal style="--i: 1">
+        <div class="matte-frame">
           <img src="assets/zxy-realtor-hero.jpg" loading="lazy" decoding="async" width="1200" height="644"
                alt="ZXY real-estate site hero" data-i18n-attrs="alt=altRealtor">
         </div>
-        <div class="build-placard">
-          <span class="atag"><span class="adot red"></span><span data-i18n="tileRealtorTag">REAL ESTATE</span></span>
+        <div class="matte-caption">
           <h3 data-i18n="tileRealtorName">ZXY — Property Media</h3>
-          <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+          <p class="matte-sub"><span data-i18n="tileRealtorTag">REAL ESTATE</span><span class="sep" aria-hidden="true">·</span><span data-i18n="badgeOwn">OUR OWN FRAME</span></p>
         </div>
       </article>
-      <!-- 3 · the real ZXY creators frame -->
-      <article class="build-card" data-reveal style="--i: 2">
-        <div class="mockup-chrome">
-          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
-          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>zxyframe.ca/creators</div></div>
-          <div class="spacer"></div>
-        </div>
-        <div class="build-shot">
+      <!-- 3 · the real ZXY creators frame — TEMPLATE: THE CINEMA (title card) -->
+      <article class="build-card tile-cinema" data-reveal style="--i: 2">
+        <div class="cinema-shot">
           <img src="assets/zxy-creator-hero.jpg" loading="lazy" decoding="async" width="1200" height="644"
                alt="ZXY creator sessions site hero" data-i18n-attrs="alt=altCreator">
-        </div>
-        <div class="build-placard">
-          <span class="atag"><span class="adot blue"></span><span data-i18n="tileCreatorTag">CREATORS</span></span>
-          <h3 data-i18n="tileCreatorName">ZXY — Creator Sessions</h3>
-          <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+          <div class="cinema-scrim" aria-hidden="true"></div>
+          <div class="cinema-caption">
+            <span class="atag"><span class="adot blue"></span><span data-i18n="tileCreatorTag">CREATORS</span></span>
+            <h3 data-i18n="tileCreatorName">ZXY — Creator Sessions</h3>
+            <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+          </div>
         </div>
       </article>
-      <!-- 4 · the aerial frame — the drone moat, framed as its own build -->
-      <article class="build-card" data-reveal style="--i: 3">
-        <div class="mockup-chrome">
-          <div class="mockup-traffic"><span class="r"></span><span class="y"></span><span class="g"></span></div>
-          <div class="mockup-urlwrap"><div class="mockup-url"><span class="dot"></span>zxyframe.ca</div></div>
-          <div class="spacer"></div>
-        </div>
-        <div class="build-shot">
-          <!-- temp grade — swap assets/fireworks-bridge.jpg for Zay's edit, same name -->
-          <img class="shot-aerial" src="assets/fireworks-bridge.jpg"
-               srcset="assets/fireworks-bridge-sm.jpg 800w, assets/fireworks-bridge.jpg 1200w"
-               sizes="(max-width: 820px) 100vw, 58vw"
-               loading="lazy" decoding="async" width="1200" height="1800"
-               alt="Fireworks over the Jacques-Cartier bridge — ZXY drone media" data-i18n-attrs="alt=altAerial">
-        </div>
-        <div class="build-placard">
-          <span class="atag"><span class="adot purple"></span><span data-i18n="tileAerialTag">AERIAL</span></span>
-          <h3 data-i18n="tileAerialName">ZXY — Aerial Media</h3>
-          <span class="build-badge own" data-i18n="badgeOwn">OUR OWN FRAME</span>
+      <!-- 4 · the aerial frame — TEMPLATE: THE POSTER (full portrait, as shot) -->
+      <article class="build-card tile-poster" data-reveal style="--i: 3">
+        <!-- temp grade — swap assets/fireworks-bridge.jpg for Zay's edit, same name -->
+        <img class="poster-img" src="assets/fireworks-bridge.jpg"
+             srcset="assets/fireworks-bridge-sm.jpg 800w, assets/fireworks-bridge.jpg 1200w"
+             sizes="(max-width: 820px) 100vw, 58vw"
+             loading="lazy" decoding="async" width="1200" height="1800"
+             alt="Fireworks over the Jacques-Cartier bridge — ZXY drone media" data-i18n-attrs="alt=altAerial">
+        <div class="poster-type">
+          <span class="poster-eyebrow" data-i18n="posterDate">MONTRÉAL — JULY 10</span>
+          <span class="poster-no" data-i18n="posterNo">SHOT № 58</span>
+          <span class="poster-square" aria-hidden="true"></span>
         </div>
       </article>
       <!-- 5 · the Empty Frame — the honesty gap converted into the CTA -->
@@ -572,7 +555,7 @@
       tileBorealTag: 'CONTRACTOR', tileBorealName: 'Boréal — Renovation', badgeConcept: 'CONCEPT — DEMO',
       tileRealtorTag: 'REAL ESTATE', tileRealtorName: 'ZXY — Property Media', badgeOwn: 'OUR OWN FRAME',
       tileCreatorTag: 'CREATORS', tileCreatorName: 'ZXY — Creator Sessions',
-      tileAerialTag: 'AERIAL', tileAerialName: 'ZXY — Aerial Media',
+      posterDate: 'MONTRÉAL — JULY 10', posterNo: 'SHOT № 58',
       altAerial: 'Fireworks over the Jacques-Cartier bridge — ZXY drone media',
       tileEmptyTag: 'NEXT', tileEmptyLine: 'YOUR BUSINESS — NEXT', tileEmptyCta: 'GET YOUR PREVIEW →',
       emptyUrl: 'yourbusiness.ca',
@@ -652,7 +635,7 @@
       tileBorealTag: 'ENTREPRENEUR', tileBorealName: 'Boréal — Rénovation', badgeConcept: 'CONCEPT — DÉMO',
       tileRealtorTag: 'IMMOBILIER', tileRealtorName: 'ZXY — Médias immobiliers', badgeOwn: 'NOTRE PROPRE CADRE',
       tileCreatorTag: 'CRÉATEURS', tileCreatorName: 'ZXY — Sessions créateurs',
-      tileAerialTag: 'AÉRIEN', tileAerialName: 'ZXY — Média aérien',
+      posterDate: 'MONTRÉAL — 10 JUILLET', posterNo: 'PLAN № 58',
       altAerial: "Feux d'artifice au-dessus du pont Jacques-Cartier — média drone ZXY",
       tileEmptyTag: 'PROCHAIN', tileEmptyLine: 'VOTRE ENTREPRISE — LA PROCHAINE', tileEmptyCta: 'OBTENEZ VOTRE APERÇU →',
       emptyUrl: 'votreentreprise.ca',
@@ -794,7 +777,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=26"></script>
+<script defer src="site.js?v=27"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=5"></script>
