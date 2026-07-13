@@ -451,9 +451,14 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 /* Every section is a STYLE DEMO (Zay: colors + fonts per section, like heroes
    of differently-styled sites). The tokens below are the switchboard — each
    .style-* class overrides them, and every section component reads them. */
+/* P8: one visible keyboard ring, re-inked per room via --s-focus */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 2px solid var(--s-focus, #c9b3ff); outline-offset: 3px;
+}
 .page-section {
   --s-bg: var(--bg);
   --s-ink: #f4f5f7;
+  --s-focus: #c9b3ff;
   --s-body: rgba(255,255,255,.68);
   --s-dim: rgba(255,255,255,.5);
   --s-line: rgba(255,255,255,.08);
@@ -512,6 +517,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
    serif headline with a hand-drawn orange underline, soft rounded cards) ------ */
 .style-warm {
   --s-bg: #f7efe2;
+  --s-focus: #b8490f;
   --s-ink: #261e15;
   --s-body: rgba(38,30,21,.75);
   --s-dim: rgba(38,30,21,.55);
@@ -556,6 +562,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
    painted through 2px gaps, stacked massive title, mono caption bars) ------- */
 .style-gallery {
   --s-bg: #f2ede3;
+  --s-focus: #141311;
   --s-ink: #141311;
   --s-body: rgba(20,19,17,.78);
   --s-dim: rgba(20,19,17,.55);
@@ -594,6 +601,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
    #bd4a24 floor is AA-checked against the cream body — don't lighten it.) --- */
 .style-minimal {
   --s-bg: #bd4a24;
+  --s-focus: #fdf6ee;
   --s-ink: #fdf6ee;
   --s-body: rgba(255,248,240,.92);
   --s-dim: rgba(255,244,235,.8);
@@ -987,6 +995,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
    The video is decorative (aria-hidden, muted, loop); the poster carries the
    look wherever playback is off. Floor is opaque #0a0d16 (canvas below). */
 .style-band {
+  --s-focus: #ffffff;
   min-height: 58vh;
   display: grid; align-content: center; justify-items: center;
   text-align: center;
