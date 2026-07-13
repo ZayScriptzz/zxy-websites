@@ -901,6 +901,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   color: #fff; text-shadow: 0 2px 26px rgba(0,0,0,.55);
 }
 .poster-square { width: 13px; height: 13px; background: var(--purple); margin-top: 4px; }
+/* — THE WARM CARD (editorial concept build) — */
+.tile-warmcard { background: #fdf9f1; padding: clamp(16px, 2vw, 28px); }
+.warmcard-photo { border-radius: 14px; overflow: hidden; }
+.warmcard-photo img { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: 50% 55%; }
+.warmcard-caption { display: flex; align-items: baseline; gap: 12px; padding: clamp(12px, 1.6vw, 18px) 4px 2px; }
+.warmcard-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 2.5px; color: rgba(184,73,15,.9); }
+.warmcard-caption h3 {
+  flex: 1; margin: 0;
+  font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 600;
+  font-size: clamp(17px, 1.5vw, 22px); color: #2b1d10;
+}
+.tile-warmcard .build-badge { color: #b8490f; border-color: rgba(184,73,15,.5); border-radius: 999px; }
+
 /* per-template hovers — each frame answers differently */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .tile-matte { transition: transform .35s cubic-bezier(.22,.9,.32,1), box-shadow .35s ease; }
@@ -910,6 +923,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .tile-poster:hover .poster-img { transform: scale(1.02); }
   .poster-no { transition: transform .35s cubic-bezier(.22,.9,.32,1); }
   .tile-poster:hover .poster-no { transform: translateX(6px); }
+  .tile-warmcard { transition: transform .35s cubic-bezier(.22,.9,.32,1); }
+  .tile-warmcard:hover { transform: rotate(.4deg) translateY(-2px); }
 }
 /* poster/cinema/matte overflow: keep the scaled art inside its frame */
 .tile-cinema, .tile-poster, .matte-frame { overflow: hidden; }
