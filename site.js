@@ -280,6 +280,41 @@
     }, { threshold: 0.2 }).observe(pillPrev);
   }
 
+  // ---- P6 · MOTION PASS -------------------------------------------------------
+  // (a) magnetic primary CTAs: the button leans ≤6px toward the cursor while
+  //     hovered; rect cached on entry (no per-move layout reads). Desktop-only.
+  var FINE_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function magnetize(btn) {
+    if (!btn) return;
+    var r = null;
+    btn.addEventListener('pointerenter', function () { r = btn.getBoundingClientRect(); });
+    btn.addEventListener('pointermove', function (e) {
+      if (!r) return;
+      var dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      var dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+      btn.style.transform = 'translate(' + (dx * 5).toFixed(1) + 'px,' + (dy * 3.5).toFixed(1) + 'px)';
+    });
+    btn.addEventListener('pointerleave', function () { r = null; btn.style.transform = ''; });
+  }
+  if (!MOTION_OFF && FINE_HOVER) {
+    magnetize(document.querySelector('.hero-cta-row .btn-primary'));
+    magnetize(document.querySelector('.form-submit'));
+    // (b) hero headline drifts up as the hero leaves — rides smoothY for weight
+    var heroHead = document.querySelector('.hero-headline-block');
+    if (heroHead) {
+      var lastDrift = -1;
+      subs.push(function (y, sy) {
+        var f = Math.min(1, Math.max(0, sy / (vh * 0.9)));
+        f = Math.round(f * 200) / 200;
+        if (f !== lastDrift) {
+          lastDrift = f;
+          heroHead.style.transform = 'translateY(' + (-f * 44).toFixed(1) + 'px)';
+          heroHead.style.opacity = String(1 - f * 0.3);
+        }
+      });
+    }
+  }
+
   // ---- P4 · DUSK BAND VIDEO -------------------------------------------------
   // Decorative loop plays only while on screen. Mobile / reduced-motion never
   // start it (preload=none → the poster is all that ever loads there).

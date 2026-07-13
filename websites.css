@@ -807,6 +807,13 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .build-shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* the fireworks source is portrait — art-direct the landscape crop onto burst + bridge */
 .shot-aerial { object-position: 50% 48%; }
+/* P6: photographs breathe on inspect — contained by the shots' overflow:hidden */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .build-shot img, .why-figure img { transition: transform .55s cubic-bezier(.22,.9,.32,1); }
+  .build-card:hover .build-shot img, .build-card:focus-visible .build-shot img,
+  .why-figure:hover img { transform: scale(1.04); }
+  .btn-primary, .form-submit { transition: transform .18s ease-out; }
+}
 /* mono caption bar — inverts to ink on inspect (no transforms in this room) */
 .build-placard {
   display: flex; align-items: center; gap: 12px;
