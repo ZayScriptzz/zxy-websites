@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=21"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=22"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -181,6 +181,12 @@
         <a class="why-link" href="#process" data-i18n="whyCard3Link">THE PROCESS →</a>
       </article>
     </div>
+    <figure class="why-figure" data-reveal>
+      <!-- temp grade — swap assets/espresso.jpg for Zay's edit, same name -->
+      <img src="assets/espresso.jpg" loading="lazy" width="1400" height="933"
+           alt="Espresso pour at a Montréal café — shot by ZXY" data-i18n-attrs="alt=altEspresso">
+      <figcaption class="atag"><span class="adot red"></span><span data-i18n="whyFigCap">SHOT BY ZXY — MONTRÉAL</span></figcaption>
+    </figure>
     <p class="why-moat" data-reveal data-i18n="whyMoat">No photos? We fly drones for a living. Your footage is the add-on, not your homework.</p>
     <div class="why-stats" data-reveal>
       <div class="stat"><span class="stat-n">2</span><span class="stat-l" data-i18n="stat1l">LANGUAGES</span></div>
@@ -581,6 +587,8 @@
       pillText: 'TEXT US — FREE PREVIEW',
       footPitch: 'Bilingual websites for Montréal businesses. Built in a week. Yours.',
       footMade: 'Designed and hosted in Montréal.',
+      whyFigCap: 'SHOT BY ZXY — MONTRÉAL',
+      altEspresso: 'Espresso pour at a Montréal café — shot by ZXY',
       whyCard1Tag: 'BILINGUAL', whyCard1Title: 'Both languages. Hand-written.',
       whyCard1Body: 'Every page ships in French and English — authored, not auto-translated. In the spirit of Loi 96 — and of actually being found.',
       whyToggleProof: "Press FR. That's the product. →",
@@ -658,6 +666,8 @@
       pillText: 'TEXTEZ-NOUS — APERÇU GRATUIT',
       footPitch: 'Sites web bilingues pour les entreprises de Montréal. Prêts en une semaine. À vous.',
       footMade: 'Conçu et hébergé à Montréal.',
+      whyFigCap: 'SIGNÉ ZXY — MONTRÉAL',
+      altEspresso: 'Café espresso dans un café montréalais — signé ZXY',
       whyCard1Tag: 'BILINGUE', whyCard1Title: 'Les deux langues. Écrites à la main.',
       whyCard1Body: "Chaque page est livrée en français et en anglais — rédigée, pas traduite par une machine. Dans l'esprit de la Loi 96 — et pour être trouvé, tout simplement.",
       whyToggleProof: "Appuyez sur EN. C'est ça, le produit. →",
@@ -758,7 +768,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=21"></script>
+<script defer src="site.js?v=22"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=5"></script>

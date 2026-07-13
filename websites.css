@@ -730,6 +730,24 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   transition: background .25s ease, border-color .25s ease;
 }
 .why-link:hover, .why-link:focus-visible { background: rgba(var(--s-accent-rgb),.12); border-color: #b8490f; }
+/* the editorial photograph — the warm room's proof it isn't a theme demo */
+.why-figure {
+  position: relative;
+  margin: clamp(16px, 2vw, 28px) 0 0;
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(38,25,14,.05), 0 14px 34px rgba(38,25,14,.08);
+}
+.why-figure img {
+  display: block; width: 100%;
+  height: clamp(180px, 26vw, 340px);
+  object-fit: cover; object-position: 50% 60%;
+}
+.why-figure figcaption {
+  position: absolute; left: 14px; bottom: 12px;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(255,253,249,.92);
+  border-radius: 999px; padding: 7px 13px;
+}
 .why-moat {
   margin: clamp(26px, 3.5vh, 40px) 0 0;
   max-width: 640px;
