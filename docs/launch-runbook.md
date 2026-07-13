@@ -20,7 +20,7 @@ Options, in order of least friction:
 DNS: if a subdomain, one CNAME at the registrar. TTL 1h.
 
 Deploy layout assumption: the page lives at `/websites/` with `assets/` beside it.
-- [ ] FIX ON DEPLOY: `<link rel="icon" href="../assets/logo.png">` points OUTSIDE this folder (works locally beside the parent site's assets; will 404 on standalone hosting). Copy a logo into `assets/` and point the icon there.
+- [x] ~~FIX ON DEPLOY: favicon path~~ — fixed 2026-07-13: logo copied into `assets/logo.png`, icon href now repo-relative. Nothing to do on deploy.
 - [ ] Verify `og:image` resolves: `https://<final-host>/websites/assets/skyline-downtown.jpg` (edit the meta if the path differs).
 
 ## 3 · The form (FormSubmit)
