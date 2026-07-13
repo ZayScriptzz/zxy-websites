@@ -918,7 +918,24 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 
 /* ===== BORÉAL DUSK SCENE ==================================================
    CSS-composed "drone shot at dusk" for the concept build — deep sky, warm
-   horizon, rooflines, lit windows. Shared by the hero mockup and the tile. */
+   horizon, rooflines, lit windows. Shared by the hero mockup and the tile.
+   P2 · THE REAL THING: .boreal-photo swaps in Zay's actual dusk drone shot
+   (temp grade — his edit replaces assets/dusk-street.jpg under the same name).
+   Remove the class anywhere and that element falls back to the CSS scene. */
+.boreal-photo.boreal-scene, .mockup-site .bg.boreal-photo.boreal-scene {
+  background:
+    linear-gradient(180deg, rgba(8,9,14,.08) 42%, rgba(8,9,14,.64) 100%),
+    url("assets/dusk-street.jpg") 50% 42% / cover no-repeat,
+    #131624;
+}
+@media (max-width: 820px) {
+  .boreal-photo.boreal-scene, .mockup-site .bg.boreal-photo.boreal-scene {
+    background:
+      linear-gradient(180deg, rgba(8,9,14,.08) 42%, rgba(8,9,14,.64) 100%),
+      url("assets/dusk-street-sm.jpg") 50% 42% / cover no-repeat,
+      #131624;
+  }
+}
 .boreal-scene, .mockup-site .bg.boreal-scene {
   background:
     /* lit windows */
