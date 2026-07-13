@@ -280,6 +280,25 @@
     }, { threshold: 0.2 }).observe(pillPrev);
   }
 
+  // ---- P4 · DUSK BAND VIDEO -------------------------------------------------
+  // Decorative loop plays only while on screen. Mobile / reduced-motion never
+  // start it (preload=none → the poster is all that ever loads there).
+  var bandVideo = document.getElementById('band-video');
+  var bandAllowed = bandVideo && !MOTION_OFF && window.innerWidth > 820 && 'IntersectionObserver' in window;
+  if (bandAllowed) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        if (tieredDown) return;                       // sentinel says no
+        if (en.isIntersecting) {
+          var p = bandVideo.play();
+          if (p && p.catch) p.catch(function () {});  // Safari autoplay guard
+        } else {
+          bandVideo.pause();
+        }
+      });
+    }, { threshold: 0.15 }).observe(bandVideo);
+  }
+
   // ---- THE LOOP ------------------------------------------------------------
   var last = performance.now();
   function frame(now) {
@@ -287,7 +306,10 @@
     if (dt > 0 && dt < 250) {           // ignore tab-switch gaps
       ftAvg += (dt - ftAvg) * 0.05;
       if (ftAvg > 20) {
-        if (++slowFrames >= 60 && !tieredDown) { tieredDown = true; docEl.classList.add('perf-tier-down'); }
+        if (++slowFrames >= 60 && !tieredDown) {
+          tieredDown = true; docEl.classList.add('perf-tier-down');
+          if (bandVideo) bandVideo.pause();   // frozen frame ≈ poster; loop stays off
+        }
       } else {
         slowFrames = 0;
       }

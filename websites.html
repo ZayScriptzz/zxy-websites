@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@300;400;500;600&family=Fraunces:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="websites.css?v=20"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
+<link rel="stylesheet" href="websites.css?v=21"><!-- bump ?v= on every phase — kills stale-cache testing sessions -->
 
 <!-- Fluid engine, PINNED to 0.6.1 (matches package.json). Newer majors break the static API. -->
 <script type="importmap">
@@ -354,6 +354,24 @@
       </ol>
     </div>
   </section>
+  <!-- ===== #AERIAL — THE DUSK BAND ==========================================
+       The moat, made visible: clip0024's landmark reveal (steeple → Olympic
+       Stadium → river → Mont Royal) loops silently behind one line. Plays only
+       on-screen; poster-only on mobile / reduced-motion / perf-tier-down.
+       temp grade — swap assets/aerial-reveal.mp4 + skyline-downtown.jpg for
+       Zay's graded exports, same names. -->
+  <section id="aerial" class="page-section style-band" aria-labelledby="aerial-line">
+    <video class="band-video" id="band-video" muted loop playsinline preload="none"
+           poster="assets/skyline-downtown.jpg" width="1920" height="1080" aria-hidden="true">
+      <source src="assets/aerial-reveal.mp4" type="video/mp4">
+    </video>
+    <div class="band-scrim" aria-hidden="true"></div>
+    <p class="section-chapter"><span data-i18n="chAerial">— AERIAL</span></p>
+    <div class="band-inner">
+      <p class="band-line" id="aerial-line" data-reveal data-i18n="bandLine">We fly drones for a living.</p>
+      <a class="band-cta" href="#preview" data-reveal data-i18n="bandCta">YOUR FOOTAGE, YOUR SITE →</a>
+    </div>
+  </section>
   <section id="pricing" class="page-section style-minimal" aria-labelledby="pricing-title">
     <p class="section-chapter"><span data-i18n="chPricing">04 — PRICING</span></p>
     <span class="style-chip" aria-hidden="true"><span class="adot purple"></span><span data-i18n="stylePricing">STYLE — STATEMENT</span></span>
@@ -510,6 +528,8 @@
       navMenu: 'MENU',
       chWhy: '01 — WHY', chExamples: '02 — EXAMPLES', chProcess: '03 — PROCESS',
       chPricing: '04 — PRICING', chPreview: '05 — YOUR PREVIEW', chFooter: 'ZXY — MONTRÉAL',
+      chAerial: '— AERIAL',
+      bandLine: 'We fly drones for a living.', bandCta: 'YOUR FOOTAGE, YOUR SITE →',
       whyBadge: 'MONTRÉAL — BUILT HERE',
       whyTitleA: 'No site, no ', whyTitleHl: 'leads.',
       exTitleL1: 'THE', exTitleL2: 'FRAME', exTitleL3: 'GALLERY.',
@@ -585,6 +605,8 @@
       navMenu: 'MENU',
       chWhy: '01 — POURQUOI', chExamples: '02 — EXEMPLES', chProcess: '03 — PROCESSUS',
       chPricing: '04 — TARIFS', chPreview: '05 — VOTRE APERÇU', chFooter: 'ZXY — MONTRÉAL',
+      chAerial: '— AÉRIEN',
+      bandLine: 'On pilote des drones pour gagner notre vie.', bandCta: 'VOS IMAGES, VOTRE SITE →',
       whyBadge: 'MONTRÉAL — FAIT ICI',
       whyTitleA: 'Pas de site, pas de ', whyTitleHl: 'soumission.',
       exTitleL1: 'LA', exTitleL2: 'GALERIE', exTitleL3: 'DES CADRES.',
@@ -736,7 +758,7 @@
 </script>
 
 <!-- Motion spine: scroll fade, reveals, frame-time sentinel (enhancement-only) -->
-<script defer src="site.js?v=20"></script>
+<script defer src="site.js?v=21"></script>
 
 <!-- Fluid engine -->
 <script type="module" src="fluid-hero.js?v=5"></script>
