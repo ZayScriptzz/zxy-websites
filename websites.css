@@ -154,24 +154,26 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   padding: 14px 16px;
 }
-.mockup-brand { font-family: 'Anton', sans-serif; font-size: 17px; color: #fff; letter-spacing: .5px; white-space: nowrap; }
-.mockup-brand .dot, .accent-dot { color: #ff4438; }
+/* Boréal's brand look — its OWN identity (amber + grotesk), not ZXY's red/blue */
+.mockup-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; color: #fff; letter-spacing: -.2px; white-space: nowrap; }
+.mockup-brand .dot { color: #f0a648; }
+.accent-dot { color: #ff4438; } /* the ZXY nav logo dot keeps the house red */
 .mockup-navlinks {
   display: flex; align-items: center; gap: 11px;
   font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.5px; color: rgba(255,255,255,.62);
 }
-.mockup-navlinks .quote { padding: 5px 10px; background: #ff4438; color: #fff; border-radius: 1px; white-space: nowrap; }
+.mockup-navlinks .quote { padding: 5px 10px; background: #e08b2d; color: #1c1206; border-radius: 1px; white-space: nowrap; }
 .mockup-hud {
   position: absolute; right: 16px; top: 58px; z-index: 2;
   display: inline-flex; align-items: center; gap: 7px;
   font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 1.5px; color: rgba(255,255,255,.66);
   border: 1px solid rgba(255,255,255,.18); padding: 4px 8px;
 }
-.mockup-hud .dot { width: 6px; height: 6px; border-radius: 50%; background: #ff4438; }
+.mockup-hud .dot { width: 6px; height: 6px; border-radius: 50%; background: #f0a648; }
 .mockup-copy { position: absolute; left: 18px; right: 18px; bottom: 20px; z-index: 2; }
-.mockup-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: #5aa0e6; margin-bottom: 9px; }
-.mockup-h1 { font-family: 'Anton', sans-serif; font-size: clamp(30px, 3.4vw, 46px); line-height: .9; color: #fff; }
-.mockup-h1 .grad { background: linear-gradient(95deg, #ff4438, #2b7fd4); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.mockup-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(240,198,132,.92); margin-bottom: 9px; }
+.mockup-h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(26px, 3vw, 40px); line-height: .94; letter-spacing: -.5px; color: #fff; }
+.mockup-h1 .grad { background: linear-gradient(95deg, #f0a648, #ffe9c4); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 /* ===== CORNER BRACKETS + RETICLE ========================================= */
 .corner { position: absolute; width: 26px; height: 26px; z-index: 6; pointer-events: none; }
@@ -904,7 +906,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* — THE WARM CARD (editorial concept build) — */
 .tile-warmcard { background: #fdf9f1; padding: clamp(16px, 2vw, 28px); }
 .warmcard-photo { border-radius: 14px; overflow: hidden; }
-.warmcard-photo img { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; object-position: 50% 55%; }
+/* portrait source, 2:3 — the 4:5 window at 65% shows booth + table + the cup */
+.warmcard-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; object-position: 50% 65%; }
 .warmcard-caption { display: flex; align-items: baseline; gap: 12px; padding: clamp(12px, 1.6vw, 18px) 4px 2px; }
 .warmcard-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 2.5px; color: rgba(184,73,15,.9); }
 .warmcard-caption h3 {
@@ -946,10 +949,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .build-badge.own { color: var(--s-dim); border-color: var(--s-line-strong); }
 /* the composed Boréal mini-hero inside the shot */
 .build-shot .bshot-copy { position: absolute; left: 18px; bottom: 16px; display: grid; gap: 6px; }
-.bshot-brand { font-family: 'Anton', sans-serif; font-size: 13px; letter-spacing: .5px; color: #fff; }
-.bshot-brand span { color: var(--red); }
-.bshot-h1 { font-family: 'Anton', sans-serif; font-size: clamp(24px, 2.4vw, 34px); line-height: .95; color: #fff; }
-.bshot-h1 em { font-style: normal; background: linear-gradient(95deg, var(--red), var(--blue)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.bshot-brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: -.2px; color: #fff; }
+.bshot-brand span { color: #f0a648; }
+.bshot-h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: clamp(21px, 2.1vw, 30px); line-height: .98; letter-spacing: -.5px; color: #fff; }
+.bshot-h1 em { font-style: normal; background: linear-gradient(95deg, #f0a648, #ffe9c4); -webkit-background-clip: text; background-clip: text; color: transparent; }
 /* the Empty Frame */
 .empty-frame .build-shot.empty {
   display: grid; place-content: center; gap: 10px; justify-items: center;
