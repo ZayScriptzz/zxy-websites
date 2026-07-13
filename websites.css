@@ -917,6 +917,40 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .tile-warmcard .build-badge { color: #b8490f; border-color: rgba(184,73,15,.5); border-radius: 999px; }
 
+/* R2 · CORNER MARKS — each frame annotates itself top-left, in its own voice */
+.bshot-mark { /* Boréal: a live-site HUD chip, amber like its brand */
+  position: absolute; top: 12px; left: 12px; z-index: 6;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.5px;
+  color: rgba(255,255,255,.88);
+  background: rgba(8,10,16,.55); border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px; padding: 4px 9px;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  pointer-events: none;
+}
+.bshot-mark::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #f0a648; box-shadow: 0 0 6px rgba(240,166,72,.8); }
+.perf-tier-down .bshot-mark { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.matte-frame { position: relative; }
+.matte-mark { /* the print's edition label, stuck on the glass */
+  position: absolute; top: 10px; left: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.5px;
+  color: #141311; background: rgba(250,247,240,.94); border: 1px solid #141311;
+  padding: 4px 8px;
+}
+.cinema-mark { /* the slate line */
+  position: absolute; top: 14px; left: clamp(14px, 1.8vw, 22px);
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,.9); text-shadow: 0 1px 10px rgba(0,0,0,.6);
+}
+.cinema-mark::before { content: ''; width: 8px; height: 8px; background: var(--blue); }
+.warmcard-photo { position: relative; }
+.warmcard-mark { /* the café's handwritten corner note, on the mural wall */
+  position: absolute; top: 12px; left: 14px;
+  font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 600;
+  font-size: clamp(13px, 1.2vw, 16px); color: #3b2413;
+}
+
 /* per-template hovers — each frame answers differently */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .tile-matte { transition: transform .35s cubic-bezier(.22,.9,.32,1), box-shadow .35s ease; }
