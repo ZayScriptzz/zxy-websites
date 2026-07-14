@@ -758,11 +758,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .why-figure img {
   display: block; width: 100%;
   aspect-ratio: 4 / 3; height: auto;
-  object-fit: cover; object-position: 68% 45%; /* the cup lives centre-right in the source */
+  object-fit: cover; object-position: 50% 50%; /* Zay's grade centres the cup in its vignette */
 }
 @media (max-width: 820px) {
   .why-foot { grid-template-columns: 1fr; }
-  .why-figure img { aspect-ratio: 3 / 2; object-position: 62% 45%; }
+  .why-figure img { aspect-ratio: 3 / 2; }
 }
 .why-figure figcaption {
   position: absolute; left: 14px; bottom: 12px;
@@ -906,8 +906,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* — THE WARM CARD (editorial concept build) — */
 .tile-warmcard { background: #fdf9f1; padding: clamp(16px, 2vw, 28px); }
 .warmcard-photo { border-radius: 14px; overflow: hidden; }
-/* portrait source, 2:3 — the 4:5 window at 65% shows booth + table + the cup */
-.warmcard-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; object-position: 50% 65%; }
+/* portrait source, 2:3 — Zay's grade drops the cup lower and vignettes the booth,
+   so the window grows to 3:4 (shows ~89% of the frame): logotype keeps the pale
+   mural top-left, the spot-lit cup keeps its saucer */
+.warmcard-photo img { display: block; width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; object-position: 50% 60%; }
 .warmcard-caption { display: flex; align-items: baseline; gap: 12px; padding: clamp(12px, 1.6vw, 18px) 4px 2px; }
 .warmcard-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 2.5px; color: rgba(184,73,15,.9); }
 .warmcard-caption h3 {
