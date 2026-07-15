@@ -1181,14 +1181,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
    the carriage glow covers the ±1% viewport drift). Both stop at D7 — the faint
    track past the last station stays unfilled. */
 .proc-line { stroke-dasharray: 100; stroke-dashoffset: 100; }
-.proc-wrap.in-view .proc-line { animation: proc-draw 4s linear .6s forwards; }
+.proc-wrap.in-view .proc-line { animation: proc-draw 4.6s linear .6s forwards; }
 @keyframes proc-draw {
-  0%, 4%   { stroke-dashoffset: 99.5; }
-  20%, 24% { stroke-dashoffset: 82.6; }
-  40%, 44% { stroke-dashoffset: 65.6; }
-  60%, 64% { stroke-dashoffset: 48.7; }
-  80%, 84% { stroke-dashoffset: 31.7; }
-  100%     { stroke-dashoffset: 14.8; }
+  0%, 3.5%     { stroke-dashoffset: 99.5; }
+  17.4%, 20.9% { stroke-dashoffset: 82.6; }
+  34.8%, 38.3% { stroke-dashoffset: 65.6; }
+  52.2%, 55.7% { stroke-dashoffset: 48.7; }
+  69.6%, 73.1% { stroke-dashoffset: 31.7; }
+  87%, 90.4%   { stroke-dashoffset: 14.8; }
+  100%         { stroke-dashoffset: 0; }  /* after D7: run out the whole rail */
 }
 .proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--proc-gap); }
 .proc-step { display: grid; justify-items: start; align-content: start; gap: 8px; }
@@ -1215,23 +1216,24 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .proc-carriage::before { left: 50%; top: -7px; bottom: -7px; width: 1px; margin-left: -.5px; }
 .proc-carriage::after { top: 50%; left: -7px; right: -7px; height: 1px; margin-top: -.5px; }
 @media (prefers-reduced-motion: no-preference) {
-  .proc-wrap.in-view .proc-carriage { animation: proc-slide 4s linear .6s forwards, proc-fade 4.4s linear .6s forwards; }
+  .proc-wrap.in-view .proc-carriage { animation: proc-slide 4.6s linear .6s forwards, proc-fade 4.6s linear .6s forwards; }
   /* stations start dim, power on exactly as the scanner arrives — same clock */
   .js .proc-wrap.in-view .proc-step { opacity: .3; animation: proc-on .45s ease forwards; animation-delay: calc(.6s + var(--i) * .8s); }
   .js .proc-wrap.in-view .proc-dot { animation: proc-dot-fill .4s ease forwards; animation-delay: calc(.6s + var(--i) * .8s); }
 }
 @keyframes proc-slide {
-  0%, 4%   { left: 5.5px; }
-  20%, 24% { left: calc(var(--proc-stop) * 1 + 5.5px); }
-  40%, 44% { left: calc(var(--proc-stop) * 2 + 5.5px); }
-  60%, 64% { left: calc(var(--proc-stop) * 3 + 5.5px); }
-  80%, 84% { left: calc(var(--proc-stop) * 4 + 5.5px); }
-  100%     { left: calc(var(--proc-stop) * 5 + 5.5px); }
+  0%, 3.5%     { left: 5.5px; }
+  17.4%, 20.9% { left: calc(var(--proc-stop) * 1 + 5.5px); }
+  34.8%, 38.3% { left: calc(var(--proc-stop) * 2 + 5.5px); }
+  52.2%, 55.7% { left: calc(var(--proc-stop) * 3 + 5.5px); }
+  69.6%, 73.1% { left: calc(var(--proc-stop) * 4 + 5.5px); }
+  87%, 90.4%   { left: calc(var(--proc-stop) * 5 + 5.5px); }
+  100%         { left: 100%; } /* the run-out: D7 lit, the scanner rides the rail home */
 }
 @keyframes proc-fade {
   0%   { opacity: 0; }
   3%   { opacity: 1; }
-  91%  { opacity: 1; } /* 91% of 4.4s ≈ 4s — the slide's end: park on lit D7, then power down */
+  94%  { opacity: 1; } /* fade only on the run-out's last stretch */
   100% { opacity: 0; }
 }
 @keyframes proc-on { to { opacity: 1; } }
@@ -1247,8 +1249,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .js .proc-wrap.in-view .proc-step { animation-delay: calc(.15s + var(--i) * .2s); }
 }
 @media (prefers-reduced-motion: reduce) {
-  /* static-complete = the animation's end state: fill stops at D7 */
-  .proc-line { stroke-dashoffset: 14.8; animation: none !important; }
+  /* static-complete = the animation's end state: the full rail, drawn */
+  .proc-line { stroke-dashoffset: 0; animation: none !important; }
   .proc-dot::after { animation: none !important; }
 }
 
