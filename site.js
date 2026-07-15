@@ -229,9 +229,7 @@
     });
   }
   // (b) scroll-spy: whichever section owns the viewport centre lights its nav link
-  //     and feeds the mono readout (text comes from the section's own localized chapter)
   var sections = document.querySelectorAll('.page-section');
-  var readout = document.getElementById('section-readout');
   var menuLinks = document.querySelectorAll('.hero-nav .menu a');
   if (sections.length && 'IntersectionObserver' in window) {
     var spy = new IntersectionObserver(function (es) {
@@ -242,21 +240,16 @@
           if (a.getAttribute('href') === '#' + id) a.setAttribute('aria-current', 'true');
           else a.removeAttribute('aria-current');
         });
-        if (readout) {
-          var ch = e.target.querySelector('.section-chapter');
-          if (ch) { readout.textContent = ch.textContent; readout.classList.add('on'); }
-        }
       });
     }, { rootMargin: '-45% 0px -45%', threshold: 0 });
     sections.forEach(function (s) { spy.observe(s); });
-    // hero owns the top: clear state + hide readout while the hero is in view
+    // hero owns the top: clear the nav state while the hero is in view
     var heroEl = document.querySelector('.websites-page');
     if (heroEl) {
       new IntersectionObserver(function (es) {
         es.forEach(function (e) {
           if (e.isIntersecting && e.intersectionRatio > 0.4) {
             menuLinks.forEach(function (a) { a.removeAttribute('aria-current'); });
-            if (readout) readout.classList.remove('on');
           }
         });
       }, { threshold: 0.4 }).observe(heroEl);

@@ -19,7 +19,6 @@
   --gutter: clamp(26px, 3.6vw, 52px);
   --z-section: 1;
   --z-decor: 3;
-  --z-readout: 5;
   --z-pill: 6;
   --z-nav: 7;
 }
@@ -1320,7 +1319,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 
 /* ===== INSTRUMENT TELEMETRY ==============================================
    Page-wide narration: progress hairline under the nav, scroll-spy state on
-   the menu, and the mono section readout (the comp's FLUID · LIVE conceit). */
+   the menu. (The fixed section readout was retired 2026-07-15 — it duplicated
+   the chapter labels already on screen.) */
 .nav-progress {
   position: fixed; top: 0; left: 0; right: 0; height: 2px;
   z-index: calc(var(--z-nav) + 1);
@@ -1334,19 +1334,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
   background: rgb(var(--purple-rgb)); border-radius: 1px;
 }
-.section-readout {
-  /* bottom-LEFT: bottom-right collided with the sections' own style chips */
-  position: fixed; left: var(--gutter); bottom: 16px;
-  z-index: var(--z-readout);
-  font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px;
-  color: rgba(255,255,255,.55);
-  background: rgba(var(--bg-rgb),.72);
-  border: 1px solid rgba(255,255,255,.14); border-radius: 2px; padding: 5px 9px;
-  opacity: 0; transition: opacity .3s ease;
-  pointer-events: none;
-}
-.section-readout.on { opacity: 1; }
-@media (max-width: 820px) { .section-readout { display: none; } }
 
 /* ===== PREVIEW / CONVERSION ============================================== */
 .preview-sub {
