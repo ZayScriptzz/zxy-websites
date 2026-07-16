@@ -146,7 +146,11 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 }
 .mockup-site .overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(8,9,12,.04) 0%, rgba(8,9,12,.74) 100%);
+  /* was a flat 74% floor dim (tuned for the CSS scene) — it buried the real
+     photo's sunset. Now: local scrim under the copy, gentle global wash. */
+  background:
+    radial-gradient(60% 55% at 18% 88%, rgba(8,9,12,.55), transparent 70%),
+    linear-gradient(180deg, rgba(8,9,12,.02) 0%, rgba(8,9,12,.36) 100%);
 }
 .mockup-nav {
   position: relative; z-index: 2;
@@ -915,8 +919,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .bshot-mark::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #f0a648; box-shadow: 0 0 6px rgba(240,166,72,.8); }
 .perf-tier-down .bshot-mark { -webkit-backdrop-filter: none; backdrop-filter: none; }
 .matte-frame { position: relative; }
-.matte-mark { /* the print's edition label, stuck on the glass */
-  position: absolute; top: 10px; left: 10px;
+.matte-mark { /* the print's edition label — bottom-left, like a signed print
+                 (top-left collided with the screenshot's own nav bar) */
+  position: absolute; bottom: 10px; left: 10px;
   font-family: 'JetBrains Mono', monospace; font-size: 8.5px; letter-spacing: 1.5px;
   color: #141311; background: rgba(250,247,240,.94); border: 1px solid #141311;
   padding: 4px 8px;
