@@ -1141,16 +1141,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   color: #f6f3ee; max-width: 18ch;
   text-shadow: 0 2px 34px rgba(0,0,0,.55);
 }
-.band-cta {
-  font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 2px;
-  color: rgba(255,255,255,.85); text-decoration: none;
-  border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 10px 18px;
-  background: rgba(4,6,10,.35);
-  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-  transition: background .25s ease, border-color .25s ease;
-}
-.band-cta:hover, .band-cta:focus-visible { background: rgba(255,255,255,.12); border-color: #fff; }
-.perf-tier-down .band-cta { -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 /* ===== #PROCESS — blueprint timeline ===================================== */
 .proc-sub { max-width: 520px; margin: 16px 0 0; font-weight: 300; font-size: clamp(14px, 1.1vw, 17px); color: var(--s-body); }
