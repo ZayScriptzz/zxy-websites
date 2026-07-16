@@ -150,6 +150,10 @@
       // coarse pointer / reduced motion: tap flips the whole tile
       lensHost.addEventListener('click', function () { lensHost.classList.toggle('flipped'); });
     }
+    // keyboard parity for the flip (review W3): Enter/Space toggles it
+    lensHost.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lensHost.classList.toggle('flipped'); }
+    });
   }
 
   // ---- THE PREVIEW FORGE -----------------------------------------------------------
@@ -316,10 +320,13 @@
   var SAVE_DATA = !!(navigator.connection && navigator.connection.saveData);
   var bandAllowed = bandVideo && !MOTION_OFF && !SAVE_DATA && 'IntersectionObserver' in window;
   if (bandAllowed) {
+    // markup ships the SMALL poster (mobile-first — review W4); desktop upgrades,
+    // phones swap the source down to the 720p rendition
     if (window.innerWidth <= 820) {
       var bandSrc = bandVideo.querySelector('source');
-      bandVideo.poster = 'assets/aerial-poster-sm.jpg';   // 67KB vs the 206KB desktop poster
       if (bandSrc) { bandSrc.src = 'assets/aerial-reveal-720.mp4'; bandVideo.load(); }
+    } else {
+      bandVideo.poster = 'assets/aerial-poster.jpg';
     }
     new IntersectionObserver(function (es) {
       es.forEach(function (en) {

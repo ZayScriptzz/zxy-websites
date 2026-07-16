@@ -31,9 +31,9 @@ Deploy layout assumption: the page lives at `/websites/` with `assets/` beside i
 ## 4 · Smoke list (production URL)
 - [ ] `?lang=fr` direct link renders French pre-paint (no flash of English)
 - [ ] FR toggle persists across reload (localStorage `zxy-lang`)
-- [ ] Fluid hero runs on desktop Chrome/Safari/Firefox; static bloom on mobile
+- [ ] Fluid hero runs on desktop AND phones (lite tier — Equal Cut); static bloom only under reduced-motion/no-WebGL
 - [ ] Confluence appears behind the form (desktop), kill-switch = `CONFLUENCE` in fluid-hero.js
-- [ ] Band video: plays on scroll-in (desktop), poster-only on phone
+- [ ] Band video: plays on scroll-in on desktop AND phones (720p rendition); poster-only under reduced-motion/data-saver/tier-down
 - [ ] Form submits; SMS pill appears on phone mid-page; all anchors scroll
 - [ ] Lighthouse pass: perf ≥ 90 mobile (budget: 315KB first view + fonts; video is play-gated)
 

@@ -216,7 +216,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
   padding-top: clamp(12px, 1.4vw, 18px); padding-bottom: clamp(12px, 1.4vw, 18px);
 }
 /* HOME — purple return button (this page's return signature: realtor=red / creator=blue
-   / websites=purple). Placeholder href="#"; reads in both transparent and solid states. */
+   / websites=purple). Reads in both transparent and solid states. */
 .btn-home {
   display: inline-flex; align-items: center; gap: 7px;
   border: 1px solid rgba(var(--purple-rgb),.6); border-radius: 2px;
@@ -1239,6 +1239,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   /* static-complete = the animation's end state: the full rail, drawn */
   .proc-line { stroke-dashoffset: 0; animation: none !important; }
   .proc-dot::after { animation: none !important; }
+  /* static-complete includes the dots' lit end state (review note) */
+  .proc-dot { background: rgb(var(--purple-rgb)); border-color: #fff; }
 }
 
 /* ===== #PRICING — minimal calipers ======================================= */
@@ -1401,7 +1403,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 /* ===== RESPONSIVE / MOBILE =============================================
-   Fluid is disabled below 820px (fluid-hero.js → static fallback). Reflow the
+   Fluid runs the LITE tier below 820px (Equal Cut; static fallback only for
+   reduced-motion / no-WebGL / MOBILE_FLUID=false). Reflow the
    absolute hero into a readable stacked column; drop the floating mockup. */
 @media (max-width: 820px) {
   /* mobile hero flows in-document (hero-content is position:relative below) —
