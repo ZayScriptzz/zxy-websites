@@ -12,7 +12,16 @@ whenever Zay decides. Nothing here has been executed.
       cafe-booth(-sm).jpg · skyline-downtown(-sm).jpg · aerial-reveal.mp4`
       then bump `?v=` once.
 
-## 2 · Hosting
+## 2 · Hosting — DECIDED & LIVE (2026-07-16)
+**Production = zxyframe.ca/websites/** — the domain is GitHub Pages serving repo
+`ZayScriptzz/zxy-visuals` (NOT Framer; that memory was stale). This page ships as
+the `websites/` folder there: `websites.html` → `websites/index.html` + css/js/assets.
+**Release procedure:** in the dev repo commit + push to `ZayScriptzz/zxy-websites`
+(dev mirror), then copy into `../websites/` (page → index.html, og URLs already
+zxyframe.ca) and push `zxy-visuals`. Future era: Netlify/Cloudflare Pages for the
+templates project + client sites (Zay's roadmap).
+
+## 2b · Original hosting options (kept for reference)
 Options, in order of least friction:
 1. **Same host as zxyframe.ca** (Framer can't host raw files → use option 2/3 under a subdomain, e.g. `sites.zxyframe.ca/websites` or path via reverse proxy).
 2. **GitHub Pages** — push this repo to a private→public repo, enable Pages. Free, instant, custom domain OK.
@@ -43,7 +52,7 @@ Assets are immutable-by-name (`?v=N` on css/js; media swaps keep names → bump 
 ## 6 · Rollback
 `git revert` the offending commit or `git checkout campaign2~N -- <file>`; every phase is one commit. The Boréal photo, band, tile, and figure are each one self-contained block (see PROVISIONAL BY DESIGN in the plan) — removable without touching structure.
 
-## 6b · Main-site button (zxyframe.ca — Framer, Zay edits)
+## 6b · Main-site button — DONE 2026-07-16: V2 ghost frame (purple confluence hover) implemented directly in zxy-visuals index.html + creators.html nav (`.nav-websites`), linking /websites/. Original notes:
 Once `/websites` resolves publicly, add the entry point on the Framer site:
 - [ ] Nav item + a button in the hero/services area, linking to the live `/websites` URL
 - [ ] Labels: EN **"WEBSITES →"** (or "GET A WEBSITE"), FR **« SITES WEB → »** — match the Framer site's existing nav style
