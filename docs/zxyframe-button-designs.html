@@ -47,7 +47,10 @@
   .v2::before, .v2::after { content: ''; position: absolute; width: 9px; height: 9px; transition: border-color .25s ease; }
   .v2::before { top: -1px; left: -1px; border-top: 2px solid #ff4438; border-left: 2px solid #ff4438; }
   .v2::after { bottom: -1px; right: -1px; border-bottom: 2px solid #2b7fd4; border-right: 2px solid #2b7fd4; }
-  .v2:hover { background: linear-gradient(95deg, rgba(255,68,56,.16), rgba(43,127,212,.16)); border-color: rgba(255,255,255,.7); color: #fff; }
+  /* CHOSEN (Zay): hover fills PURPLE — red bracket + blue bracket, and the press
+     births the emergent color. The button performs the fluid's whole story. */
+  .v2:hover { background: #7a4fd3; border-color: #9166e8; color: #fff; box-shadow: 0 10px 40px -10px rgba(145,102,232,.55); }
+  .v2:hover::before, .v2:hover::after { border-color: #fff; }
 
   /* ===== V3 · THE NAV ITEM — quiet, with the emergent purple dot ===== */
   .v3 {
@@ -84,7 +87,7 @@
   </section>
 
   <section>
-    <h2>V2 · THE GHOST FRAME</h2>
+    <h2>V2 · THE GHOST FRAME — ✓ CHOSEN</h2>
     <p class="use">Secondary placement — works beside an existing solid button without fighting it. The corner brackets are the frame motif; red top-left, blue bottom-right.</p>
     <div class="dark-stage">
       <a class="v2" href="#">WEBSITES</a>
@@ -93,7 +96,8 @@
     <div class="spec">
       border <b>1px rgba(255,255,255,.35)</b> · corner brackets <b>9×9, 2px — #FF4438 TL, #2B7FD4 BR</b><br>
       font <b>mono 500 · 13px · tracking 2.5px</b> · padding <b>15 / 28</b> · radius <b>2</b><br>
-      hover <b>faint red→blue gradient fill (16% alpha), border to 70% white</b>
+      hover <b>fills #7A4FD3 (AA on white text), border #9166E8, brackets → white,
+      soft purple glow</b> — red + blue meet, purple is born (the fluid motif)
     </div>
   </section>
 
@@ -110,6 +114,6 @@
     </div>
   </section>
 
-  <p class="note" style="margin-top:36px">Recommended pairing: <b>V3 in the nav</b> (always present) + <b>V1 once</b> in the hero or services section. V2 is the alternate if the hero already has a solid CTA nearby. Destination for all: the live /websites URL (same tab). Both languages shown; use the matching one per locale page.</p>
+  <p class="note" style="margin-top:36px">Zay's pick: <b>V2, purple-fill hover</b>. Suggested placement: V2 in the hero/services area; optionally V3 in the nav as the quiet persistent entry (its purple dot now foreshadows V2's hover). Destination for all: the live /websites URL (same tab). Both languages shown; use the matching one per locale page.</p>
 </body>
 </html>
