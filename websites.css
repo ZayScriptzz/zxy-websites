@@ -420,7 +420,7 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 /* ===== AXES MARK (bottom-right, replaces FLUID · LIVE) ===================
    Simplified red-Z / blue-X / grey-Y glyph. Lines draw in once on load (.ax-animate
    added by JS), labels fade in after, then it holds static — no looping state. */
-.hero-cornermark { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.hero-cornermark { display: flex; flex-direction: column; align-items: flex-end; } /* the glyph stands alone — the words it carried were repetition */
 .axis-glyph { display: block; width: clamp(96px, 8vw, 124px); height: auto; overflow: visible; }
 .axis-glyph text { font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 13px; letter-spacing: 1px; }
 
@@ -440,7 +440,6 @@ body { font-family: 'Archivo', sans-serif; color: #fff; }
 .axis-glyph.ax-animate .ax-x-label { transition-delay: 1s;    opacity: 1; }
 .axis-glyph.ax-animate .ax-y-label { transition-delay: 1.45s; opacity: 1; }
 
-.axis-tags { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 14px; }
 .atag {
   display: inline-flex; align-items: center; gap: 7px;
   font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 2px; color: rgba(255,255,255,.6);
@@ -1438,7 +1437,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .hero-logo { font-size: 20px; padding: 6px 9px; }
 }
 @media (max-width: 420px) {
-  .axis-tags { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
