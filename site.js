@@ -343,6 +343,8 @@
         if (++slowFrames >= 60 && !tieredDown) {
           tieredDown = true; docEl.classList.add('perf-tier-down');
           if (bandVideo) bandVideo.pause();   // frozen frame ≈ poster; loop stays off
+          // Equal Cut: tell the fluid to hard-stop and crossfade to the static bloom
+          try { window.dispatchEvent(new CustomEvent('zxy:tier-down')); } catch (e) {}
         }
       } else {
         slowFrames = 0;

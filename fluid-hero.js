@@ -70,6 +70,21 @@ let lastPt = null, lastInjPt = null, lastMove = 0, purpleUntil = 0, colCount = 0
 // meet — behind the place where the visitor signs. ONE boolean kills the whole
 // phase: zone, scrim class, farewell, loops. false = the hero-only page.
 const CONFLUENCE = true;
+
+// ---- EQUAL CUT · MOBILE LITE TIER ------------------------------------------------
+// Phones get the SAME living hero, at a resolution their GPUs can hold: half the
+// dye fill, no bloom/sunrays/shading post-passes. One boolean returns them to the
+// static bloom. The frame-time sentinel (site.js → 'zxy:tier-down') is the escape
+// hatch on machines that still can't keep up — it hard-stops the sim and crossfades
+// back to the CSS fallback, so the floor of the experience never drops below today's.
+const MOBILE_FLUID = true;
+const LITE_CONFIG = {
+  SIM_RESOLUTION: 96,
+  DYE_RESOLUTION: 256,
+  BLOOM: false,
+  SUNRAYS: false,
+  SHADING: false,
+};
 let heroZoneEl = null;        // .websites-page — ambient breathing belongs to the hero only
 let confluenceEl = null;      // #preview
 let confluenceOn = false;     // scene is holding dye (dissipation lowered)
@@ -338,10 +353,10 @@ function setupFarewell() {
   }, { threshold: [0.35] }).observe(heroZoneEl);
 }
 
-function startFluid(canvas) {
+function startFluid(canvas, lite) {
   if (started || stopped) return false;
   try {
-    webGLFluidEnhanced.simulation(canvas, CONFIG);
+    webGLFluidEnhanced.simulation(canvas, lite ? Object.assign({}, CONFIG, LITE_CONFIG) : CONFIG);
   } catch (e) { return false; }
   // self-verify: simulation() resizes the canvas synchronously; if still at default it didn't take.
   if (canvas.width === 300 || canvas.width === 0) return false;
@@ -355,8 +370,19 @@ function startFluid(canvas) {
   intro();
   breathTimer = setTimeout(ambientLoop, 8000);   // hold ~4.5s + dissipate, then ambient breathing (~8s total)
 
-  window.addEventListener('pointermove', onPointerMove, { passive: true });
+  // cursor halo only where a cursor exists — touch-drag pointermove would splat on scroll
+  if (window.matchMedia('(pointer: fine)').matches) {
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+  }
   document.addEventListener('visibilitychange', onVisibility);
+  // sentinel escape hatch: hard-stop and crossfade back to the static bloom
+  window.addEventListener('zxy:tier-down', function () {
+    zoneState.forEach(function (v, k) { zoneState.set(k, false); });
+    applyRunState();                                   // pauses via the one call site
+    stopped = true;                                    // nothing can resume it
+    document.body.classList.remove('fluid-revealed');  // re-arm the opacity transition
+    document.body.classList.remove('fluid-active');    // CSS fades the fallback back in
+  }, { once: true });
   heroZoneEl = document.querySelector('.websites-page');
   observeFluidZone(heroZoneEl);   // hero = zone #1; sim runs only while a zone is in view
   if (CONFLUENCE) { setupFarewell(); setupConfluence(); }   // P10 — one boolean, whole phase
@@ -370,18 +396,20 @@ function init() {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const mobile = window.matchMedia('(max-width: 820px)').matches || window.matchMedia('(pointer: coarse)').matches;
 
-  // reduced-motion / mobile / no-WebGL → static low-intensity CSS bloom (no canvas, no timers)
-  if (reduce || mobile || !hasWebGL()) {
+  // reduced-motion / no-WebGL → static low-intensity CSS bloom (no canvas, no timers).
+  // Mobile only falls back when MOBILE_FLUID is off — otherwise it runs the lite tier.
+  if (reduce || !hasWebGL() || (mobile && !MOBILE_FLUID)) {
     canvas.remove();
     return;
   }
+  const lite = mobile;   // same hero, lighter passes
 
   // Poll until the canvas has laid out, then start. startFluid() is idempotent.
   let attempts = 0;
   const poll = setInterval(() => {
     if (started || stopped || attempts++ > 140) { clearInterval(poll); return; }
     if (canvas.getBoundingClientRect().width < 1) return;   // wait for layout
-    if (startFluid(canvas)) clearInterval(poll);
+    if (startFluid(canvas, lite)) clearInterval(poll);
   }, 100);
 }
 
