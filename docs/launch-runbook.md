@@ -43,6 +43,13 @@ Assets are immutable-by-name (`?v=N` on css/js; media swaps keep names → bump 
 ## 6 · Rollback
 `git revert` the offending commit or `git checkout campaign2~N -- <file>`; every phase is one commit. The Boréal photo, band, tile, and figure are each one self-contained block (see PROVISIONAL BY DESIGN in the plan) — removable without touching structure.
 
+## 6b · Main-site button (zxyframe.ca — Framer, Zay edits)
+Once `/websites` resolves publicly, add the entry point on the Framer site:
+- [ ] Nav item + a button in the hero/services area, linking to the live `/websites` URL
+- [ ] Labels: EN **"WEBSITES →"** (or "GET A WEBSITE"), FR **« SITES WEB → »** — match the Framer site's existing nav style
+- [ ] Open in the same tab (it's the same brand, not an external link)
+- [ ] Check both language versions of the Framer site if it has them
+
 ## 7 · Day-after
 - [ ] BCC yourself on form notifications for 2 weeks (FormSubmit `_cc` or inbox rule)
 - [ ] Add the URL to the cold-call script + SMS pitch (Operation ZXY)
