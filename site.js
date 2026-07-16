@@ -318,6 +318,7 @@
   if (bandAllowed) {
     if (window.innerWidth <= 820) {
       var bandSrc = bandVideo.querySelector('source');
+      bandVideo.poster = 'assets/aerial-poster-sm.jpg';   // 67KB vs the 206KB desktop poster
       if (bandSrc) { bandSrc.src = 'assets/aerial-reveal-720.mp4'; bandVideo.load(); }
     }
     new IntersectionObserver(function (es) {

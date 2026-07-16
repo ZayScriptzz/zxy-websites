@@ -917,6 +917,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .bshot-mark::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #f0a648; box-shadow: 0 0 6px rgba(240,166,72,.8); }
 .perf-tier-down .bshot-mark { -webkit-backdrop-filter: none; backdrop-filter: none; }
+/* Equal Cut fleet: two more tier-down reliefs — the scrolled nav's full-width blur
+   resample, and the CTA's endlessly looping box-shadow repaint */
+.perf-tier-down .hero-nav.scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.perf-tier-down .btn-primary { animation: none; }
 .matte-frame { position: relative; }
 .matte-mark { /* the print's edition label — bottom-left, like a signed print
                  (top-left collided with the screenshot's own nav bar) */
@@ -1227,6 +1231,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .proc-steps { grid-template-columns: 1fr; gap: 22px; border-left: 2px solid transparent;
     border-image: linear-gradient(180deg, var(--red), var(--purple), var(--blue)) 1; padding-left: 22px; }
   .proc-dot { display: none; }
+  .proc-carriage { display: none; } /* fleet catch: it was animating over a hidden rail */
   .proc-step p { max-width: none; }
   .js .proc-wrap.in-view .proc-step { animation-delay: calc(.15s + var(--i) * .2s); }
 }
