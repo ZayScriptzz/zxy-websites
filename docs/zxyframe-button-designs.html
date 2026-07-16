@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>zxyframe.ca — /websites entry buttons (design sheet)</title>
+<style>
+  /* Design sheet only — open in a browser, hover everything, pick one.
+     Every variant lists its exact values for rebuilding in Framer. */
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #0a0a0e; color: #eceef2; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 48px clamp(20px, 6vw, 90px); }
+  h1 { font-size: 15px; letter-spacing: 3px; font-weight: 600; color: rgba(255,255,255,.5); margin-bottom: 6px; }
+  .note { font-size: 13px; color: rgba(255,255,255,.45); max-width: 62ch; line-height: 1.6; margin-bottom: 44px; }
+  section { border-top: 1px solid rgba(255,255,255,.1); padding: 34px 0 44px; }
+  h2 { font-size: 12px; letter-spacing: 2.5px; color: rgba(255,255,255,.85); margin-bottom: 4px; }
+  .use { font-size: 12px; color: rgba(255,255,255,.4); margin-bottom: 22px; }
+  .row { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-bottom: 20px; }
+  .spec { font-family: ui-monospace, Menlo, monospace; font-size: 11px; line-height: 1.9; color: rgba(255,255,255,.55); background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 6px; padding: 14px 18px; max-width: 640px; }
+  .spec b { color: #c9b3ff; font-weight: 500; }
+
+  /* ===== V1 · THE GRADIENT — the /websites signature (red meets blue) ===== */
+  .v1 {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: linear-gradient(95deg, #ff4438, #2b7fd4);
+    color: #fff; text-decoration: none; border: none; cursor: pointer;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 14px; font-weight: 500; letter-spacing: 2.5px;
+    padding: 17px 30px; border-radius: 3px; white-space: nowrap;
+    box-shadow: 0 14px 50px -10px rgba(255,68,56,.5), 0 10px 44px -12px rgba(43,127,212,.45);
+    transition: transform .18s ease-out, box-shadow .3s ease;
+  }
+  .v1:hover { transform: translateY(-2px); box-shadow: 0 18px 60px -8px rgba(255,68,56,.6), 0 14px 54px -10px rgba(43,127,212,.55); }
+  .v1 .arrow { font-family: Arial, sans-serif; font-size: 1.25em; line-height: 0; }
+
+  /* ===== V2 · THE GHOST FRAME — the frame motif, fills on hover ===== */
+  .v2 {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 12px;
+    background: transparent; color: rgba(255,255,255,.92);
+    text-decoration: none; cursor: pointer;
+    border: 1px solid rgba(255,255,255,.35);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px; font-weight: 500; letter-spacing: 2.5px;
+    padding: 15px 28px; border-radius: 2px; white-space: nowrap;
+    transition: color .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .v2::before, .v2::after { content: ''; position: absolute; width: 9px; height: 9px; transition: border-color .25s ease; }
+  .v2::before { top: -1px; left: -1px; border-top: 2px solid #ff4438; border-left: 2px solid #ff4438; }
+  .v2::after { bottom: -1px; right: -1px; border-bottom: 2px solid #2b7fd4; border-right: 2px solid #2b7fd4; }
+  .v2:hover { background: linear-gradient(95deg, rgba(255,68,56,.16), rgba(43,127,212,.16)); border-color: rgba(255,255,255,.7); color: #fff; }
+
+  /* ===== V3 · THE NAV ITEM — quiet, with the emergent purple dot ===== */
+  .v3 {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: transparent; color: rgba(255,255,255,.75); text-decoration: none; cursor: pointer;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px; font-weight: 500; letter-spacing: 2.5px;
+    padding: 10px 4px; border-bottom: 1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .v3 .dot { width: 6px; height: 6px; border-radius: 50%; background: #9166e8; box-shadow: 0 0 8px rgba(145,102,232,.7); }
+  .v3:hover { color: #fff; border-bottom-color: #9166e8; }
+
+  .dark-stage { background: #101016; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; padding: 34px; display: inline-flex; gap: 22px; align-items: center; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+  <h1>ZXYFRAME.CA — /WEBSITES ENTRY BUTTONS</h1>
+  <p class="note">Three candidates for the main site's entry point to /websites, in the main site's dark context. All use the red→blue pairing (the /websites page's whole identity is those two colors meeting), mono letterspaced caps to match the existing BOOK-YOUR-SHOT button language. Hover each one. Values below each are what you rebuild in Framer.</p>
+
+  <section>
+    <h2>V1 · THE GRADIENT</h2>
+    <p class="use">Primary placement — hero or services area. Loudest; the gradient IS the /websites brand.</p>
+    <div class="dark-stage">
+      <a class="v1" href="#">WEBSITES <span class="arrow">→</span></a>
+      <a class="v1" href="#">SITES WEB <span class="arrow">→</span></a>
+    </div>
+    <div class="spec">
+      fill <b>linear-gradient(95°, #FF4438 → #2B7FD4)</b> · text <b>#FFFFFF</b><br>
+      font <b>JetBrains Mono 500</b> (or the site's mono) · 14px · tracking <b>2.5px</b> · caps<br>
+      padding <b>17 / 30</b> · radius <b>3</b> · shadow <b>red + blue glows, soft, -10 spread</b><br>
+      hover <b>lift 2px, glow up</b>
+    </div>
+  </section>
+
+  <section>
+    <h2>V2 · THE GHOST FRAME</h2>
+    <p class="use">Secondary placement — works beside an existing solid button without fighting it. The corner brackets are the frame motif; red top-left, blue bottom-right.</p>
+    <div class="dark-stage">
+      <a class="v2" href="#">WEBSITES</a>
+      <a class="v2" href="#">SITES WEB</a>
+    </div>
+    <div class="spec">
+      border <b>1px rgba(255,255,255,.35)</b> · corner brackets <b>9×9, 2px — #FF4438 TL, #2B7FD4 BR</b><br>
+      font <b>mono 500 · 13px · tracking 2.5px</b> · padding <b>15 / 28</b> · radius <b>2</b><br>
+      hover <b>faint red→blue gradient fill (16% alpha), border to 70% white</b>
+    </div>
+  </section>
+
+  <section>
+    <h2>V3 · THE NAV ITEM</h2>
+    <p class="use">For the navigation bar — quiet sibling to the existing links, marked by the purple dot (red + blue mixed: the /websites page's emergent color).</p>
+    <div class="dark-stage">
+      <a class="v3" href="#"><span class="dot"></span>WEBSITES</a>
+      <a class="v3" href="#"><span class="dot"></span>SITES WEB</a>
+    </div>
+    <div class="spec">
+      text <b>rgba(255,255,255,.75) → #FFF on hover</b> · font <b>mono 500 · 12px · tracking 2.5px</b><br>
+      dot <b>6px, #9166E8, soft glow</b> · hover <b>1px purple underline</b>
+    </div>
+  </section>
+
+  <p class="note" style="margin-top:36px">Recommended pairing: <b>V3 in the nav</b> (always present) + <b>V1 once</b> in the hero or services section. V2 is the alternate if the hero already has a solid CTA nearby. Destination for all: the live /websites URL (same tab). Both languages shown; use the matching one per locale page.</p>
+</body>
+</html>
