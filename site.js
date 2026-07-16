@@ -308,18 +308,24 @@
     }
   }
 
-  // ---- P4 · DUSK BAND VIDEO -------------------------------------------------
-  // Decorative loop plays only while on screen. Mobile / reduced-motion never
-  // start it (preload=none → the poster is all that ever loads there).
+  // ---- P4 · DUSK BAND VIDEO (Equal Cut: phones play it too) -------------------
+  // Decorative loop plays only while on screen. Phones get the 720p rendition,
+  // swapped in BEFORE anything loads (preload=none guarantees no wasted fetch).
+  // The poster stays for: reduced motion, data-saver, and tier-down.
   var bandVideo = document.getElementById('band-video');
-  var bandAllowed = bandVideo && !MOTION_OFF && window.innerWidth > 820 && 'IntersectionObserver' in window;
+  var SAVE_DATA = !!(navigator.connection && navigator.connection.saveData);
+  var bandAllowed = bandVideo && !MOTION_OFF && !SAVE_DATA && 'IntersectionObserver' in window;
   if (bandAllowed) {
+    if (window.innerWidth <= 820) {
+      var bandSrc = bandVideo.querySelector('source');
+      if (bandSrc) { bandSrc.src = 'assets/aerial-reveal-720.mp4'; bandVideo.load(); }
+    }
     new IntersectionObserver(function (es) {
       es.forEach(function (en) {
         if (tieredDown) return;                       // sentinel says no
         if (en.isIntersecting) {
           var p = bandVideo.play();
-          if (p && p.catch) p.catch(function () {});  // Safari autoplay guard
+          if (p && p.catch) p.catch(function () {});  // Safari/iOS autoplay guard
         } else {
           bandVideo.pause();
         }
