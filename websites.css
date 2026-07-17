@@ -951,7 +951,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   color: #2b1d10;
 }
 @media (max-width: 820px) {
-  .warmcard-mark { font-size: clamp(26px, 8vw, 46px); }
+  /* phone-test fix: at 390px the 33.4% strip is ~100px but 8vw type ran ~120px —
+     the logotype spilled onto the photo. Widen the board, calm the type. */
+  .warmcard-mark { width: 40%; font-size: clamp(20px, 6vw, 46px); }
 }
 
 /* per-template hovers — each frame answers differently */
