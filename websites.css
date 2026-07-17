@@ -1432,8 +1432,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .btn-home { display: none; }
   .hero-nav { gap: 10px; padding-left: 16px; padding-right: 16px; }
   .hero-nav .links { gap: 8px; }
-  .btn-lang { padding: 7px 9px; }
-  .nav-mobile summary { padding: 7px 10px; }
+  /* first taps on the page — meet the 44px finger, not the 30px mouse */
+  .btn-lang { padding: 12px 11px; }
+  .nav-mobile summary { padding: 12px 12px; }
   .hero-logo { font-size: 20px; padding: 6px 9px; }
 }
 @media (max-width: 420px) {
