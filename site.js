@@ -265,7 +265,10 @@
   // element per viewport. CSS keeps it display:none on desktop.
   var pill = document.getElementById('sms-pill');
   var pillHero = document.querySelector('.websites-page');
-  var pillPrev = document.getElementById('preview');
+  // Hand off to the in-page TEXT chip, not the section top: on mobile the chips
+  // sit below the form + forge, so yielding at #preview-entry deleted the
+  // texter's one-tap path exactly at the decision point (phone test 2026-07-16).
+  var pillPrev = document.querySelector('.preview-aside .contact-chip') || document.getElementById('preview');
   if (pill && pillHero && pillPrev && 'IntersectionObserver' in window) {
     var heroIn = true, prevIn = false;
     var updPill = function () { pill.classList.toggle('on', !heroIn && !prevIn); };
